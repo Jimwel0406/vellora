@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-08-16T01:14:54.356Z",
+  "total": 5,
+  "byIntent": {
+    "transactional": [
+      {
+        "keyword": "buy mechanical keyboard",
+        "volume": 2400,
+        "difficulty": 45,
+        "intent": "transactional",
+        "source": "sample-keywords.csv"
+      }
+    ],
+    "commercial": [
+      {
+        "keyword": "best wireless headphones under 100",
+        "volume": 1900,
+        "difficulty": 52,
+        "intent": "commercial",
+        "source": "sample-keywords.csv"
+      },
+      {
+        "keyword": "compostable phone case review",
+        "volume": 880,
+        "difficulty": 38,
+        "intent": "commercial",
+        "source": "sample-keywords.csv"
+      }
+    ],
+    "informational": [
+      {
+        "keyword": "what is a usb-c hub",
+        "volume": 1200,
+        "difficulty": 30,
+        "intent": "informational",
+        "source": "sample-keywords.csv"
+      }
+    ],
+    "navigational": [
+      {
+        "keyword": "vellora marketplace",
+        "volume": 500,
+        "difficulty": 22,
+        "intent": "navigational",
+        "source": "sample-keywords.csv"
+      }
+    ]
+  },
+  "highValue": [
+    {
+      "keyword": "buy mechanical keyboard",
+      "volume": 2400,
+      "difficulty": 45,
+      "intent": "transactional",
+      "source": "sample-keywords.csv"
+    },
+    {
+      "keyword": "best wireless headphones under 100",
+      "volume": 1900,
+      "difficulty": 52,
+      "intent": "commercial",
+      "source": "sample-keywords.csv"
+    },
+    {
+      "keyword": "what is a usb-c hub",
+      "volume": 1200,
+      "difficulty": 30,
+      "intent": "informational",
+      "source": "sample-keywords.csv"
+    },
+    {
+      "keyword": "compostable phone case review",
+      "volume": 880,
+      "difficulty": 38,
+      "intent": "commercial",
+      "source": "sample-keywords.csv"
+    },
+    {
+      "keyword": "vellora marketplace",
+      "volume": 500,
+      "difficulty": 22,
+      "intent": "navigational",
+      "source": "sample-keywords.csv"
+    }
+  ],
+  "all": [
+    {
+      "keyword": "buy mechanical keyboard",
+      "volume": 2400,
+      "difficulty": 45,
+      "intent": "transactional",
+      "source": "sample-keywords.csv"
+    },
+    {
+      "keyword": "best wireless headphones under 100",
+      "volume": 1900,
+      "difficulty": 52,
+      "intent": "commercial",
+      "source": "sample-keywords.csv"
+    },
+    {
+      "keyword": "what is a usb-c hub",
+      "volume": 1200,
+      "difficulty": 30,
+      "intent": "informational",
+      "source": "sample-keywords.csv"
+    },
+    {
+      "keyword": "compostable phone case review",
+      "volume": 880,
+      "difficulty": 38,
+      "intent": "commercial",
+      "source": "sample-keywords.csv"
+    },
+    {
+      "keyword": "vellora marketplace",
+      "volume": 500,
+      "difficulty": 22,
+      "intent": "navigational",
+      "source": "sample-keywords.csv"
+    }
+  ]
+}

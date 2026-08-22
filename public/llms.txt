@@ -1,0 +1,35 @@
+# Vellora
+
+> Vellora is a multi-vendor marketplace for thoughtfully made products — electronics, home goods, stationery, and sustainable lifestyle essentials from independent sellers. Buy directly from trusted vendors with fast shipping, easy returns, and real customer reviews.
+
+## About Vellora
+
+- [Vellora homepage](http://localhost:3000/): Multi-vendor marketplace for premium electronics, home & lifestyle goods, and sustainable essentials.
+- [Browse all products](http://localhost:3000/products): Shop electronics, home decor, fashion, and more from independent vendors.
+- [Explore stores](http://localhost:3000/stores): Discover the independent sellers behind every product.
+- [About Vellora](http://localhost:3000/about): Our mission, values, and how the marketplace works.
+- [Contact us](http://localhost:3000/contact): Get in touch with the Vellora team.
+- [Careers](http://localhost:3000/careers): Join the Vellora team.
+- [Terms of service](http://localhost:3000/terms): Terms and conditions for using Vellora.
+- [Privacy policy](http://localhost:3000/privacy): How we collect and use data.
+
+## Product categories
+
+- **Electronics & tech**: Wireless headphones, mechanical keyboards, USB-C hubs, smart watches, and more.
+- **Home & lifestyle**: Ceramic plant pots, soy candles, woven throws, bamboo desk organizers, and more.
+- **Stationery & writing**: Linen notebooks, fountain pens, weekly planners, reading journals, and more.
+- **Fashion & accessories**: Canvas totes, denim jackets, running sneakers, leather wallets, and more.
+- **Fitness & wellness**: Yoga mats, adjustable dumbbells, insulated water bottles, and more.
+- **Sustainable living**: Bamboo toothbrushes, beeswax food wraps, compostable phone cases, natural lip balm, and more.
+
+## Frequently asked questions
+
+- **What is Vellora?** Vellora is a multi-vendor marketplace where independent sellers offer quality products across electronics, home, lifestyle, and sustainable essentials.
+- **How do purchases work?** Buy directly from a vendor; each order is fulfilled and shipped by the individual store.
+- **Can I return a product?** Yes — every product includes a 30-day return window.
+- **Do products come with a warranty?** Most products include a warranty; check the individual product page for details.
+
+## Contact
+
+- Email: support@vellora.example.com
+- Location: Vellora Marketplace
