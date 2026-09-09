@@ -330,7 +330,7 @@ export function StoreDirectory({ items }: { items: StoreItem[] }) {
             {display.length === 0 ? (
               <div className="border border-[#E5E8E5] rounded-2xl py-28 text-center bg-white">
                 <LayoutGrid className="w-10 h-10 mx-auto text-[#17201C]/20" />
-                <p className="mt-5 font-serif italic text-2xl text-[#17201C]/70">
+                <p className="mt-5 font-heading text-2xl text-[#17201C]/70">
                   No stores found
                 </p>
                 <p className="text-sm text-[#6B716D] mt-2">

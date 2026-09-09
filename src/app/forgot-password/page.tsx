@@ -36,7 +36,7 @@ function ForgotPasswordForm() {
   return (
     <div data-section="auth-forgot-password" className="section-auth-forgot-password w-full max-w-[440px] z-10">
       <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-terracotta">Account recovery</p>
-      <h1 className="mt-4 font-serif italic text-4xl lg:text-5xl text-clay leading-tight">Reset your password</h1>
+      <h1 className="mt-4 font-heading text-4xl lg:text-5xl text-clay leading-tight">Reset your password</h1>
       <p className="mt-3 text-sm text-clay/60">
         Enter your account email and we&apos;ll send you a link to set a new password.
       </p>

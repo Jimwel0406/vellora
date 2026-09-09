@@ -15,12 +15,15 @@ function formatPrice(cents: number) {
 }
 
 export function ProductCard({ product }: { product: HomeProduct }) {
+  const href = `/products/${product.id}`;
+
   return (
-    <Link
-      href={`/products/${product.id}`}
-      className="group flex flex-col bg-white border border-clay/10 rounded-xl overflow-hidden hover:border-terracotta/40 hover:shadow-[0_12px_28px_-16px_rgba(61,43,31,0.25)] transition-all duration-300"
-    >
-      <div className="relative aspect-square overflow-hidden bg-sand/40">
+    <div className="group flex flex-col h-full bg-white border border-clay/10 rounded-xl overflow-hidden hover:border-terracotta/40 hover:shadow-[0_12px_28px_-16px_rgba(61,43,31,0.25)] transition-all duration-300">
+      <Link
+        href={href}
+        aria-label={product.name}
+        className="block relative aspect-square overflow-hidden bg-sand/40"
+      >
         {product.image ? (
           <img
             src={product.image}
@@ -32,7 +35,7 @@ export function ProductCard({ product }: { product: HomeProduct }) {
             No image
           </div>
         )}
-      </div>
+      </Link>
 
       <div className="flex flex-col flex-1 p-3.5 sm:p-4 lg:p-5">
         <h3 className="text-sm font-semibold text-clay leading-snug line-clamp-2 min-h-[2.5rem]">
@@ -40,32 +43,41 @@ export function ProductCard({ product }: { product: HomeProduct }) {
         </h3>
 
         {product.rating != null && (
-          <div className="flex items-center gap-1.5 mt-1.5">
-            <div className="flex items-center gap-0.5">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star
-                  key={i}
-                  className={`w-3.5 h-3.5 ${
-                    i <= Math.round(product.rating!)
-                      ? "text-terracotta fill-terracotta"
-                      : "text-clay/20"
-                  }`}
-                />
-              ))}
-            </div>
-            <span className="text-xs text-clay/60">
+          <div className="mt-1.5">
+            <span className="block text-[11px] text-clay/60 sm:hidden">
               {product.rating!.toFixed(1)}
               {product.reviewCount != null && ` (${product.reviewCount})`}
             </span>
+            <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-0.5">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star
+                    key={i}
+                    className={`w-3.5 h-3.5 ${
+                      i <= Math.round(product.rating!)
+                        ? "text-rating fill-rating"
+                        : "text-clay/20"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="hidden sm:inline text-xs text-clay/60">
+                {product.rating!.toFixed(1)}
+                {product.reviewCount != null && ` (${product.reviewCount})`}
+              </span>
+            </div>
           </div>
         )}
 
-        <p className="mt-2 text-base font-bold text-clay">{formatPrice(product.price)}</p>
+        <p className="mt-2 text-base font-bold text-clay font-label">{formatPrice(product.price)}</p>
 
-        <span className="mt-3 w-full inline-flex items-center justify-center py-2.5 rounded-lg bg-clay text-sand text-[10px] font-bold uppercase font-label tracking-[0.2em] group-hover:bg-terracotta transition-colors duration-300">
+        <Link
+          href={href}
+          className="mt-3 w-full inline-flex items-center justify-center py-2.5 rounded-lg bg-clay text-sand text-[10px] font-bold uppercase font-label tracking-[0.2em] group-hover:bg-terracotta transition-colors duration-300"
+        >
           Shop Now
-        </span>
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 }

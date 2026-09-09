@@ -31,7 +31,7 @@ export function AccountHero({
 
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
         <div className="max-w-2xl">
-          <h1 className="font-serif italic text-4xl sm:text-5xl lg:text-6xl text-terracotta leading-tight mb-3">
+          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-terracotta leading-tight mb-3">
             {title}
           </h1>
           <p className="text-sm text-clay/60 max-w-lg leading-relaxed">{subtitle}</p>

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { Header } from "@/components/shared/header";
-import { FooterCustomer } from "@/components/shared/footer-customer";
+import { FooterEcommerce } from "@/components/home/footer-ecommerce";
 import { AccountSidebar } from "@/components/account/account-sidebar";
 import { AccountHero } from "@/components/account/account-hero";
 import { SettingsForm } from "./settings-form";
@@ -47,7 +47,7 @@ export default async function AccountSettingsPage() {
           </div>
         </div>
       </main>
-      <FooterCustomer />
+      <FooterEcommerce />
     </>
   );
 }

@@ -11,7 +11,7 @@ export function FooterCustomer() {
           <div className="md:col-span-5">
             <h1 className="text-3xl font-black text-white mb-8 uppercase tracking-tighter">VELLORA</h1>
             <p className="text-sm leading-relaxed max-w-sm mb-12 font-medium">
-              Connecting discerning shoppers with exceptional independent makers around the world. We believe in slow commerce and lasting objects.
+              Connecting discerning shoppers with exceptional independent stores and brands around the world. We believe in thoughtful curation and products that last.
             </p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-white transition-colors" aria-label="Twitter">

@@ -56,7 +56,7 @@ export default async function CheckoutPage() {
           <ShieldCheck className="w-3.5 h-3.5" />
           Secure Checkout
         </p>
-        <h1 className="font-serif italic text-4xl sm:text-5xl text-clay tracking-tight mt-3">
+        <h1 className="font-heading text-4xl sm:text-5xl text-clay tracking-tight mt-3">
           Checkout
         </h1>
         <p className="text-sm text-clay/60 mt-3 max-w-md mx-auto">

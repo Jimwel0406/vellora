@@ -95,7 +95,7 @@ export function ProductQa({
           <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta">
             Ask the shop
           </span>
-          <h2 className="font-serif italic text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
+          <h2 className="font-heading text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
             Questions &amp; answers
           </h2>
         </div>

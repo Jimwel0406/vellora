@@ -70,7 +70,7 @@ function ResetPasswordForm() {
   return (
     <div data-section="auth-reset-password" className="section-auth-reset-password w-full max-w-[440px] z-10">
       <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-terracotta">Account recovery</p>
-      <h1 className="mt-4 font-serif italic text-4xl lg:text-5xl text-clay leading-tight">Choose a new password</h1>
+      <h1 className="mt-4 font-heading text-4xl lg:text-5xl text-clay leading-tight">Choose a new password</h1>
       <p className="mt-3 text-sm text-clay/60">Make it at least 8 characters.</p>
 
       <div className="mt-8 bg-white rounded-2xl border border-clay/10 shadow-[0px_8px_40px_rgba(61,43,31,0.06)] p-6 sm:p-8">

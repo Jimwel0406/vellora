@@ -83,8 +83,8 @@ export function StoreCard({ item }: { item: StoreItem }) {
                 key={i}
                 className={`w-3 h-3 min-[360px]:w-3.5 min-[360px]:h-3.5 ${
                   i <= Math.round(item.rating ?? 5)
-                    ? "fill-[#E7B93F] text-[#E7B93F]"
-                    : "fill-[#E5E8E5] text-[#E5E8E5]"
+                    ? "fill-rating text-rating"
+                    : "fill-clay/15 text-clay/15"
                 }`}
               />
             ))}

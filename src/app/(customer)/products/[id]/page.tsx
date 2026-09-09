@@ -180,6 +180,11 @@ export default async function ProductPage({
       ? (productReviews.reduce((sum, r) => sum + r.reviews.rating, 0) / totalReviews).toFixed(1)
       : null;
 
+  const ratingDistribution = [5, 4, 3, 2, 1].map((star) => ({
+    star,
+    count: productReviews.filter((r) => r.reviews.rating === star).length,
+  }));
+
   const galleryImages = (product.products.images?.length ? product.products.images : ["/wishlist-artifact-1.jpg"]);
 
   return (
@@ -312,9 +317,36 @@ export default async function ProductPage({
               </Link>
 
               {/* Title */}
-              <h1 className="max-w-[520px] text-[32px] sm:text-[40px] lg:text-[56px] font-bold leading-[1.05] text-[#1A1A1A] font-serif italic">
+              <h1 className="max-w-[520px] text-[32px] sm:text-[40px] lg:text-[56px] font-bold leading-[1.05] text-[#1A1A1A] font-heading">
                 {product.products.name}
               </h1>
+
+              {/* Rating */}
+              {totalReviews > 0 && avgRating && (
+                <div className="flex items-center gap-2.5">
+                  <div className="relative inline-flex">
+                    <div className="flex gap-0.5 text-clay/15">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className="w-[16px] h-[16px]" />
+                      ))}
+                    </div>
+                    <div
+                      className="absolute inset-0 overflow-hidden flex gap-0.5 text-rating"
+                      style={{ width: `${(Number(avgRating) / 5) * 100}%` }}
+                    >
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className="w-[16px] h-[16px] fill-rating shrink-0" />
+                      ))}
+                    </div>
+                  </div>
+                  <span className="text-[14px] font-bold text-[#1A1A1A] leading-none">
+                    {avgRating}
+                  </span>
+                  <span className="text-[13px] text-clay/50">
+                    ({totalReviews} {totalReviews === 1 ? "review" : "reviews"})
+                  </span>
+                </div>
+              )}
 
               {/* Price */}
               <div className="pt-1">
@@ -346,15 +378,20 @@ export default async function ProductPage({
 
               {/* Tags */}
               {product.products.tags && product.products.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {product.products.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full border border-clay/20 text-[11px] font-medium uppercase tracking-wider text-clay/60"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-clay/50 mb-2.5">
+                    Tags
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {product.products.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3.5 py-1.5 rounded-full bg-terracotta/10 text-terracotta text-[12px] font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -366,7 +403,7 @@ export default async function ProductPage({
                   </h2>
                   <dl className="space-y-3">
                     {features.slice(0, 4).map((point, i) => (
-                      <div key={i} className="flex items-center gap-3 text-[15px] text-[#555555]">
+                      <div key={i} className="flex items-center gap-3 text-[15px] font-semibold text-clay">
                         <dt className="sr-only">Feature {i + 1}</dt>
                         <dd className="flex items-center gap-3">
                           <Check className="w-4 h-4 text-terracotta shrink-0" strokeWidth={2} />
@@ -421,32 +458,26 @@ export default async function ProductPage({
               </div>
 
               {/* Trust badges */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                <div className="flex items-center gap-4 rounded-[16px] border border-clay/10 bg-sand/50 p-4">
-                  <span className="w-11 h-11 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
-                    <Truck className="w-5 h-5" strokeWidth={1.75} />
-                  </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-clay/10 border border-clay/10 rounded-[16px] bg-white overflow-hidden pt-2">
+                <div className="flex flex-col items-center text-center gap-2.5 p-5">
+                  <Truck className="w-6 h-6 text-terracotta shrink-0" strokeWidth={1.75} />
                   <div className="min-w-0">
                     <p className="text-[13px] font-bold text-[#1A1A1A] leading-tight">Free Shipping</p>
-                    <p className="text-[11px] text-clay/50 leading-snug mt-0.5">Free on orders over $50</p>
+                    <p className="text-[11px] text-clay/50 leading-snug mt-1">On orders over $50</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 rounded-[16px] border border-clay/10 bg-sand/50 p-4">
-                  <span className="w-11 h-11 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-5 h-5" strokeWidth={1.75} />
-                  </span>
+                <div className="flex flex-col items-center text-center gap-2.5 p-5">
+                  <ShieldCheck className="w-6 h-6 text-terracotta shrink-0" strokeWidth={1.75} />
                   <div className="min-w-0">
                     <p className="text-[13px] font-bold text-[#1A1A1A] leading-tight">Secure Checkout</p>
-                    <p className="text-[11px] text-clay/50 leading-snug mt-0.5">Your payment is always protected</p>
+                    <p className="text-[11px] text-clay/50 leading-snug mt-1">Your payment is protected</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 rounded-[16px] border border-clay/10 bg-sand/50 p-4">
-                  <span className="w-11 h-11 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
-                    <RotateCcw className="w-5 h-5" strokeWidth={1.75} />
-                  </span>
+                <div className="flex flex-col items-center text-center gap-2.5 p-5">
+                  <RotateCcw className="w-6 h-6 text-terracotta shrink-0" strokeWidth={1.75} />
                   <div className="min-w-0">
                     <p className="text-[13px] font-bold text-[#1A1A1A] leading-tight">Easy Returns</p>
-                    <p className="text-[11px] text-clay/50 leading-snug mt-0.5">30-day returns accepted</p>
+                    <p className="text-[11px] text-clay/50 leading-snug mt-1">30-day returns accepted</p>
                   </div>
                 </div>
               </div>
@@ -456,20 +487,20 @@ export default async function ProductPage({
 
         {/* Reviews */}
         <section data-section="product-reviews" className="section-product-reviews mt-[120px]">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div>
-              <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta">
-                Reviews
-              </span>
-              <h2 className="font-serif italic text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
-                What our community thinks
-              </h2>
-            </div>
-            {avgRating && (
+          {totalReviews > 0 && avgRating && (
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+              <div>
+                <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta">
+                  Reviews
+                </span>
+                <h2 className="font-heading text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
+                  What our community thinks
+                </h2>
+              </div>
               <div className="flex items-center gap-4">
-                <div className="flex gap-0.5 text-ochre">
+                <div className="flex gap-0.5 text-rating">
                   {Array.from({ length: Math.round(Number(avgRating)) }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-ochre" />
+                    <Star key={i} className="w-5 h-5 fill-rating" />
                   ))}
                 </div>
                 <div>
@@ -479,12 +510,58 @@ export default async function ProductPage({
                   </p>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-            {/* Compose */}
-            <div className="lg:col-span-4">
+            {/* Rating overview */}
+            <div className="lg:col-span-4 space-y-6">
+              {totalReviews > 0 && avgRating && (
+                <div className="bg-white border border-clay/10 rounded-[20px] p-7">
+                  <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-clay mb-6">
+                    Rating overview
+                  </h3>
+                  <div className="flex items-end gap-3">
+                    <p className="text-5xl font-bold text-[#1A1A1A] leading-none">{avgRating}</p>
+                    <div className="pb-1">
+                      <div className="flex gap-0.5 text-rating">
+                        {Array.from({ length: Math.round(Number(avgRating)) }).map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-rating" />
+                        ))}
+                      </div>
+                      <p className="text-[12px] text-clay/50 mt-1.5">
+                        {totalReviews} {totalReviews === 1 ? "review" : "reviews"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <dl className="mt-6 space-y-2.5">
+                    {ratingDistribution.map((d) => {
+                      return (
+                        <div key={d.star} className="flex items-center gap-3">
+                          <dt className="sr-only">{d.star} star</dt>
+                          <dd className="w-[calc(100%-56px)]">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-semibold text-clay w-3">{d.star}</span>
+                              <div className="flex-1 h-2 rounded-full bg-clay/10 overflow-hidden">
+                                <div
+                                  className="h-full rounded-full bg-ochre transition-[width] duration-500"
+                                  style={{ width: totalReviews > 0 ? `${(d.count / totalReviews) * 100}%` : "0%" }}
+                                />
+                              </div>
+                              <span className="text-xs text-clay/40 w-6 text-right tabular-nums">
+                                {d.count}
+                              </span>
+                            </div>
+                          </dd>
+                        </div>
+                      );
+                    })}
+                  </dl>
+                </div>
+              )}
+
+              {/* Compose */}
               <div className="bg-white border border-clay/10 rounded-[20px] p-8">
                 <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-clay mb-6">
                   Share Your Experience
@@ -539,7 +616,7 @@ export default async function ProductPage({
                 <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta">
                   You may also like
                 </span>
-                <h2 className="font-serif italic text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
+                <h2 className="font-heading text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
                   From {product.stores?.name || "the same maker"}
                 </h2>
               </div>

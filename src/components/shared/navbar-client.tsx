@@ -71,9 +71,9 @@ export function NavbarClient({
   }
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -84,9 +84,9 @@ export function NavbarClient({
   return (
     <header
       data-section="navbar"
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-out ${
         scrolled
-          ? "border-b bg-background/80 backdrop-blur-md shadow-sm"
+          ? "bg-[#FAF7EF]/95 backdrop-blur-xl shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
           : "bg-transparent"
       }`}
     >

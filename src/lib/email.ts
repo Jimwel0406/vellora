@@ -112,7 +112,7 @@ export function welcomeEmailHtml(name: string, baseUrl: string) {
   return shell(
     "Welcome",
     `Welcome to Vellora, ${name}`,
-    `<p>Your account is ready. Shop thoughtfully made goods from independent makers — electronics, home goods, stationery, and more.</p>`,
+    `<p>Your account is ready. Shop thoughtfully curated goods from independent stores — electronics, home goods, stationery, and more.</p>`,
     { label: "Start shopping", href: `${baseUrl}/products` }
   );
 }

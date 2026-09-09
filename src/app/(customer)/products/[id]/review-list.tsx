@@ -21,7 +21,7 @@ export function ReviewList({ reviews }: { reviews: ReviewItem[] }) {
     return (
       <div className="flex flex-col items-start justify-center py-10">
         <Star className="w-8 h-8 text-terracotta mb-5" />
-        <p className="font-serif italic text-2xl text-[#1A1A1A] mb-3">
+        <p className="font-heading text-2xl text-[#1A1A1A] mb-3">
           Be the first to review
         </p>
         <p className="text-[15px] text-clay/50 max-w-md leading-relaxed">
@@ -46,9 +46,9 @@ export function ReviewList({ reviews }: { reviews: ReviewItem[] }) {
               <p className="font-semibold text-sm text-[#1A1A1A]">
                 {review.name}
               </p>
-              <div className="flex gap-0.5 text-ochre">
+              <div className="flex gap-0.5 text-rating">
                 {Array.from({ length: review.rating }).map((_, i) => (
-                  <Star key={i} className="w-3 h-3 fill-ochre" />
+                  <Star key={i} className="w-3 h-3 fill-rating" />
                 ))}
               </div>
             </div>

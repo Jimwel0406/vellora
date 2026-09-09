@@ -10,6 +10,7 @@
   --color-terracotta: #A6634B;
   --color-rust-dark: #8B4513;
   --color-ochre: #C89B5F;
+  --color-rating: #F5C518;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
@@ -165,8 +166,22 @@
   animation: marquee 35s linear infinite;
 }
 
+.animate-marquee-reverse {
+  animation: marquee 35s linear infinite reverse;
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes float-rotate {
@@ -298,4 +313,56 @@
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* New arrivals slideshow progress bar */
+@keyframes na-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* Hero image rotation animations */
+@keyframes main-land {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes bottom-cycle {
+  0% {
+    opacity: 0;
+    transform: scale(1.15) translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
+@keyframes top-cycle {
+  0% {
+    opacity: 0;
+    transform: scale(1.2) translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
+.animate-main-land {
+  animation: main-land 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-bottom-cycle {
+  animation: bottom-cycle 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.animate-top-cycle {
+  animation: top-cycle 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }

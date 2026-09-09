@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { stores, products, categories, reviews } from "@/db/schema";
 import { eq, count, sql } from "drizzle-orm";
-import { StoreDirectory } from "./store-directory";
+import { StoreDirectoryPremium } from "./store-directory-premium";
 import type { StoreItem } from "./store-types";
 
 const STORE_TYPES: Record<string, string> = {
@@ -101,7 +101,7 @@ export default async function StoresPage() {
 
   return (
     <div className="bg-[#FAF7EF] min-h-screen">
-      <StoreDirectory items={items} />
+      <StoreDirectoryPremium items={items} />
     </div>
   );
 }

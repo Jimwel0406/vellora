@@ -48,7 +48,7 @@ export default async function CartPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         <div className="lg:col-span-8 space-y-16">
           <header className="space-y-2">
-            <h2 className="font-serif text-5xl lg:text-[56px] leading-[1.1] italic text-terracotta">
+            <h2 className="font-heading text-5xl lg:text-[56px] leading-[1.1] text-terracotta">
               Your Cart
             </h2>
             <p className="text-xs lg:text-sm font-medium font-label tracking-[0.2em] uppercase text-clay/50">
@@ -119,7 +119,7 @@ function EmptyCart() {
       <span className="mx-auto w-16 h-16 rounded-full bg-sand border border-clay/10 flex items-center justify-center">
         <ShoppingBag className="w-7 h-7 text-terracotta" />
       </span>
-      <h1 className="mt-6 font-serif italic text-4xl lg:text-5xl text-clay leading-tight">
+      <h1 className="mt-6 font-heading text-4xl lg:text-5xl text-clay leading-tight">
         Your cart is empty
       </h1>
       <p className="mt-3 text-sm text-clay/60 max-w-sm mx-auto leading-relaxed">

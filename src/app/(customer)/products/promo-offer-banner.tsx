@@ -1,4 +1,4 @@
-import { Apple, Citrus, Cherry, Grape } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const OFFER = {
   headline: "Get $3 Cashback! Min Order of $30",
@@ -7,35 +7,28 @@ const OFFER = {
 
 export function PromoOfferBanner() {
   return (
-    <section data-section="promo-offer-banner" className="section-promo-offer-banner max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pt-8 pb-8 lg:pb-14">
-      <div className="relative block overflow-hidden rounded-2xl bg-[#0E8A76] text-white px-6 sm:px-12 lg:px-16 py-7 sm:py-8">
-        {/* Decorative fruit — partially cropped at the edges */}
-        <span className="absolute -left-6 -top-8 opacity-90">
-          <Apple className="w-20 h-20 sm:w-24 sm:h-24 text-white/20" strokeWidth={1.2} />
-        </span>
-        <span className="absolute -right-4 -bottom-10 opacity-90">
-          <Citrus className="w-24 h-24 sm:w-28 sm:h-28 text-white/20" strokeWidth={1.2} />
-        </span>
-        <span className="absolute left-1/2 -top-9 -translate-x-1/2 opacity-60">
-          <Cherry className="w-16 h-16 text-white/15" strokeWidth={1.2} />
-        </span>
-        <span className="absolute -left-8 bottom-0 opacity-70">
-          <Grape className="w-16 h-16 sm:w-20 sm:h-20 text-white/20" strokeWidth={1.2} />
-        </span>
+    <div className="max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pb-10 lg:pb-16">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] text-white px-8 sm:px-12 lg:px-16 py-8 sm:py-10">
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "32px 32px" }} />
 
-        {/* Center content */}
-        <div className="relative text-center">
-          <p className="text-xl sm:text-2xl lg:text-[28px] font-bold tracking-tight leading-tight">
-            {OFFER.headline}
-          </p>
-          <p className="mt-2 sm:mt-2.5 text-xs sm:text-sm text-white/75 tracking-wide">
-            Use Code:{" "}
-            <span className="font-bold text-white tracking-[0.2em] uppercase">
+        {/* Content */}
+        <div className="relative flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+          <div className="flex items-center gap-3">
+            <Sparkles className="w-5 h-5 text-amber-400" />
+            <p className="text-xl sm:text-2xl lg:text-3xl font-heading font-medium tracking-tight">
+              {OFFER.headline}
+            </p>
+            <Sparkles className="w-5 h-5 text-amber-400" />
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/50">Use Code</span>
+            <span className="px-4 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-bold tracking-[0.15em] uppercase border border-white/20">
               {OFFER.code}
             </span>
-          </p>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

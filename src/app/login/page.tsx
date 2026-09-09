@@ -67,7 +67,7 @@ function LoginForm() {
         <Store className="w-3.5 h-3.5" />
         Curated Marketplace
       </p>
-      <h1 className="mt-4 font-serif italic text-4xl lg:text-5xl text-clay leading-tight">
+      <h1 className="mt-4 font-heading text-4xl lg:text-5xl text-clay leading-tight">
         Welcome back
       </h1>
       <p className="mt-3 text-sm text-clay/60">
@@ -256,14 +256,14 @@ export default function LoginPage() {
           >
             <img
               src="/auth-hero.jpg"
-              alt="Artisanal products in a natural shopping bag"
+              alt="Curated products in a natural shopping bag"
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-clay/85 via-clay/30 to-clay/10" />
             <div className="absolute inset-x-0 bottom-0 p-6 lg:p-10 hidden lg:block">
               <LogoMark className="h-10 w-10 text-sand" />
-              <p className="mt-5 font-serif italic text-3xl text-sand leading-snug max-w-md">
-                Shop thoughtfully made goods from independent makers.
+              <p className="mt-5 font-heading text-3xl text-sand leading-snug max-w-md">
+                Shop thoughtfully curated goods from independent stores.
               </p>
               <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.3em] text-sand/70">
                 Electronics &middot; Home &middot; Stationery &middot; Lifestyle

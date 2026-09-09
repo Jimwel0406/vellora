@@ -1,14 +1,12 @@
 import { db } from "@/db";
 import { products, stores, categories, reviews } from "@/db/schema";
 import { eq, sql } from "drizzle-orm";
-import { Boxes, Package, Heart, Flame, Clock, Star } from "lucide-react";
-import { ShopArea } from "./shop-area";
-import {
-  ShopHeroBanner,
-  ShopByCategories,
-  ProductRow,
-} from "./shop-sections";
-import { PromoOfferBanner } from "./promo-offer-banner";
+import { FilterSwitcher } from "./filter-switcher";
+import { ShopByCategoriesSwitcher } from "./categories-variations";
+import { ShopHeroB } from "./shop-hero-variations";
+import { ProductsHeaderSwitcher } from "./product-header-switcher";
+import { DiscoverSwitcher } from "./discover-variations";
+import { ReviewsSection } from "./reviews-section";
 import type { ShopProduct } from "./shop-types";
 
 export const dynamic = "force-dynamic";
@@ -16,9 +14,9 @@ export const dynamic = "force-dynamic";
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; category?: string }>;
+  searchParams: Promise<{ q?: string; category?: string; sort?: string }>;
 }) {
-  const { q, category } = await searchParams;
+  const { q, category, sort } = await searchParams;
   const query = q?.trim() || "";
 
   const [allProducts, reviewStats] = await Promise.all([
@@ -66,6 +64,23 @@ export default async function ProductsPage({
     ratingCount: ratingMap.get(p.id)?.count ?? 0,
   }));
 
+  // Apply sort
+  if (sort === "best-selling") {
+    productItems.sort((a, b) => {
+      const aBest = a.tags?.some((t) => ["Best Seller", "Popular"].includes(t)) ? 1 : 0;
+      const bBest = b.tags?.some((t) => ["Best Seller", "Popular"].includes(t)) ? 1 : 0;
+      return bBest - aBest || b.ratingCount - a.ratingCount;
+    });
+  } else if (sort === "newest") {
+    productItems.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  } else if (sort === "price-low") {
+    productItems.sort((a, b) => a.price - b.price);
+  } else if (sort === "price-high") {
+    productItems.sort((a, b) => b.price - a.price);
+  } else if (sort === "top-rated") {
+    productItems.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+  }
+
   const allCategories = [
     ...new Set(allProducts.map((p) => p.categoryName).filter(Boolean)),
   ].sort() as string[];
@@ -93,80 +108,38 @@ export default async function ProductsPage({
 
   return (
     <div className="bg-[#F1EDE1]">
-      <section data-section="products-header" className="section-products-header max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pt-16 sm:pt-20 lg:pt-28">
-        <div className="text-center">
-          <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-terracotta mb-6 inline-flex items-center gap-2">
-            <Boxes className="w-3.5 h-3.5" />
-            The Collection
-          </p>
-          <div className="flex items-center justify-center gap-4">
-            <span className="h-px w-10 sm:w-20 bg-clay/20" />
-            <h1 className="font-serif italic text-5xl sm:text-6xl lg:text-7xl text-clay tracking-tight leading-[1.05] flex items-center gap-3">
-              {query ? (
-                <>Results for &ldquo;{query}&rdquo;</>
-              ) : (
-                <>All Products</>
-              )}
-              <Package className="w-6 h-6 lg:w-7 lg:h-7 text-terracotta" />
-            </h1>
-            <span className="h-px w-10 sm:w-20 bg-clay/20" />
-          </div>
-          <p className="mt-6 max-w-[640px] mx-auto text-[15px] lg:text-base text-clay/60 leading-relaxed">
-            Browse quality products from independent sellers, all in one place.
-          </p>
-        </div>
-      </section>
+      <ProductsHeaderSwitcher query={query} />
 
-      <section data-section="products-shop-area" className="section-products-shop-area max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pt-12 sm:pt-16 lg:pt-20">
-        <ShopHeroBanner />
-        <ShopArea
-          key={`${query}|${category ?? ""}`}
+      <section data-section="products-shop-area" className="section-products-shop-area max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pt-14 sm:pt-18 lg:pt-24">
+        <ShopHeroB />
+        <FilterSwitcher
           products={productItems}
           allCategories={allCategories}
           allVendors={allVendors}
           query={query}
           initialCategory={category}
+          initialSort={sort === "best-selling" ? "popular" : sort === "price-low" ? "price-asc" : sort === "price-high" ? "price-desc" : sort === "top-rated" ? "rating" : sort === "newest" ? "newest" : undefined}
         />
       </section>
 
-      <section data-section="products-categories" className="section-products-categories max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pb-8 lg:pt-24 lg:pb-36">
-        <ShopByCategories categories={allCategories} />
+      <section data-section="products-categories" className="section-products-categories max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pb-10 lg:pt-28 lg:pb-40">
+        <ShopByCategoriesSwitcher categories={allCategories} />
       </section>
 
-      <section data-section="products-discover" className="section-products-discover max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-10">
-          <ProductRow
-            name="top-selling"
-            eyebrow="Customer Favorites"
-            title="Top Selling"
-            products={topSelling}
-            icon={<Heart className="w-3.5 h-3.5" />}
-          />
-          <ProductRow
-            name="trending-products"
-            eyebrow="What&rsquo;s Hot"
-            title="Trending Products"
-            products={trending}
-            icon={<Flame className="w-3.5 h-3.5" />}
-          />
-          <ProductRow
-            name="recently-added"
-            eyebrow="Just In"
-            title="Recently Added"
-            products={recentlyAdded}
-            icon={<Clock className="w-3.5 h-3.5" />}
-          />
-          <ProductRow
-            name="top-rated"
-            eyebrow="Highly Rated"
-            title="Top Rated"
-            products={topRated}
-            icon={<Star className="w-3.5 h-3.5" />}
+      <section data-section="products-reviews" className="section-products-reviews max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14">
+        <ReviewsSection />
+      </section>
+
+      <section data-section="products-discover" className="section-products-discover bg-white/50">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 py-10 lg:py-14">
+          <DiscoverSwitcher
+            topSelling={topSelling}
+            trending={trending}
+            recentlyAdded={recentlyAdded}
+            topRated={topRated}
           />
         </div>
       </section>
-
-      <PromoOfferBanner />
     </div>
   );
 }

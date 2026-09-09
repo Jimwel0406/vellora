@@ -84,7 +84,7 @@ export function RecentlyViewedSection() {
           <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta">
             Continue browsing
           </span>
-          <h2 className="font-serif italic text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
+          <h2 className="font-heading text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
             Recently viewed
           </h2>
         </div>

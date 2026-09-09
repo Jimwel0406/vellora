@@ -11,7 +11,7 @@ export default function PrivacyPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
         <aside className="hidden lg:block lg:col-span-3">
           <div className="sticky top-32">
-            <h3 className="font-serif text-[10px] font-bold uppercase tracking-[0.3em] text-terracotta mb-8">Contents</h3>
+            <h3 className="font-heading text-[10px] font-bold uppercase tracking-[0.3em] text-terracotta mb-8">Contents</h3>
             <ul className="space-y-6">
               <li>
                 <a href="#introduction" className="text-sm text-clay/50 hover:text-terracotta transition-all border-l-2 border-transparent hover:border-terracotta pl-4 block">
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
             <h1 id="intro" className="text-5xl lg:text-7xl font-black uppercase tracking-tighter text-clay mb-8 leading-tight scroll-mt-40">
               Privacy Policy
             </h1>
-            <p className="text-lg text-clay/60 italic leading-relaxed">
+            <p className="text-lg text-clay/60 leading-relaxed">
               At Vellora, we believe transparency is the foundation of trust. This policy outlines our commitment to protecting your digital footprint while curating a bespoke marketplace experience.
             </p>
             <div className="w-20 h-1 bg-terracotta mt-10" />
@@ -58,8 +58,8 @@ export default function PrivacyPage() {
 
           <section id="introduction" data-section="privacy-introduction" className="section-privacy-introduction mb-24 max-w-2xl group scroll-mt-40">
             <div className="flex items-start gap-4 mb-8">
-              <span className="font-serif text-4xl text-terracotta/40 leading-none">01</span>
-              <h2 className="font-serif text-3xl text-clay">Introduction</h2>
+              <span className="font-heading text-4xl text-terracotta/40 leading-none">01</span>
+              <h2 className="font-heading text-3xl text-clay">Introduction</h2>
             </div>
             <div className="md:pl-12 space-y-4">
               <p className="text-base text-clay/60 leading-relaxed">
@@ -81,8 +81,8 @@ export default function PrivacyPage() {
 
           <section id="information-collection" data-section="privacy-information-collection" className="section-privacy-information-collection mb-24 max-w-2xl group scroll-mt-40">
             <div className="flex items-start gap-4 mb-8">
-              <span className="font-serif text-4xl text-terracotta/40 leading-none">02</span>
-              <h2 className="font-serif text-3xl text-clay">Information we collect</h2>
+              <span className="font-heading text-4xl text-terracotta/40 leading-none">02</span>
+              <h2 className="font-heading text-3xl text-clay">Information we collect</h2>
             </div>
             <div className="md:pl-12 space-y-6">
               <p className="text-base text-clay/60 leading-relaxed">
@@ -113,8 +113,8 @@ export default function PrivacyPage() {
 
           <section id="use-of-information" data-section="privacy-use-of-information" className="section-privacy-use-of-information mb-24 max-w-2xl group scroll-mt-40">
             <div className="flex items-start gap-4 mb-8">
-              <span className="font-serif text-4xl text-terracotta/40 leading-none">03</span>
-              <h2 className="font-serif text-3xl text-clay">How we use your information</h2>
+              <span className="font-heading text-4xl text-terracotta/40 leading-none">03</span>
+              <h2 className="font-heading text-3xl text-clay">How we use your information</h2>
             </div>
             <div className="md:pl-12 grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-3">
@@ -134,8 +134,8 @@ export default function PrivacyPage() {
 
           <section id="data-security" data-section="privacy-data-security" className="section-privacy-data-security mb-24 max-w-2xl group scroll-mt-40">
             <div className="flex items-start gap-4 mb-8">
-              <span className="font-serif text-4xl text-terracotta/40 leading-none">04</span>
-              <h2 className="font-serif text-3xl text-clay">Data Security</h2>
+              <span className="font-heading text-4xl text-terracotta/40 leading-none">04</span>
+              <h2 className="font-heading text-3xl text-clay">Data Security</h2>
             </div>
             <div className="md:pl-12 space-y-4">
               <p className="text-base text-clay/60 leading-relaxed">
@@ -149,8 +149,8 @@ export default function PrivacyPage() {
 
           <section id="contact" data-section="privacy-contact" className="section-privacy-contact max-w-2xl group scroll-mt-40">
             <div className="flex items-start gap-4 mb-8">
-              <span className="font-serif text-4xl text-terracotta/40 leading-none">05</span>
-              <h2 className="font-serif text-3xl text-clay">Contact</h2>
+              <span className="font-heading text-4xl text-terracotta/40 leading-none">05</span>
+              <h2 className="font-heading text-3xl text-clay">Contact</h2>
             </div>
             <div className="md:pl-12 space-y-8">
               <p className="text-base text-clay/60 leading-relaxed">

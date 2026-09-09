@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import {
   Bell,
@@ -52,7 +53,9 @@ function timeAgo(iso: string): string {
   });
 }
 
-export function NotificationBell({ user }: { user: SessionUser }) {
+export function NotificationBell({ user, scrolled }: { user: SessionUser; scrolled?: boolean }) {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -164,7 +167,11 @@ export function NotificationBell({ user }: { user: SessionUser }) {
         onClick={toggle}
         aria-label="Notifications"
         aria-expanded={open}
-        className="relative inline-flex items-center justify-center w-10 h-10 rounded-full text-clay/70 hover:text-terracotta hover:bg-clay/5 transition-colors cursor-pointer"
+        className={`relative inline-flex items-center justify-center w-10 h-10 rounded-full transition-colors cursor-pointer ${
+          isHome
+            ? scrolled ? "text-clay hover:text-terracotta hover:bg-clay/5" : "text-white/70 hover:text-white hover:bg-white/10"
+            : "text-clay hover:text-terracotta hover:bg-clay/5"
+        }`}
       >
         <Bell className="w-5 h-5" />
         {unreadCount > 0 && (

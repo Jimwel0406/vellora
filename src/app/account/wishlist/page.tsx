@@ -5,7 +5,7 @@ import { wishlistItems, products, stores } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { auth } from "@/lib/auth";
 import { Header } from "@/components/shared/header";
-import { FooterCustomer } from "@/components/shared/footer-customer";
+import { FooterEcommerce } from "@/components/home/footer-ecommerce";
 import { AccountSidebar } from "@/components/account/account-sidebar";
 import { AccountHero } from "@/components/account/account-hero";
 import { WishlistRemoveButton, WishlistAddToCartButton } from "./wishlist-actions";
@@ -145,7 +145,7 @@ export default async function WishlistPage() {
           </div>
         </div>
       </main>
-      <FooterCustomer />
+      <FooterEcommerce />
     </>
   );
 }

@@ -53,7 +53,7 @@ export function ReviewForm({ productId }: { productId: number }) {
             <Star
               className={`w-6 h-6 ${
                 star <= (hover || rating)
-                  ? "fill-ochre text-ochre"
+                  ? "fill-rating text-rating"
                   : "text-clay/15"
               } transition-colors`}
             />

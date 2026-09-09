@@ -1,18 +1,22 @@
 ﻿import { db } from "@/db";
 import { products, stores, categories, reviews } from "@/db/schema";
 import { eq, inArray, count, sql } from "drizzle-orm";
+import Link from "next/link";
 import { Header } from "@/components/shared/header";
-import { NewsletterForm } from "@/components/home/newsletter-form";
-import { PromotionalBanner } from "@/components/home/promotional-banner";
+import { NewsletterMinimal } from "@/components/home/newsletter-variations";
+import { PromoPopup } from "@/components/home/promo-popup";
 import { Hero } from "@/components/home/hero";
-import { Testimonials } from "@/components/home/testimonials";
-import { BenefitsBar } from "@/components/home/benefits-bar";
+import { TestimonialsVariationB } from "@/components/home/testimonials-variation-b";
+import { BenefitsBarBigStatsH } from "@/components/home/benefits-bar-big-stats-h";
 import { FooterEcommerce } from "@/components/home/footer-ecommerce";
+import { BestSellers } from "@/components/home/best-sellers-variations";
 import { SectionHeading } from "@/components/home/section-heading";
 import { ProductCarousel } from "@/components/home/product-carousel";
-import { CategoryNavigation } from "@/components/home/category-navigation";
+import { CategoryVariationA } from "@/components/home/category-variations";
 import { Reveal } from "@/components/home/reveal";
 import { WhyVellora } from "@/components/home/why-vellora";
+import { NewArrivalsGrid } from "@/components/home/new-arrivals-grid";
+import { FaqSection } from "@/components/home/faq-section";
 
 export default async function HomePage() {
   const allProducts = await db
@@ -50,22 +54,46 @@ export default async function HomePage() {
 
   const withImage = allProducts.filter((row) => row.products.images?.length);
 
-  const bestSellerRows = withImage.filter((row) =>
+  const bestSellerTagged = withImage.filter((row) =>
     row.products.tags?.some((t) => t === "Best Seller" || t === "Popular")
   );
 
+  const bestSellerRows =
+    bestSellerTagged.length >= 5
+      ? bestSellerTagged.slice(0, 5)
+      : [
+          ...bestSellerTagged,
+          ...withImage
+            .filter((row) => !bestSellerTagged.some((t) => t.products.id === row.products.id))
+            .slice(0, 5 - bestSellerTagged.length),
+        ].slice(0, 5);
+
   const bestSellerIds = new Set(bestSellerRows.map((row) => row.products.id));
 
-  const newArrivalRows = withImage
+  const byNewest = (a: (typeof withImage)[number], b: (typeof withImage)[number]) =>
+    new Date(b.products.createdAt).getTime() - new Date(a.products.createdAt).getTime();
+
+  const taggedNew = withImage
     .filter((row) => {
       if (bestSellerIds.has(row.products.id)) return false;
       return row.products.tags?.some((t) => t === "New" || t === "Featured");
     })
-    .sort((a, b) => new Date(b.products.createdAt).getTime() - new Date(a.products.createdAt).getTime())
-    .slice(0, 4);
+    .sort(byNewest);
+
+  const newArrivalRows =
+    taggedNew.length >= 8
+      ? taggedNew.slice(0, 8)
+      : [
+          ...taggedNew,
+          ...withImage
+            .filter((row) => !bestSellerIds.has(row.products.id))
+            .filter((row) => !taggedNew.some((t) => t.products.id === row.products.id))
+            .sort(byNewest)
+            .slice(0, 8 - taggedNew.length),
+        ].slice(0, 8);
 
   const featuredIds = [
-    ...bestSellerRows.slice(0, 4).map((row) => row.products.id),
+    ...bestSellerRows.slice(0, 5).map((row) => row.products.id),
     ...newArrivalRows.map((row) => row.products.id),
   ];
 
@@ -93,7 +121,7 @@ export default async function HomePage() {
     };
   };
 
-  const bestSellers = bestSellerRows.slice(0, 4).map(withRating);
+  const bestSellers = bestSellerRows.slice(0, 5).map(withRating);
   const newArrivals = newArrivalRows.map(withRating);
 
   return (
@@ -101,16 +129,10 @@ export default async function HomePage() {
       <Header />
       <main className="bg-[#F1EDE1]">
         <Hero />
-        <PromotionalBanner />
 
-        <Reveal>
-          <section data-section="best-sellers" className="section-best-sellers max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-10 sm:pt-14 lg:pt-16">
-            <SectionHeading eyebrow="Top Picks For You" title="Best Sellers" />
-            <div className="mt-8 lg:mt-10">
-              <ProductCarousel products={bestSellers} />
-            </div>
-          </section>
-        </Reveal>
+        <PromoPopup />
+
+        <BestSellers products={bestSellers} />
 
         <Reveal>
           <WhyVellora
@@ -121,43 +143,61 @@ export default async function HomePage() {
         </Reveal>
 
         <Reveal>
-          <section data-section="new-arrivals" className="section-new-arrivals max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
-            <SectionHeading eyebrow="Check Out What's New" title="New Arrivals" />
-            <div className="mt-8 lg:mt-10">
-              <ProductCarousel products={newArrivals} />
-            </div>
-          </section>
-        </Reveal>
-
-        <Reveal>
-          <section data-section="shop-by-category" className="section-shop-by-category max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-16 lg:pt-20 pb-20 lg:pb-24">
-            <CategoryNavigation categories={allCategories} />
-          </section>
-        </Reveal>
-
-        <Reveal>
-          <section data-section="newsletter" className="section-newsletter relative py-14 lg:py-16 overflow-hidden">
-            <div className="absolute inset-0 z-0">
-              <img alt="Background" className="w-full h-full object-cover" src="/newsletter-bg.jpg" />
-            </div>
-            <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
-            <div className="relative z-10 max-w-2xl mx-auto px-8 text-center text-white">
-              <span className="text-[10px] font-bold uppercase tracking-[0.6em] mb-6 block font-label">
-                The Journal
-              </span>
-              <h2 className="text-4xl sm:text-5xl font-black mb-6 uppercase tracking-tighter">
-                Stay in the loop
+          <section data-section="new-arrivals" className="section-new-arrivals max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-2 lg:pt-24">
+            {/* Editorial header */}
+            <div className="text-center mb-12 lg:mb-16">
+              <div className="inline-flex items-center gap-0 lg:gap-4 mb-4">
+                <span className="relative w-12 h-[2px] bg-terracotta -right-4 lg:right-auto" />
+                <p className="text-xl font-bold uppercase font-label tracking-[0.3em] text-terracotta">
+                  Check Out What&apos;s New
+                </p>
+                <span className="relative w-12 h-[2px] bg-terracotta -left-4 lg:left-auto" />
+              </div>
+              <h2 className="-mt-2 font-heading text-4xl sm:text-5xl lg:text-6xl text-clay tracking-tight leading-none">
+                New Arrivals
               </h2>
-              <p className="text-sm font-medium mb-10 opacity-80 leading-relaxed tracking-wide">
-                New vendors, curated products, and exclusive updates &mdash; straight to your inbox.
-              </p>
-              <NewsletterForm />
+              <div className="mt-6 mx-auto w-24 h-1.5 bg-gradient-to-r from-transparent via-terracotta to-transparent rounded-full" />
             </div>
+
+            <NewArrivalsGrid products={newArrivals} />
+          </section>
+        </Reveal>
+
+        <Reveal>
+          <section data-section="shop-by-category" className="section-shop-by-category max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-16 lg:pt-20 pb-10 lg:pb-14">
+            <CategoryVariationA categories={allCategories} />
           </section>
         </Reveal>
       </main>
-      <Testimonials />
-      <BenefitsBar />
+      <div className="bg-sand">
+        <div className="w-[95%] mx-auto py-12 lg:py-16">
+          <div className="relative overflow-hidden rounded-3xl">
+            {/* Blurred background images */}
+            <img
+              src="/hero-lifestyle.jpg"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover scale-[1.2] blur-2xl opacity-30"
+              aria-hidden="true"
+            />
+            <img
+              src="/hero-curation.jpg"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover scale-[1.3] blur-3xl opacity-20"
+              aria-hidden="true"
+            />
+            {/* Tint overlay */}
+            <div className="absolute inset-0 bg-sand/60" aria-hidden="true" />
+
+            {/* Content grid */}
+            <div className="relative grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-6 lg:gap-8 items-stretch p-4 sm:p-6 lg:p-8">
+              <TestimonialsVariationB />
+              <BenefitsBarBigStatsH />
+            </div>
+          </div>
+        </div>
+      </div>
+      <NewsletterMinimal />
+      <FaqSection />
       <FooterEcommerce />
     </>
   );

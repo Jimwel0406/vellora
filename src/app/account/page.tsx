@@ -5,8 +5,8 @@ import { users, orders, wishlistItems } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { ShoppingBag, Heart, MapPin } from "lucide-react";
 import { Header } from "@/components/shared/header";
-import { FooterCustomer } from "@/components/shared/footer-customer";
-import { BenefitsBar } from "@/components/home/benefits-bar";
+import { FooterEcommerce } from "@/components/home/footer-ecommerce";
+import { BenefitsBarBigStatsH } from "@/components/home/benefits-bar-big-stats-h";
 import { AccountSidebar } from "@/components/account/account-sidebar";
 import { AccountHero } from "@/components/account/account-hero";
 import { StatTile } from "@/components/shared/dashboard-ui";
@@ -95,10 +95,10 @@ export default async function AccountPage() {
 
         {/* Benefits strip */}
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
-          <BenefitsBar />
+          <BenefitsBarBigStatsH />
         </div>
       </main>
-      <FooterCustomer />
+      <FooterEcommerce />
     </>
   );
 }

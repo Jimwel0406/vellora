@@ -160,7 +160,7 @@ export default async function StorePage({
               </span>
             </div>
 
-            <h1 className="mt-5 font-serif italic text-[44px] sm:text-6xl lg:text-7xl text-[#3D2B1F] leading-[1.02] tracking-tight">
+            <h1 className="mt-5 font-heading text-[44px] sm:text-6xl lg:text-7xl text-[#3D2B1F] leading-[1.02] tracking-tight">
               {store.name}
             </h1>
 

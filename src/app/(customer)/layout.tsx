@@ -1,5 +1,5 @@
 import { Header } from "@/components/shared/header";
-import { FooterCustomer } from "@/components/shared/footer-customer";
+import { FooterEcommerce } from "@/components/home/footer-ecommerce";
 
 export default function CustomerLayout({
   children,
@@ -10,7 +10,7 @@ export default function CustomerLayout({
     <>
       <Header />
       <main className="flex-1 bg-sand">{children}</main>
-      <FooterCustomer />
+      <FooterEcommerce />
     </>
   );
 }

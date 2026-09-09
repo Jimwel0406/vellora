@@ -57,7 +57,7 @@ Contrast notes:
 
 ## Typography
 
-Fonts are loaded in `src/app/layout.tsx` via `next/font`: `--font-sans` (Inter), `--font-heading` (Outfit), `--font-label` (Space Grotesk). A `font-serif` (Georgia/serif stack) is used for editorial display.
+Fonts are loaded in `src/app/layout.tsx` via `next/font`: `--font-sans` (Inter), `--font-heading` (Outfit), `--font-label` (Space Grotesk). Outfit is used for both headings and editorial display — no serif font.
 
 ```yaml
 typography:
@@ -71,12 +71,12 @@ typography:
   body-sm:      # Inter 400, 13px, line-height 1.5
   caption:      # Inter 400, 12px, clay-mute
   stat-figure:  # Outfit 700, 28–36px, tabular-nums, clay — KPI values
-  stat-figure-serif: # serif 600, 32–40px, clay — editorial hero numerals
+  display-hero: # Outfit 600, 40–110px, tracking -0.02em — editorial display headings
   button:       # Space Grotesk 600, 11px, uppercase, tracking +0.12em
 ```
 
 Principles:
-- Headings always `Outfit`; body always `Inter`; eyebrows/labels/buttons always `Space Grotesk` uppercase. One type scale, no ad-hoc sizes.
+- Headings and display text always `Outfit`; body always `Inter`; eyebrows/labels/buttons always `Space Grotesk` uppercase. One type scale, no ad-hoc sizes. No serif fonts.
 - KPI figures use `font-variant-numeric: tabular-nums` so columns align.
 - Body line-height 1.5–1.7; headings 1.1–1.3. Display tracking tighter, eyebrow tracking wider.
 
