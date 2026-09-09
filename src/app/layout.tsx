@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit, Space_Grotesk } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "@/components/shared/providers";
 import { ScrollToTop } from "@/components/shared/scroll-to-top";
 import "./globals.css";
@@ -114,6 +115,7 @@ export default function RootLayout({
           <ScrollToTop />
           {children}
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
