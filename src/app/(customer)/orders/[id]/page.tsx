@@ -113,6 +113,9 @@ export default async function OrderDetailPage({
                               src={item.productImage}
                               alt={item.productName}
                               className="w-14 h-14 rounded-lg object-cover bg-clay/5 shrink-0"
+                              width="56"
+                              height="56"
+                              loading="lazy"
                             />
                           ) : (
                             <span className="w-14 h-14 rounded-lg bg-clay/5 flex items-center justify-center text-[10px] text-clay/30 shrink-0">

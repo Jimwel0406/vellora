@@ -16,6 +16,11 @@ import { Reveal } from "@/components/home/reveal";
 import { WhyVellora } from "@/components/home/why-vellora";
 import { NewArrivalsGrid } from "@/components/home/new-arrivals-grid";
 import { FaqSection } from "@/components/home/faq-section";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default async function HomePage() {
   const allProducts = await db
@@ -126,7 +131,7 @@ export default async function HomePage() {
   return (
     <>
       <Header />
-      <main className="bg-[#F1EDE1]">
+      <main id="main-content" className="bg-[#F1EDE1]">
         <Hero />
 
         <PromoPopup />
@@ -190,18 +195,22 @@ export default async function HomePage() {
               alt=""
               className="absolute inset-0 w-full h-full object-cover scale-[1.2] blur-2xl opacity-30"
               aria-hidden="true"
+              width="1920"
+              height="1080"
             />
             <img
               src="/hero-curation.jpg"
               alt=""
               className="absolute inset-0 w-full h-full object-cover scale-[1.3] blur-3xl opacity-20"
               aria-hidden="true"
+              width="1920"
+              height="1080"
             />
             {/* Tint overlay */}
             <div className="absolute inset-0 bg-sand/60" aria-hidden="true" />
 
             {/* Content grid */}
-            <div className="relative grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-6 lg:gap-8 items-stretch p-4 sm:p-6 lg:p-8">
+            <div className="relative grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-6 lg:gap-8 items-start p-4 sm:p-6 lg:p-8">
               <TestimonialsVariationB />
               <BenefitsBarBigStatsH />
             </div>

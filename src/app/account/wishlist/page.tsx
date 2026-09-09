@@ -67,6 +67,9 @@ export default async function WishlistPage() {
                             alt=""
                             className="w-full h-full object-cover"
                             src="/wishlist-artifact-2.jpg"
+                            width="800"
+                            height="600"
+                            loading="lazy"
                           />
                         </div>
                         <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-14 h-14 sm:w-20 sm:h-20 rounded-xl overflow-hidden shadow-lg border-2 border-white -rotate-12 group-hover:-rotate-6 transition-transform duration-500">
@@ -74,6 +77,9 @@ export default async function WishlistPage() {
                             alt=""
                             className="w-full h-full object-cover"
                             src="/wishlist-artifact-1.jpg"
+                            width="800"
+                            height="600"
+                            loading="lazy"
                           />
                         </div>
                       </div>
@@ -106,6 +112,9 @@ export default async function WishlistPage() {
           src={product.images[0]}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+          width="600"
+          height="600"
+          loading="lazy"
         />
       ) : (
         <div className="w-full h-full flex items-center justify-center">

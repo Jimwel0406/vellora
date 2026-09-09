@@ -185,6 +185,8 @@ export function PromoPopup() {
                   src={PROMO.productImage}
                   alt={PROMO.productAlt}
                   className="absolute inset-0 w-full h-full object-cover"
+                  width="800"
+                  height="600"
                 />
               ) : (
                 <div className="absolute inset-0 bg-clay" />

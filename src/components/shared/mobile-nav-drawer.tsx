@@ -171,6 +171,9 @@ export function MobileNavDrawer({
                   src={user.image}
                   alt={displayName}
                   className="w-14 h-14 rounded-full object-cover ring-2 ring-white/70 shrink-0"
+                  width="56"
+                  height="56"
+                  loading="lazy"
                 />
               ) : (
                 <span className="w-14 h-14 rounded-full bg-white/15 ring-2 ring-white/70 flex items-center justify-center text-xl font-bold text-white shrink-0">

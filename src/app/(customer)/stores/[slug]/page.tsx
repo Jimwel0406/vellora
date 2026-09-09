@@ -14,6 +14,22 @@ import {
 } from "lucide-react";
 import { auth } from "@/lib/auth";
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const store = await db.select().from(stores).where(eq(stores.slug, slug)).then(r => r[0]);
+  if (!store) return { title: "Store Not Found" };
+  return {
+    title: store.name,
+    description: store.description || `Shop ${store.name} on Vellora`,
+    alternates: { canonical: `/stores/${slug}` },
+    openGraph: {
+      title: store.name,
+      description: store.description || `Shop ${store.name} on Vellora`,
+      type: "website",
+    },
+  };
+}
+
 export default async function StorePage({
   params,
 }: {

@@ -61,6 +61,8 @@ export function HeroImageRotator() {
               src={img.src}
               alt={img.alt}
               className="w-full h-full object-cover"
+              width="1920"
+              height="1080"
             />
           </div>
         );

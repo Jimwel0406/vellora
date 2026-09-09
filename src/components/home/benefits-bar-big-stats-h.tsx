@@ -1,8 +1,8 @@
 export function BenefitsBarBigStatsH() {
   return (
-    <section data-section="benefits-bar" className="section-benefits-bar h-full">
-      <div className="bg-[#2C1E14] rounded-3xl h-full overflow-hidden">
-        <div className="relative h-full flex flex-col">
+    <section data-section="benefits-bar" className="section-benefits-bar">
+      <div className="bg-[#2C1E14] rounded-3xl overflow-hidden">
+        <div className="relative flex flex-col">
 
           {/* Top label — inset from edges */}
           <div className="px-8 sm:px-10 lg:px-11 pt-9 sm:pt-10 lg:pt-11">

@@ -80,6 +80,7 @@ export function PromotionalBanner() {
                 className="w-full h-full object-cover object-center"
                 width={200}
                 height={250}
+                loading="lazy"
               />
             </div>
           </div>

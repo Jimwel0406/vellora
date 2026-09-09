@@ -99,7 +99,7 @@ export default async function VendorProductsPage() {
                       <div className="flex items-center gap-3">
                         <div className="w-11 h-11 rounded-lg bg-clay/[0.03] border border-clay/10 flex items-center justify-center overflow-hidden shrink-0">
                           {product.images?.[0] ? (
-                            <img src={product.images[0]} alt="" className="w-full h-full object-cover" />
+                            <img src={product.images[0]} alt="" className="w-full h-full object-cover" width="600" height="600" loading="lazy" />
                           ) : (
                             <span className="text-xs text-clay/40">No img</span>
                           )}

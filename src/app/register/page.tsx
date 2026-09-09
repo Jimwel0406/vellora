@@ -364,6 +364,8 @@ export default function RegisterPage() {
               src="/auth-hero.jpg"
               alt="Curated products in a natural shopping bag"
               className="absolute inset-0 w-full h-full object-cover"
+              width="1920"
+              height="1080"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-clay/85 via-clay/30 to-clay/10" />
             <div className="absolute inset-x-0 bottom-0 p-6 lg:p-10 hidden lg:block">

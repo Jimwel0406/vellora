@@ -214,6 +214,9 @@ export function SearchDialog({
                       src={p.image}
                       alt={p.name}
                       className="w-11 h-11 rounded-lg object-cover bg-clay/5"
+                      width="44"
+                      height="44"
+                      loading="lazy"
                     />
                   ) : (
                     <span className="w-11 h-11 rounded-lg bg-clay/5 flex items-center justify-center">
@@ -259,6 +262,9 @@ export function SearchDialog({
                       src={s.logo}
                       alt={`${s.name} logo`}
                       className="w-11 h-11 rounded-full object-cover bg-clay/5"
+                      width="44"
+                      height="44"
+                      loading="lazy"
                     />
                   ) : (
                     <span className="w-11 h-11 rounded-full bg-clay/5 flex items-center justify-center">

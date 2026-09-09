@@ -1,0 +1,18 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin
+
+# AI citation bots — must never be blocked
+User-Agent: GPTBot
+Allow: /
+User-Agent: ClaudeBot
+Allow: /
+User-Agent: PerplexityBot
+Allow: /
+User-Agent: Google-Extended
+Allow: /
+User-Agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://vellora-seven.vercel.app/sitemap.xml

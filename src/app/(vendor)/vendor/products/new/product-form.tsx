@@ -221,6 +221,9 @@ export function ProductForm() {
                       src={url}
                       alt="Product"
                       className="w-20 h-20 object-cover rounded-lg border border-clay/10"
+                      width="80"
+                      height="80"
+                      loading="lazy"
                     />
                     <button
                       type="button"

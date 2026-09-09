@@ -4,14 +4,14 @@
 
 ## About Vellora
 
-- [Vellora homepage](http://localhost:3000/): Multi-vendor marketplace for premium electronics, home & lifestyle goods, and sustainable essentials.
-- [Browse all products](http://localhost:3000/products): Shop electronics, home decor, fashion, and more from independent vendors.
-- [Explore stores](http://localhost:3000/stores): Discover the independent sellers behind every product.
-- [About Vellora](http://localhost:3000/about): Our mission, values, and how the marketplace works.
-- [Contact us](http://localhost:3000/contact): Get in touch with the Vellora team.
-- [Careers](http://localhost:3000/careers): Join the Vellora team.
-- [Terms of service](http://localhost:3000/terms): Terms and conditions for using Vellora.
-- [Privacy policy](http://localhost:3000/privacy): How we collect and use data.
+- [Vellora homepage](https://vellora-seven.vercel.app/): Multi-vendor marketplace for premium electronics, home & lifestyle goods, and sustainable essentials.
+- [Browse all products](https://vellora-seven.vercel.app/products): Shop electronics, home decor, fashion, and more from independent vendors.
+- [Explore stores](https://vellora-seven.vercel.app/stores): Discover the independent sellers behind every product.
+- [About Vellora](https://vellora-seven.vercel.app/about): Our mission, values, and how the marketplace works.
+- [Contact us](https://vellora-seven.vercel.app/contact): Get in touch with the Vellora team.
+- [Careers](https://vellora-seven.vercel.app/careers): Join the Vellora team.
+- [Terms of service](https://vellora-seven.vercel.app/terms): Terms and conditions for using Vellora.
+- [Privacy policy](https://vellora-seven.vercel.app/privacy): How we collect and use data.
 
 ## Product categories
 

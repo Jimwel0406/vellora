@@ -27,6 +27,9 @@ export function StoreCard({ item }: { item: StoreItem }) {
               src={item.coverImage}
               alt={store.name}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              width="800"
+              height="600"
+              loading="lazy"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
@@ -49,6 +52,9 @@ export function StoreCard({ item }: { item: StoreItem }) {
               src={store.logo}
               alt={`${store.name} logo`}
               className="absolute bottom-3 left-3 w-10 h-10 rounded-full object-cover ring-2 ring-white"
+              width="40"
+              height="40"
+              loading="lazy"
             />
           ) : (
             <span className="absolute bottom-3 left-3 w-10 h-10 rounded-full bg-[#17201C] text-white flex items-center justify-center text-sm font-bold ring-2 ring-white">

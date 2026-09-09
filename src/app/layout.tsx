@@ -54,6 +54,9 @@ export const metadata: Metadata = {
     description:
       "Shop quality electronics, home goods, stationery, and sustainable essentials from independent vendors.",
   },
+  icons: {
+    icon: "/favicon.svg?v=4",
+  },
   robots: {
     index: true,
     follow: true,
@@ -73,6 +76,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} h-full antialiased scroll-smooth`}>
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-clay focus:text-sand focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold"
+        >
+          Skip to content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

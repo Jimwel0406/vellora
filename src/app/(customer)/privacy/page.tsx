@@ -76,6 +76,9 @@ export default function PrivacyPage() {
               className="w-full h-full object-cover grayscale-[20%] contrast-[1.05]"
               alt="Minimalist flat lay of stationery and smartphone on warm cream linen surface"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8s1EIAE7dEcIS2CEuP5bjAZi-k_4gh4YbIw7tCknuOxPEYbE4Uiq-byw-DbXiCy1wSzUt80F3_WFJb02aBJYB0-Kf3GWkbvd48VFEy2RrCAc6gxRN7v8R_pfpEVughyii4n1NWmgM9tEgFBeHeq02yLNe6NY88aqFY0e9M8F2kbV4aiWoeHjW9Vnps3DmMSh0sGpp04ksRDQZWz6AnTP8Idr7qHvPjZWIEKQrf0BE43-oUFlnfYzJ"
+              width="800"
+              height="600"
+              loading="lazy"
             />
           </div>
 

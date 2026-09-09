@@ -139,6 +139,9 @@ export function Testimonials() {
               src="/cart-unboxing.jpg"
               alt="Happy customer"
               className="absolute inset-0 w-full h-full object-cover"
+              width="800"
+              height="600"
+              loading="lazy"
             />
           </div>
         </div>

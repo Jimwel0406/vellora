@@ -100,7 +100,7 @@ export function MobileNavDrawer({
               <DrawerPrimitive.Title className="sr-only">Navigation menu</DrawerPrimitive.Title>
               <Link href={isSignedIn ? "/account" : "/login"} className="flex items-center gap-3.5 group">
                 {user?.image ? (
-                  <img src={user.image} alt={displayName} className="w-[50px] h-[50px] rounded-full object-cover shrink-0" />
+                  <img src={user.image} alt={displayName} className="w-[50px] h-[50px] rounded-full object-cover shrink-0" width="50" height="50" loading="lazy" />
                 ) : (
                   <span className="w-[50px] h-[50px] rounded-full bg-clay/8 border border-clay/10 flex items-center justify-center text-[18px] font-semibold text-clay shrink-0">
                     {isSignedIn ? displayName.charAt(0).toUpperCase() : <User className="w-5 h-5" />}

@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Contact Us — Vellora",
   description:
     "Get in touch with Vellora. Reach us by phone, WhatsApp, or email — we are happy to help.",
+  alternates: { canonical: "/contact" },
 };
 
 const STORE_IMG =

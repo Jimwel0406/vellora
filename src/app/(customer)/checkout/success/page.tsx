@@ -114,6 +114,9 @@ export default async function CheckoutSuccessPage({
                         src={item.productImage}
                         alt={item.productName}
                         className="w-12 h-12 rounded-lg object-cover bg-muted shrink-0"
+                        width="48"
+                        height="48"
+                        loading="lazy"
                       />
                     ) : (
                       <span className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center text-[10px] text-muted-foreground shrink-0">

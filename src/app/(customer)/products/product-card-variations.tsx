@@ -41,7 +41,7 @@ export function ProductCardA({ product }: ProductCardProps) {
       <div className="relative aspect-square overflow-hidden bg-[#F9F7F3]">
         <Link href={`/products/${product.id}`} aria-label={product.name} className="block w-full h-full">
           {product.image ? (
-            <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out" />
+            <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out" width="600" height="600" loading="lazy" />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-clay/20 text-sm">No image</div>
           )}
@@ -111,7 +111,7 @@ export function ProductCardB({ product, buttonStyle = "A" }: ProductCardProps & 
       <div className="relative aspect-[4/5] bg-[#F9F7F3]">
         <Link href={`/products/${product.id}`} aria-label={product.name} className="block w-full h-full overflow-hidden rounded-t-3xl">
           {product.image ? (
-            <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700 ease-out" />
+            <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700 ease-out" width="600" height="600" loading="lazy" />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-clay/20 text-sm">No image</div>
           )}
@@ -184,7 +184,7 @@ export function ProductCardC({ product }: ProductCardProps) {
     <Link href={`/products/${product.id}`} className="group flex items-center gap-4 bg-white rounded-2xl border border-clay/8 p-3 hover:border-clay/20 hover:shadow-[0_16px_40px_-16px_rgba(61,43,31,0.15)] transition-all duration-400">
       <div className="relative w-28 h-28 shrink-0 rounded-xl overflow-hidden bg-[#F9F7F3]">
         {product.image ? (
-          <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out" />
+          <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out" width="600" height="600" loading="lazy" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-clay/20 text-xs">No image</div>
         )}

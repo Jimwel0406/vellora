@@ -29,6 +29,9 @@ export function ProductCard({ product }: { product: HomeProduct }) {
             src={product.image}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            width="600"
+            height="600"
+            loading="lazy"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-clay/30 text-xs italic">

@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight, Eye, ShieldCheck, Truck, Heart, Store, Leaf }
 export const metadata: Metadata = {
   title: "About — Vellora",
   description: "Discover the story behind Vellora — a curated multi-vendor marketplace connecting shoppers with independent sellers across every category.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
@@ -17,6 +18,8 @@ export default function AboutPage() {
             src="/about-hero.jpg"
             alt="Vellora marketplace"
             className="w-full h-full object-cover"
+            width="1920"
+            height="1080"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-clay/90 via-clay/40 to-transparent" />
         </div>
@@ -97,6 +100,9 @@ export default function AboutPage() {
                   alt="Vellora workshop"
                   className="w-full h-auto rounded-2xl shadow-[0_30px_80px_-20px_rgba(61,43,31,0.2)]"
                   src="/about-humantouch.jpg"
+                  width="800"
+                  height="600"
+                  loading="lazy"
                 />
               </div>
 
@@ -242,6 +248,9 @@ export default function AboutPage() {
                   alt="Vellora philosophy"
                   className="w-full h-auto rounded-2xl shadow-[0_30px_80px_-20px_rgba(61,43,31,0.2)]"
                   src="/about-workshop.jpg"
+                  width="800"
+                  height="600"
+                  loading="lazy"
                 />
               </div>
             </div>
