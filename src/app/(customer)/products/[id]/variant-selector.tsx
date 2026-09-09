@@ -29,10 +29,10 @@ export function VariantSelector({
     <div className="space-y-4">
       {variants.map((v) => (
         <div key={v.name}>
-          <p className="text-xs font-semibold uppercase tracking-widest text-clay/70 mb-3">
+          <p className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-clay/40 mb-2.5 font-label">
             {v.name}
             {selected[v.name] && (
-              <span className="text-clay/40 font-normal ml-2 normal-case tracking-normal">
+              <span className="text-clay/30 font-normal ml-2 normal-case tracking-normal text-[13px]">
                 — {selected[v.name]}
               </span>
             )}
@@ -45,10 +45,10 @@ export function VariantSelector({
                   key={opt}
                   onClick={() => handleSelect(v.name, opt)}
                   className={cn(
-                    "px-3.5 py-2 rounded-lg text-sm border transition-all",
+                    "px-4 py-2 rounded-full text-[14px] border transition-all duration-200",
                     isSelected
                       ? "border-terracotta bg-terracotta/5 text-clay font-medium"
-                      : "border-clay/10 text-clay/50 hover:border-clay/30"
+                      : "border-clay/10 text-clay/50 hover:border-clay/25"
                   )}
                 >
                   {opt}

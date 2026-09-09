@@ -19,7 +19,7 @@ export function RelatedProductCard({
       href={`/products/${product.id}`}
       className="group block"
     >
-      <div className="aspect-square rounded-[20px] overflow-hidden bg-white border border-clay/5 relative mb-4 transition-shadow duration-300 group-hover:shadow-[0_20px_40px_-20px_rgba(61,43,31,0.2)]">
+      <div className="aspect-[4/5] rounded-[8px] overflow-hidden bg-[#FAF7EC] relative mb-3">
         {product.images?.[0] ? (
           <img
             src={product.images[0]}
@@ -32,10 +32,10 @@ export function RelatedProductCard({
           </div>
         )}
       </div>
-      <p className="text-sm font-semibold text-clay group-hover:text-terracotta transition-colors truncate">
+      <p className="text-[15px] font-semibold text-clay group-hover:text-terracotta transition-colors truncate">
         {product.name}
       </p>
-      <p className="text-sm text-clay/50 mt-1">
+      <p className="text-[14px] text-clay/60 mt-0.5">
         ${(product.price / 100).toFixed(2)}
       </p>
     </Link>

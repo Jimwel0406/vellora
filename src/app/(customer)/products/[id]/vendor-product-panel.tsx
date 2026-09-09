@@ -36,42 +36,37 @@ export async function VendorProductPanel({
 
   return (
     <div className="space-y-4">
-      <div className="rounded-[16px] border border-terracotta/20 bg-sand/60 p-5">
+      <div className="border border-terracotta/15 bg-[#FBF6EC] p-5">
         <div className="flex items-start gap-3">
-          <span className="w-10 h-10 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
-            <BadgeCheck className="w-5 h-5" strokeWidth={1.75} />
+          <span className="w-9 h-9 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
+            <BadgeCheck className="w-[18px] h-[18px]" strokeWidth={1.75} />
           </span>
           <div>
-            <p className="text-[15px] font-bold text-[#1A1A1A] leading-snug">
+            <p className="text-[15px] font-semibold text-clay leading-snug">
               Vendor preview
             </p>
-            <p className="text-[13px] text-clay/60 leading-snug mt-1">
-              You&apos;re viewing one of your own products — shoppers see the
-              buy panel instead of this.
+            <p className="text-[13px] text-clay/50 leading-snug mt-1">
+              You&apos;re viewing one of your own products — shoppers see the buy panel instead of this.
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-3 gap-2 mt-4">
-          <div className="rounded-[12px] bg-white border border-clay/10 p-3 text-center">
-            <p className="text-lg font-bold text-[#1A1A1A] leading-none">{unitsSold}</p>
-            <p className="text-[11px] text-clay/50 mt-1">Units sold</p>
+          <div className="bg-white border border-clay/10 p-3 text-center">
+            <p className="text-lg font-bold text-clay leading-none">{unitsSold}</p>
+            <p className="text-[11px] text-clay/40 mt-1">Units sold</p>
           </div>
-          <div className="rounded-[12px] bg-white border border-clay/10 p-3 text-center">
-            <p className="text-lg font-bold text-[#1A1A1A] leading-none">
+          <div className="bg-white border border-clay/10 p-3 text-center">
+            <p className="text-lg font-bold text-clay leading-none">
               ${(revenue / 100).toFixed(2)}
             </p>
-            <p className="text-[11px] text-clay/50 mt-1">Revenue</p>
+            <p className="text-[11px] text-clay/40 mt-1">Revenue</p>
           </div>
-          <div className="rounded-[12px] bg-white border border-clay/10 p-3 text-center">
-            <p
-              className={`text-lg font-bold leading-none ${
-                lowStock ? "text-terracotta" : "text-[#1A1A1A]"
-              }`}
-            >
+          <div className="bg-white border border-clay/10 p-3 text-center">
+            <p className={`text-lg font-bold leading-none ${lowStock ? "text-terracotta" : "text-clay"}`}>
               {product?.stock ?? 0}
             </p>
-            <p className="text-[11px] text-clay/50 mt-1">
+            <p className="text-[11px] text-clay/40 mt-1">
               {lowStock ? "Low stock" : "In stock"}
             </p>
           </div>
@@ -80,7 +75,7 @@ export async function VendorProductPanel({
         <div className="mt-4 space-y-2">
           <Link
             href={`/vendor/products/${productId}/edit`}
-            className="block w-full text-center bg-terracotta text-white py-4 text-[11px] font-bold uppercase font-label tracking-[0.2em] hover:bg-clay transition-all flex items-center justify-center gap-2"
+            className="block w-full text-center bg-terracotta text-white py-3 text-[12px] font-bold uppercase font-label tracking-[0.2em] hover:bg-terracotta-deep transition-all flex items-center justify-center gap-2"
           >
             <PencilLine className="w-4 h-4" />
             Edit product
@@ -89,7 +84,7 @@ export async function VendorProductPanel({
             {store && (
               <Link
                 href={`/stores/${store.slug}`}
-                className="block text-center border border-clay/20 text-clay py-3 text-[11px] font-semibold uppercase tracking-[0.14em] hover:border-clay/40 transition-all flex items-center justify-center gap-2"
+                className="block text-center border border-clay/15 text-clay py-3 text-[12px] font-semibold uppercase tracking-[0.14em] hover:border-clay/30 transition-all flex items-center justify-center gap-2"
               >
                 <Eye className="w-4 h-4" />
                 View store
@@ -97,7 +92,7 @@ export async function VendorProductPanel({
             )}
             <Link
               href="/vendor/products"
-              className="block text-center border border-clay/20 text-clay py-3 text-[11px] font-semibold uppercase tracking-[0.14em] hover:border-clay/40 transition-all flex items-center justify-center gap-2"
+              className="block text-center border border-clay/15 text-clay py-3 text-[12px] font-semibold uppercase tracking-[0.14em] hover:border-clay/30 transition-all flex items-center justify-center gap-2"
             >
               <Package className="w-4 h-4" />
               All products

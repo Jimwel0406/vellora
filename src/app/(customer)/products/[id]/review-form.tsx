@@ -38,8 +38,8 @@ export function ReviewForm({ productId }: { productId: number }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex items-center gap-1 mb-6">
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="flex items-center gap-1">
         {[1, 2, 3, 4, 5].map((star) => (
           <button
             key={star}
@@ -51,7 +51,7 @@ export function ReviewForm({ productId }: { productId: number }) {
             aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
           >
             <Star
-              className={`w-6 h-6 ${
+              className={`w-5 h-5 ${
                 star <= (hover || rating)
                   ? "fill-rating text-rating"
                   : "text-clay/15"
@@ -62,11 +62,11 @@ export function ReviewForm({ productId }: { productId: number }) {
       </div>
 
       <textarea
-        placeholder="Pen your thoughts on this piece..."
+        placeholder="Share your thoughts on this piece..."
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         rows={3}
-        className="w-full border-0 border-b border-clay/20 bg-transparent focus:ring-0 focus:border-terracotta resize-none text-sm text-clay placeholder:text-clay/40 p-0 pb-2 mb-6 outline-none transition-colors"
+        className="w-full border-0 border-b border-clay/15 bg-transparent focus:ring-0 focus:border-terracotta resize-none text-[15px] text-clay placeholder:text-clay/40 p-0 pb-2 outline-none transition-colors"
       />
 
       {error && <p className="text-sm text-red-600">{error}</p>}
@@ -74,9 +74,9 @@ export function ReviewForm({ productId }: { productId: number }) {
       <button
         type="submit"
         disabled={rating === 0 || submitting}
-        className="bg-white hover:bg-sand text-clay text-[11px] font-bold uppercase tracking-widest py-3 px-6 rounded transition-colors border border-clay/15 disabled:opacity-40 w-full sm:w-auto"
+        className="text-[12px] font-bold uppercase tracking-[0.12em] text-terracotta hover:text-clay py-2 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
       >
-        {submitting ? "Submitting..." : "Submit Impression"}
+        {submitting ? "Submitting..." : "Submit review"}
       </button>
     </form>
   );

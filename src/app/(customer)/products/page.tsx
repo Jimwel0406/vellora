@@ -47,7 +47,10 @@ export default async function ProductsPage({
   ]);
 
   const ratingMap = new Map(
-    reviewStats.map((r) => [r.productId, { rating: r.avgRating, count: r.totalReviews }])
+    reviewStats.map((r) => [
+      r.productId,
+      { rating: r.avgRating, count: r.totalReviews },
+    ])
   );
 
   const productItems: ShopProduct[] = allProducts.map((p) => ({
@@ -67,22 +70,36 @@ export default async function ProductsPage({
   // Apply sort
   if (sort === "best-selling") {
     productItems.sort((a, b) => {
-      const aBest = a.tags?.some((t) => ["Best Seller", "Popular"].includes(t)) ? 1 : 0;
-      const bBest = b.tags?.some((t) => ["Best Seller", "Popular"].includes(t)) ? 1 : 0;
+      const aBest = a.tags?.some((t) =>
+        ["Best Seller", "Popular"].includes(t)
+      )
+        ? 1
+        : 0;
+      const bBest = b.tags?.some((t) =>
+        ["Best Seller", "Popular"].includes(t)
+      )
+        ? 1
+        : 0;
       return bBest - aBest || b.ratingCount - a.ratingCount;
     });
   } else if (sort === "newest") {
-    productItems.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+    productItems.sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
   } else if (sort === "price-low") {
     productItems.sort((a, b) => a.price - b.price);
   } else if (sort === "price-high") {
     productItems.sort((a, b) => b.price - a.price);
   } else if (sort === "top-rated") {
-    productItems.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+    productItems.sort(
+      (a, b) => (b.rating ?? 0) - (a.rating ?? 0)
+    );
   }
 
   const allCategories = [
-    ...new Set(allProducts.map((p) => p.categoryName).filter(Boolean)),
+    ...new Set(
+      allProducts.map((p) => p.categoryName).filter(Boolean)
+    ),
   ].sort() as string[];
 
   const allVendors = [
@@ -90,7 +107,9 @@ export default async function ProductsPage({
   ].sort() as string[];
 
   const topSelling = productItems
-    .filter((p) => p.tags?.some((t) => ["Best Seller", "Popular"].includes(t)))
+    .filter((p) =>
+      p.tags?.some((t) => ["Best Seller", "Popular"].includes(t))
+    )
     .slice(0, 2);
 
   const trending = [...productItems]
@@ -98,7 +117,9 @@ export default async function ProductsPage({
     .slice(0, 2);
 
   const recentlyAdded = [...productItems]
-    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    .sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    )
     .slice(0, 2);
 
   const topRated = [...productItems]
@@ -108,30 +129,61 @@ export default async function ProductsPage({
 
   return (
     <div className="bg-[#F1EDE1]">
+      {/* Section 01 — Collection Hero */}
       <ProductsHeaderSwitcher query={query} />
 
-      <section data-section="products-shop-area" className="section-products-shop-area max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pt-14 sm:pt-18 lg:pt-24">
+      {/* Section 02 — Real Sellers cinematic feature */}
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
         <ShopHeroB />
+      </section>
+
+      {/* Section 03 — Product Browse Area */}
+      <section
+        data-section="products-shop-area"
+        className="section-products-shop-area max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pt-6 lg:pt-10"
+      >
         <FilterSwitcher
           products={productItems}
           allCategories={allCategories}
           allVendors={allVendors}
           query={query}
           initialCategory={category}
-          initialSort={sort === "best-selling" ? "popular" : sort === "price-low" ? "price-asc" : sort === "price-high" ? "price-desc" : sort === "top-rated" ? "rating" : sort === "newest" ? "newest" : undefined}
+          initialSort={
+            sort === "best-selling"
+              ? "popular"
+              : sort === "price-low"
+                ? "price-asc"
+                : sort === "price-high"
+                  ? "price-desc"
+                  : sort === "top-rated"
+                    ? "rating"
+                    : sort === "newest"
+                      ? "newest"
+                      : undefined
+          }
         />
       </section>
 
-      <section data-section="products-categories" className="section-products-categories max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 pb-10 lg:pt-28 lg:pb-40">
+      {/* Section 04 — Shop by Categories */}
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pt-10 lg:pt-20 pb-10 lg:pb-16">
         <ShopByCategoriesSwitcher categories={allCategories} />
       </section>
 
-      <section data-section="products-reviews" className="section-products-reviews max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14">
-        <ReviewsSection />
-      </section>
+      {/* Section 05 — Customer Voices */}
+      <ReviewsSection />
 
-      <section data-section="products-discover" className="section-products-discover bg-white/50">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-14 py-10 lg:py-14">
+      {/* Section 06 — Product Discovery Rails */}
+      <section
+        data-section="products-discover"
+        className="section-products-discover bg-white/40"
+      >
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-10 lg:py-14">
+          <div className="flex items-center gap-3 mb-8 lg:mb-12">
+            <span className="w-8 h-[2.5px] bg-terracotta rounded-full" />
+            <span className="font-label text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-terracotta">
+              Discover
+            </span>
+          </div>
           <DiscoverSwitcher
             topSelling={topSelling}
             trending={trending}

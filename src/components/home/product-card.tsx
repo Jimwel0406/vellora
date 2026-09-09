@@ -55,9 +55,10 @@ export function ProductCard({ product }: { product: HomeProduct }) {
                     key={i}
                     className={`w-3.5 h-3.5 ${
                       i <= Math.round(product.rating!)
-                        ? "text-rating fill-rating"
+                        ? "text-rating"
                         : "text-clay/20"
                     }`}
+                    style={i <= Math.round(product.rating!) ? { fill: "#F5C518" } : undefined}
                   />
                 ))}
               </div>

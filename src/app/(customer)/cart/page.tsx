@@ -4,7 +4,6 @@ import { db } from "@/db";
 import { carts, cartItems, products, stores } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { auth } from "@/lib/auth";
-import { ShoppingBag, Store } from "lucide-react";
 import { CartItemRow } from "./cart-item-row";
 import { CartSummary } from "./cart-summary";
 import { CartContents } from "./cart-contents";
@@ -44,67 +43,73 @@ export default async function CartPage() {
 
   return (
     <CartContents initialRowCount={items.length} empty={<EmptyCart />}>
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-12 py-12 lg:py-20">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-        <div className="lg:col-span-8 space-y-16">
-          <header className="space-y-2">
-            <h2 className="font-heading text-5xl lg:text-[56px] leading-[1.1] text-terracotta">
-              Your Cart
-            </h2>
-            <p className="text-xs lg:text-sm font-medium font-label tracking-[0.2em] uppercase text-clay/50">
-              {itemCount} item{itemCount !== 1 ? "s" : ""} from {grouped.size} store{grouped.size !== 1 ? "s" : ""}
-            </p>
-          </header>
+      <div className="max-w-[1120px] mx-auto px-5 sm:px-8 lg:px-12 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-28">
+        {/* Cart header */}
+        <header className="mb-12 sm:mb-16 lg:mb-20">
+          <h1 className="font-heading text-[40px] sm:text-[46px] lg:text-[52px] leading-[1.05] text-terracotta tracking-[-0.02em]">
+            Your Cart
+          </h1>
+          <p className="mt-2 sm:mt-3 text-[11px] sm:text-[12px] font-semibold font-label tracking-[0.2em] uppercase text-clay/45">
+            {itemCount} item{itemCount !== 1 ? "s" : ""} from {grouped.size} store{grouped.size !== 1 ? "s" : ""}
+          </p>
+        </header>
 
-          {[...grouped.entries()].map(([storeName, storeItems]) => {
-            const groupId = storeItems[0].stores?.slug ?? storeName;
-            return (
-              <CartVendorSection
-                key={groupId}
-                groupId={groupId}
-                initialRowCount={storeItems.length}
-                header={
-                  <div className="flex items-center gap-4 border-b border-clay/10 pb-3">
-                    <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-clay/40">VENDOR</span>
-                    <Link href={`/stores/${storeItems[0].stores?.slug}`} className="text-xl lg:text-2xl font-bold text-clay hover:text-terracotta transition-colors">
-                      {storeName}
-                    </Link>
+        {/* 70/30 editorial grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] gap-12 lg:gap-0 items-start">
+          {/* Left — Cart products */}
+          <div className="space-y-12 sm:space-y-16">
+            {[...grouped.entries()].map(([storeName, storeItems]) => {
+              const groupId = storeItems[0].stores?.slug ?? storeName;
+              return (
+                <CartVendorSection
+                  key={groupId}
+                  groupId={groupId}
+                  initialRowCount={storeItems.length}
+                  header={
+                    <div className="border-b border-clay/10 pb-3 mb-6">
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.25em] uppercase text-clay/40 font-label">Vendor</span>
+                        <Link href={`/stores/${storeItems[0].stores?.slug}`} className="text-[18px] sm:text-[20px] font-semibold text-clay hover:text-terracotta transition-colors">
+                          {storeName}
+                        </Link>
+                      </div>
+                    </div>
+                  }
+                >
+                  <div className="space-y-8">
+                    {storeItems.map((item) => (
+                      <CartItemRow
+                        key={item.cart_items.id}
+                        itemId={item.cart_items.id}
+                        productId={item.products?.id ?? 0}
+                        productName={item.products?.name ?? ""}
+                        productImage={item.products?.images?.[0]}
+                        groupId={groupId}
+                        storeName={item.stores?.name ?? ""}
+                        storeSlug={item.stores?.slug}
+                        price={item.products?.price ?? 0}
+                        quantity={item.cart_items.quantity}
+                        stock={item.products?.stock ?? 0}
+                        variant={item.cart_items.variant}
+                      />
+                    ))}
                   </div>
-                }
-              >
-                <div className="space-y-6">
-                  {storeItems.map((item) => (
-                    <CartItemRow
-                      key={item.cart_items.id}
-                      itemId={item.cart_items.id}
-                      productId={item.products?.id ?? 0}
-                      productName={item.products?.name ?? ""}
-                      productImage={item.products?.images?.[0]}
-                      groupId={groupId}
-                      storeName={item.stores?.name ?? ""}
-                      storeSlug={item.stores?.slug}
-                      price={item.products?.price ?? 0}
-                      quantity={item.cart_items.quantity}
-                      stock={item.products?.stock ?? 0}
-                      variant={item.cart_items.variant}
-                    />
-                  ))}
-                </div>
-              </CartVendorSection>
-            );
-          })}
-        </div>
+                </CartVendorSection>
+              );
+            })}
+          </div>
 
-        <aside className="lg:col-span-4 lg:sticky lg:top-28">
-          <CartSummary
-            initialItems={items.map((item) => ({
-              id: item.cart_items.id,
-              price: item.products?.price ?? 0,
-              qty: item.cart_items.quantity,
-            }))}
-          />
-        </aside>
-      </div>
+          {/* Right — Order summary with vertical divider */}
+          <div className="lg:pl-10 lg:border-l border-clay/10 lg:sticky lg:top-28">
+            <CartSummary
+              initialItems={items.map((item) => ({
+                id: item.cart_items.id,
+                price: item.products?.price ?? 0,
+                qty: item.cart_items.quantity,
+              }))}
+            />
+          </div>
+        </div>
       </div>
     </CartContents>
   );
@@ -114,31 +119,50 @@ function EmptyCart() {
   return (
     <section
       data-section="cart-empty"
-      className="section-cart-empty border border-clay/15 rounded-2xl bg-white/60 mx-4 sm:mx-8 lg:mx-12 my-12 lg:my-20 py-24 lg:py-32 text-center"
+      className="section-cart-empty max-w-[1200px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-28"
     >
-      <span className="mx-auto w-16 h-16 rounded-full bg-sand border border-clay/10 flex items-center justify-center">
-        <ShoppingBag className="w-7 h-7 text-terracotta" />
-      </span>
-      <h1 className="mt-6 font-heading text-4xl lg:text-5xl text-clay leading-tight">
-        Your cart is empty
-      </h1>
-      <p className="mt-3 text-sm text-clay/60 max-w-sm mx-auto leading-relaxed">
-        Looks like you haven&apos;t added anything yet. Browse our stores to find something you love.
-      </p>
-      <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-        <Link
-          href="/products"
-          className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-clay text-sand text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-terracotta transition-colors duration-200"
-        >
-          Browse products
-        </Link>
-        <Link
-          href="/stores"
-          className="inline-flex items-center justify-center gap-2 h-12 px-8 rounded-full border border-clay/25 text-clay text-[10px] font-bold uppercase tracking-[0.2em] hover:border-clay/40 hover:bg-clay/5 transition-colors duration-200"
-        >
-          <Store className="w-4 h-4" />
-          Explore stores
-        </Link>
+      <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-12 lg:gap-16 lg:items-center">
+        {/* LEFT — Text column */}
+        <div className="lg:pr-8">
+          <span className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-clay/45 font-label">
+            Your cart
+          </span>
+
+          <h1 className="mt-5 sm:mt-6 font-heading text-[42px] sm:text-[48px] lg:text-[64px] xl:text-[72px] leading-[0.95] text-clay tracking-[-0.03em]">
+            Nothing here <span className="text-clay/40">— yet.</span>
+          </h1>
+
+          <p className="mt-6 sm:mt-8 text-[16px] leading-[1.7] text-clay/60 max-w-[340px]">
+            Your next favorite find is waiting. Discover pieces worth bringing home.
+          </p>
+
+          <div className="mt-8 sm:mt-10 flex flex-col gap-4">
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.12em] text-clay hover:text-terracotta transition-colors group"
+            >
+              Browse products
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+            <Link
+              href="/stores"
+              className="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-clay/40 hover:text-clay/70 transition-colors"
+            >
+              Explore stores
+            </Link>
+          </div>
+        </div>
+
+        {/* RIGHT — Editorial image */}
+        <div className="relative">
+          <div className="aspect-[4/5] overflow-hidden bg-[#FAF7EC]">
+            <img
+              src="/Vellora_lifestyle_product_still.jpeg"
+              alt="Editorial still life"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

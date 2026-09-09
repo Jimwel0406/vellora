@@ -14,14 +14,14 @@ const CUSTOMER_CARE = [
   { label: "support@vellora.com", href: "mailto:support@vellora.com" },
   { label: "(888) 123-4567", href: "tel:+18881234567" },
   { label: "Shipping & Returns", href: "/terms" },
-  { label: "FAQ", href: "/contact" },
+  { label: "FAQ", href: "/#faq" },
   { label: "Contact Us", href: "/contact" },
 ];
 
 export function FooterEcommerce() {
   return (
     <footer data-section="home-footer" className="section-home-footer bg-[#FAF7EF] border-t border-clay/10">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-20 lg:pt-28 pb-16 lg:pb-20">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-14 lg:pt-20 pb-16 lg:pb-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.25fr_1fr_1.25fr_1.5fr] gap-10 lg:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">

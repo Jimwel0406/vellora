@@ -71,9 +71,10 @@ export function CartItemRow({
   if (removed) return null;
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 group">
+    <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 group">
+      {/* Image — 25%, large and dominant */}
       <Link href={`/products/${productId}`} className="shrink-0">
-        <div className="relative w-full md:w-56 h-56 md:h-72 overflow-hidden bg-clay/[0.03] rounded-xl">
+        <div className="relative w-full sm:w-[200px] sm:h-[240px] aspect-[4/5] overflow-hidden bg-[#FAF7EC] rounded-[6px]">
           {productImage ? (
             <img
               src={productImage}
@@ -84,64 +85,69 @@ export function CartItemRow({
             <div className="w-full h-full flex items-center justify-center text-clay/20 text-xs">No image</div>
           )}
           {stock > 0 && stock <= 5 && (
-            <div className="absolute top-4 left-4 bg-white/60 backdrop-blur px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-clay rounded-full">
+            <div className="absolute top-3 left-3 bg-white/80 backdrop-blur-sm px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-clay rounded-[4px]">
               Low stock
             </div>
           )}
         </div>
       </Link>
 
-      <div className="flex-1 flex flex-col py-1">
-        <div className="space-y-1.5">
+      {/* Product info + controls */}
+      <div className="flex-1 flex flex-col justify-between min-w-0 py-0.5">
+        {/* Top — Product name + variant */}
+        <div>
           <Link href={`/products/${productId}`}>
-            <h4 className="text-xl lg:text-2xl font-bold text-clay leading-tight hover:underline underline-offset-4 decoration-1">
+            <h4 className="text-[20px] sm:text-[22px] lg:text-[24px] font-semibold text-clay leading-snug hover:text-terracotta transition-colors">
               {productName}
             </h4>
           </Link>
           {variant && (
-            <p className="text-xs text-clay/50">{variant}</p>
+            <p className="text-[13px] text-clay/50 mt-1">{variant}</p>
           )}
         </div>
 
-        <div className="flex flex-wrap items-end justify-between gap-4 mt-6">
-          <div className="space-y-1">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-clay/40">Unit Price</p>
-            <p className="text-xl font-bold text-clay">${(unitPrice / 100).toFixed(2)}</p>
-          </div>
+        {/* Bottom — Price, quantity, subtotal, remove */}
+        <div className="flex flex-wrap items-center justify-between gap-4 mt-5 sm:mt-6">
+          {/* Unit price */}
+          <p className="text-[15px] font-semibold text-clay tabular-nums">
+            ${(unitPrice / 100).toFixed(2)}
+          </p>
 
-          <div className="flex items-center border border-clay/10 rounded-lg bg-white">
+          {/* Quantity controls */}
+          <div className="flex items-center border border-clay/15 rounded-[6px] bg-white overflow-hidden">
             <button
               onClick={() => updateQuantity(localQty - 1)}
               disabled={localQty <= 1}
-              className="w-10 h-10 flex items-center justify-center hover:bg-clay/[0.03] transition-colors disabled:opacity-30"
+              className="w-9 h-9 flex items-center justify-center hover:bg-[#FBF6EC] transition-colors disabled:opacity-30"
               aria-label="Decrease quantity"
             >
-              <Minus className="w-4 h-4 text-clay/60" />
+              <Minus className="w-3.5 h-3.5 text-clay/60" />
             </button>
-            <span className="w-12 text-center text-sm font-bold tabular-nums select-none text-clay">
+            <span className="w-10 text-center text-[14px] font-semibold tabular-nums select-none text-clay">
               {localQty}
             </span>
             <button
               onClick={() => updateQuantity(localQty + 1)}
               disabled={localQty >= stock}
-              className="w-10 h-10 flex items-center justify-center hover:bg-clay/[0.03] transition-colors disabled:opacity-30"
+              className="w-9 h-9 flex items-center justify-center hover:bg-[#FBF6EC] transition-colors disabled:opacity-30"
               aria-label="Increase quantity"
             >
-              <Plus className="w-4 h-4 text-clay/60" />
+              <Plus className="w-3.5 h-3.5 text-clay/60" />
             </button>
           </div>
 
-          <div className="text-right">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-clay/40">Subtotal</p>
-            <p className="text-xl font-bold text-terracotta">${((unitPrice * localQty) / 100).toFixed(2)}</p>
-          </div>
+          {/* Subtotal */}
+          <p className="text-[16px] font-bold text-clay tabular-nums">
+            ${((unitPrice * localQty) / 100).toFixed(2)}
+          </p>
 
+          {/* Remove */}
           <button
             onClick={removeItem}
-            className="text-clay/50 hover:text-terracotta transition-colors p-2 self-center hover:bg-clay/[0.04] rounded-lg"
+            className="text-clay/30 hover:text-terracotta transition-colors p-1.5"
             aria-label="Remove item"
           >
-            <Trash2 className="w-5 h-5" />
+            <Trash2 className="w-4 h-4" />
           </button>
         </div>
       </div>

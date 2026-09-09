@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Star, ChevronDown } from "lucide-react";
+import { Star, ArrowRight } from "lucide-react";
 
-const INITIAL_VISIBLE = 6;
+const INITIAL_VISIBLE = 4;
 
 type ReviewItem = {
   id: number;
@@ -19,65 +19,92 @@ export function ReviewList({ reviews }: { reviews: ReviewItem[] }) {
 
   if (reviews.length === 0) {
     return (
-      <div className="flex flex-col items-start justify-center py-10">
-        <Star className="w-8 h-8 text-terracotta mb-5" />
-        <p className="font-heading text-2xl text-[#1A1A1A] mb-3">
-          Be the first to review
-        </p>
-        <p className="text-[15px] text-clay/50 max-w-md leading-relaxed">
-          This piece hasn&apos;t been reviewed yet. Your experience will help other
-          shoppers make an informed choice.
+      <div className="py-8">
+        <p className="text-[15px] text-clay/60 leading-relaxed">
+          No reviews yet. Be the first to share your experience with this product.
         </p>
       </div>
     );
   }
 
+  const firstReview = reviews[0];
+  const restReviews = reviews.slice(1, visible);
+
   return (
-    <>
-      <div className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory sm:snap-none sm:grid sm:grid-cols-2 pb-2 sm:pb-0 -mx-5 px-5 sm:mx-0 sm:px-0 max-sm:scroll-pl-5 max-sm:scroll-pr-5">
-        {reviews.map((review, i) => (
-          <div
-            key={review.id}
-            className={`w-[82%] min-w-[270px] shrink-0 snap-start sm:w-auto bg-white border border-clay/5 rounded-[16px] p-6 transition-shadow duration-300 hover:shadow-[0_16px_32px_-20px_rgba(61,43,31,0.15)] ${
-              i >= visible ? "sm:hidden" : ""
-            }`}
-          >
-            <div className="flex items-center justify-between mb-3">
-              <p className="font-semibold text-sm text-[#1A1A1A]">
-                {review.name}
-              </p>
-              <div className="flex gap-0.5 text-rating">
-                {Array.from({ length: review.rating }).map((_, i) => (
-                  <Star key={i} className="w-3 h-3 fill-rating" />
-                ))}
-              </div>
+    <div>
+      {/* First review — large, prominent, editorial */}
+      {firstReview && (
+        <article className="pb-10 mb-10 border-b border-clay/15">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="flex gap-0.5 text-rating">
+              {Array.from({ length: firstReview.rating }).map((_, i) => (
+                <Star key={i} className="w-[18px] h-[18px] fill-rating" />
+              ))}
             </div>
-            <p className="text-[11px] text-clay/40 mb-3">
-              {new Date(review.createdAt).toLocaleDateString("en-US", {
+            <span className="text-[13px] text-clay/55 font-medium">
+              {new Date(firstReview.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
-            </p>
-            {review.comment && (
-              <p className="text-sm text-clay/60 leading-relaxed">{review.comment}</p>
-            )}
+            </span>
           </div>
-        ))}
-      </div>
+          {firstReview.comment && (
+            <blockquote className="text-[22px] sm:text-[26px] lg:text-[28px] text-clay leading-[1.45] font-heading tracking-[-0.015em] mb-5">
+              &ldquo;{firstReview.comment}&rdquo;
+            </blockquote>
+          )}
+          <p className="text-[14px] text-clay/60 font-medium">
+            — {firstReview.name}
+          </p>
+        </article>
+      )}
 
+      {/* Remaining reviews — compact editorial entries */}
+      {restReviews.length > 0 && (
+        <div className="divide-y divide-clay/15">
+          {restReviews.map((review) => (
+            <article key={review.id} className="py-6 first:pt-0 last:pb-0">
+              <div className="flex items-center gap-2.5 mb-2">
+                <div className="flex gap-0.5 text-rating">
+                  {Array.from({ length: review.rating }).map((_, i) => (
+                    <Star key={i} className="w-3 h-3 fill-rating" />
+                  ))}
+                </div>
+                <span className="text-[12px] text-clay/50 font-medium">
+                  {new Date(review.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+              </div>
+              {review.comment && (
+                <p className="text-[15px] text-clay/75 leading-relaxed mb-2">
+                  {review.comment}
+                </p>
+              )}
+              <p className="text-[12px] text-clay/55 font-medium">
+                — {review.name}
+              </p>
+            </article>
+          ))}
+        </div>
+      )}
+
+      {/* Show all */}
       {showMore && (
-        <div className="hidden sm:block mt-8 text-center">
+        <div className="mt-8">
           <button
             type="button"
             onClick={() => setVisible(reviews.length)}
-            className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest text-terracotta hover:text-clay transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.12em] text-terracotta hover:text-clay transition-colors cursor-pointer group"
           >
             Show all {reviews.length} reviews
-            <ChevronDown className="w-4 h-4" strokeWidth={2} />
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }

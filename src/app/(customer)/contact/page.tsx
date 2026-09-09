@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Phone, Mail, Store, MapPin } from "lucide-react";
 import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
@@ -8,139 +7,187 @@ export const metadata: Metadata = {
     "Get in touch with Vellora. Reach us by phone, WhatsApp, or email — we are happy to help.",
 };
 
-const BAKERY_IMG =
+const STORE_IMG =
   "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&h=700&q=80&auto=format&fit=crop";
-
-function WhatsAppIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M12 3a9 9 0 0 0-7.9 13.4L3 21l4.8-1.1A9 9 0 1 0 12 3z" />
-      <path d="M8.6 9.4c.5 3.6 2.9 6 6.5 6.5l1.1-1.2-2-1.5-1.1.9c-1-.5-1.8-1.4-2.3-2.4l.9-1.1-1.6-2-1.2 1.3z" />
-    </svg>
-  );
-}
-
-function InfoCard({
-  icon,
-  title,
-  children,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex min-h-[95px] flex-col items-center justify-center gap-2 rounded-lg bg-[#F7F1EF] px-3 py-4 text-center">
-      <span className="text-[26px] leading-none text-[#10232B]/80">{icon}</span>
-      <div>
-        <h3 className="text-[12px] font-semibold text-[#10232B]">{title}</h3>
-        <p className="mt-0.5 text-[11px] leading-snug text-[#555555]">{children}</p>
-      </div>
-    </div>
-  );
-}
-
-function MapPlaceholder() {
-  return (
-    <div className="relative mt-4 h-[220px] w-full overflow-hidden rounded-[4px] bg-[#F1EDE6] md:h-auto md:flex-1">
-      <svg
-        className="h-full w-full"
-        viewBox="0 0 400 150"
-        preserveAspectRatio="xMidYMid slice"
-        aria-hidden="true"
-      >
-        <g stroke="#E5DFD3" strokeWidth="1">
-          <path d="M0 30 H400" />
-          <path d="M0 75 H400" />
-          <path d="M0 120 H400" />
-          <path d="M60 0 V150" />
-          <path d="M200 0 V150" />
-          <path d="M320 0 V150" />
-        </g>
-        <g stroke="#FFFFFF" fill="none" strokeLinecap="round">
-          <path d="M0 60 Q 110 40 220 70 T 400 55" strokeWidth="8" />
-          <path d="M185 0 Q 195 80 155 150" strokeWidth="6" />
-          <path d="M0 115 L400 108" strokeWidth="5" />
-        </g>
-      </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#C98255] shadow">
-          <MapPin className="h-5 w-5 text-white" />
-        </span>
-      </div>
-    </div>
-  );
-}
 
 export default function ContactPage() {
   return (
     <>
-      <section data-section="contact-hero" className="section-contact-hero relative flex min-h-[300px] w-full items-center justify-center overflow-hidden md:min-h-[340px]">
+      {/* ═══════════════════════════════════════════
+          HERO — Asymmetric editorial
+          ═══════════════════════════════════════════ */}
+      <section
+        data-section="contact-hero"
+        className="section-contact-hero relative w-full overflow-hidden"
+        style={{ height: "clamp(300px, 40vw, 430px)" }}
+      >
         <img
-          src={BAKERY_IMG}
+          src={STORE_IMG}
           alt="Vellora marketplace storefront"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-white/60" />
-        <div className="relative z-10 mx-auto max-w-[850px] px-6 py-16 text-center">
-          <h1 className="text-[32px] font-extrabold leading-tight tracking-tight text-[#10232B] md:text-[46px]">
-            Contact Us
-          </h1>
-          <p className="mx-auto mt-5 max-w-[620px] text-[15px] font-medium leading-relaxed text-[#10232B]/90 md:text-[17px]">
-            We&apos;d love to hear from you — questions about an order, your store, or a
-            partnership. <span className="text-[#A6634B]">Reach out</span> and our team will
-            get back to you soon.
-          </p>
+        {/* Localized left-side gradient — dark where text sits, fades toward right */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to right, rgba(30,20,14,0.55) 0%, rgba(30,20,14,0.40) 20%, rgba(30,20,14,0.18) 45%, rgba(30,20,14,0.06) 70%, transparent 100%)",
+          }}
+        />
+
+        {/* Asymmetric text — left-aligned */}
+        <div className="relative z-10 flex h-full items-center max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="py-10 sm:py-0">
+            <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50 font-label">
+              Get in touch
+            </span>
+            <h1 className="mt-3 font-heading text-[48px] sm:text-[56px] lg:text-[72px] xl:text-[80px] leading-[0.92] text-[#FAF7EF] tracking-[-0.03em]"
+              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.10)" }}
+            >
+              Contact
+              <br />
+              Us
+            </h1>
+            <p className="mt-5 sm:mt-6 text-[15px] sm:text-[16px] lg:text-[17px] leading-[1.55] text-white/80 max-w-[440px]"
+              style={{ textShadow: "0 1px 8px rgba(0,0,0,0.08)" }}
+            >
+              We&apos;d love to hear from you — questions about an order, your store, or a
+              partnership. Reach out and our team will get back to you soon.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section data-section="contact-info" className="section-contact-info bg-[#FCFCF8]">
-        <div className="mx-auto w-[88%] max-w-[880px] py-14">
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_1.15fr] md:gap-[50px]">
-            <div className="flex flex-col">
-              <div className="grid grid-cols-2 gap-3.5">
-                <InfoCard icon={<Phone className="h-[26px] w-[26px]" />} title="Phone">
-                  207-8767-452
-                </InfoCard>
-                <InfoCard icon={<WhatsAppIcon className="h-[26px] w-[26px]" />} title="Whatsapp">
-                  082-123-234-345
-                </InfoCard>
-                <InfoCard icon={<Mail className="h-[26px] w-[26px]" />} title="Email">
-                  <a href="mailto:support@vellora.com" className="hover:underline">
+      {/* ═══════════════════════════════════════════
+          MAIN — 35/65 asymmetric editorial grid
+          Contact info + map left, form right
+          ═══════════════════════════════════════════ */}
+      <section data-section="contact-main" className="section-contact-main bg-[#FCFCF8]">
+        <div className="max-w-[1120px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-12 lg:gap-16 items-start">
+
+            {/* LEFT — Contact information + Map */}
+            <div className="space-y-10 lg:space-y-12 lg:pr-8 lg:border-r border-clay/10">
+              {/* Section label */}
+              <div>
+                <span className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-terracotta font-label">
+                  Get in touch
+                </span>
+              </div>
+
+              {/* Contact list — editorial typography */}
+              <div className="space-y-0">
+                <ContactItem label="Phone">
+                  <a href="tel:207-8767-452" className="hover:text-terracotta transition-colors">
+                    207-8767-452
+                  </a>
+                </ContactItem>
+
+                <ContactItem label="WhatsApp">
+                  <a href="https://wa.me/082123234345" className="hover:text-terracotta transition-colors" target="_blank" rel="noopener noreferrer">
+                    082-123-234-345
+                  </a>
+                </ContactItem>
+
+                <ContactItem label="Email">
+                  <a href="mailto:support@vellora.com" className="hover:text-terracotta transition-colors">
                     support@vellora.com
                   </a>
-                </InfoCard>
-                <InfoCard icon={<Store className="h-[26px] w-[26px]" />} title="Our Shop">
-                  2443 Oak Ridge Omaha,
-                  <br />
-                  QA 45065
-                </InfoCard>
+                </ContactItem>
+
+                <ContactItem label="Visit" border={false}>
+                  <span>
+                    2443 Oak Ridge Omaha,
+                    <br />
+                    QA 45065
+                  </span>
+                </ContactItem>
               </div>
-              <MapPlaceholder />
+
+              {/* Map */}
+              <div>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-clay/40 font-label block mb-3">
+                  Location
+                </span>
+                <div className="relative w-full h-[200px] sm:h-[240px] overflow-hidden bg-[#F1EDE6] rounded-[4px]">
+                  <svg
+                    className="h-full w-full"
+                    viewBox="0 0 400 200"
+                    preserveAspectRatio="xMidYMid slice"
+                    aria-hidden="true"
+                  >
+                    <g stroke="#E5DFD3" strokeWidth="1">
+                      <path d="M0 40 H400" />
+                      <path d="M0 100 H400" />
+                      <path d="M0 160 H400" />
+                      <path d="M80 0 V200" />
+                      <path d="M200 0 V200" />
+                      <path d="M320 0 V200" />
+                    </g>
+                    <g stroke="#FFFFFF" fill="none" strokeLinecap="round">
+                      <path d="M0 80 Q 110 60 220 90 T 400 75" strokeWidth="8" />
+                      <path d="M185 0 Q 195 100 155 200" strokeWidth="6" />
+                      <path d="M0 155 L400 148" strokeWidth="5" />
+                    </g>
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-terracotta shadow-sm mb-2">
+                      <svg className="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                    </span>
+                    <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-clay/50 font-label">
+                      Vellora
+                    </span>
+                    <span className="text-[8px] uppercase tracking-[0.12em] text-clay/35 font-label">
+                      Omaha Store
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <h2 className="text-[28px] font-bold leading-tight text-[#10232B] md:text-[30px]">
-                Get In Touch
+            {/* RIGHT — Contact form */}
+            <div className="lg:pl-4">
+              <span className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-terracotta font-label">
+                Let&apos;s talk
+              </span>
+              <h2 className="mt-4 font-heading text-[32px] sm:text-[36px] lg:text-[42px] leading-[1.05] text-clay tracking-[-0.02em]">
+                Send a message
               </h2>
-              <p className="mt-3 max-w-[400px] text-[12px] leading-relaxed text-[#555555]">
-                Send us a message and our team will get back to you as soon as possible. We&apos;re
-                here to help with anything you need.
+              <p className="mt-3 text-[14px] sm:text-[15px] leading-[1.7] text-clay/55 max-w-[380px]">
+                Our team will get back to you as soon as possible. We&apos;re here to help with anything you need.
               </p>
+
+              {/* Thin editorial rule */}
+              <div className="mt-8 mb-8 border-t border-clay/10" />
+
               <ContactForm />
             </div>
           </div>
         </div>
       </section>
     </>
+  );
+}
+
+function ContactItem({
+  label,
+  children,
+  border = true,
+}: {
+  label: string;
+  children: React.ReactNode;
+  border?: boolean;
+}) {
+  return (
+    <div className={`py-5 ${border ? "border-b border-clay/10" : ""}`}>
+      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/40 font-label block mb-1.5">
+        {label}
+      </span>
+      <div className="text-[16px] sm:text-[17px] text-clay leading-relaxed">
+        {children}
+      </div>
+    </div>
   );
 }

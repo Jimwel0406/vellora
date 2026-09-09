@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const inputClass =
-  "mt-1.5 block w-full h-11 md:h-9 rounded-[5px] border border-[#E5E5E5] bg-white px-3 text-[12px] text-[#10232B] outline-none transition-colors placeholder:text-[#B9B4AC] focus:border-[#C98255] disabled:bg-[#F5F3EF] disabled:cursor-not-allowed";
+  "mt-2 block w-full h-12 bg-transparent border-0 border-b border-clay/15 text-[15px] sm:text-[16px] text-clay placeholder:text-clay/35 focus:outline-none focus:border-terracotta transition-colors pb-2 disabled:opacity-40 disabled:cursor-not-allowed";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
@@ -43,31 +43,33 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="mt-6 flex flex-col items-center gap-3 rounded-[5px] border border-[#C9E3CF] bg-[#F2FAF4] px-5 py-8 text-center">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#3E7C4F]">
-          <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <div className="py-12 text-center">
+        <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-terracotta/10 mb-4">
+          <svg className="h-5 w-5 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M20 6L9 17l-5-5" />
           </svg>
-        </span>
-        <h3 className="text-[14px] font-semibold text-[#10232B]">Message Sent</h3>
-        <p className="max-w-[260px] text-[12px] leading-relaxed text-[#555555]">
-          Thanks for reaching out! We&apos;ll get back to you as soon as possible.
+        </div>
+        <h3 className="text-[18px] font-semibold text-clay">Message sent</h3>
+        <p className="mt-2 text-[14px] text-clay/55 max-w-[280px] mx-auto">
+          Thanks for reaching out! We&apos;ll get back to you soon.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-1 h-9 rounded-full border border-[#C98255] px-6 text-[11px] font-medium text-[#C98255] transition-colors hover:bg-[#C98255] hover:text-white"
+          className="mt-6 text-[12px] font-bold uppercase tracking-[0.12em] text-terracotta hover:text-clay transition-colors"
         >
-          Send Another
+          Send another
         </button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6 space-y-3.5">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <label className="block">
-        <span className="text-[11px] font-medium text-[#10232B]">Name</span>
+        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/45 font-label">
+          Name
+        </span>
         <input
           name="name"
           type="text"
@@ -79,7 +81,9 @@ export function ContactForm() {
       </label>
 
       <label className="block">
-        <span className="text-[11px] font-medium text-[#10232B]">Email</span>
+        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/45 font-label">
+          Email
+        </span>
         <input
           name="email"
           type="email"
@@ -91,7 +95,9 @@ export function ContactForm() {
       </label>
 
       <label className="block">
-        <span className="text-[11px] font-medium text-[#10232B]">Subject</span>
+        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/45 font-label">
+          Subject
+        </span>
         <input
           name="subject"
           type="text"
@@ -103,28 +109,31 @@ export function ContactForm() {
       </label>
 
       <label className="block">
-        <span className="text-[11px] font-medium text-[#10232B]">Message</span>
+        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/45 font-label">
+          Message
+        </span>
         <textarea
           name="message"
           required
-          rows={4}
+          rows={5}
           disabled={status === "submitting"}
-          className="mt-1.5 block w-full h-[90px] md:h-[75px] resize-none rounded-[5px] border border-[#E5E5E5] bg-white px-3 py-2 text-[12px] text-[#10232B] outline-none transition-colors placeholder:text-[#B9B4AC] focus:border-[#C98255] disabled:bg-[#F5F3EF] disabled:cursor-not-allowed"
+          className="mt-2 block w-full bg-transparent border-0 border-b border-clay/15 text-[15px] sm:text-[16px] text-clay placeholder:text-clay/35 focus:outline-none focus:border-terracotta transition-colors pb-2 resize-none h-[120px] sm:h-[140px] disabled:opacity-40 disabled:cursor-not-allowed"
           placeholder="Write your message here"
         />
       </label>
 
       {error && (
-        <p className="mt-2 text-[12px] text-[#B4552F] font-medium" role="alert">
+        <p className="text-[13px] text-red-600" role="alert">
           {error}
         </p>
       )}
+
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full h-11 md:h-9 rounded-full bg-[#C98255] text-[11px] font-medium text-white transition-colors hover:bg-[#B5703F] disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full h-[50px] rounded-full bg-terracotta text-[12px] font-bold uppercase tracking-[0.15em] text-white transition-all hover:bg-[#8B4513] hover:shadow-[0_4px_16px_rgba(166,99,75,0.3)] disabled:opacity-50 disabled:cursor-not-allowed mt-2"
       >
-        {status === "submitting" ? "Sending..." : "Send Now"}
+        {status === "submitting" ? "Sending..." : "Send message"}
       </button>
     </form>
   );

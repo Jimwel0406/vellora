@@ -68,66 +68,71 @@ export function AddToCartButton({
 
   return (
     <div className="space-y-3">
-      {/* Quantity selector */}
-      <div className="flex items-center h-[52px] w-full sm:w-[200px] rounded-full border border-clay/15 bg-white overflow-hidden">
+      {/* Quantity + Add to Cart — horizontal */}
+      <div className="flex items-stretch gap-3">
+        {/* Quantity selector */}
+        <div className="flex items-center h-[56px] w-[120px] shrink-0 rounded-full border border-clay/15 bg-white overflow-hidden">
+          <button
+            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+            disabled={quantity <= 1 || outOfStock}
+            className="self-stretch flex items-center justify-center w-10 text-clay hover:bg-[#FBF6EC] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            aria-label="Decrease quantity"
+          >
+            <Minus className="w-4 h-4" strokeWidth={1.75} />
+          </button>
+          <span className="self-stretch flex items-center justify-center flex-1 text-[15px] font-semibold select-none tabular-nums">
+            {quantity}
+          </span>
+          <button
+            onClick={() => setQuantity(Math.min(stock, quantity + 1))}
+            disabled={quantity >= stock || outOfStock}
+            className="self-stretch flex items-center justify-center w-10 text-clay hover:bg-[#FBF6EC] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            aria-label="Increase quantity"
+          >
+            <Plus className="w-4 h-4" strokeWidth={1.75} />
+          </button>
+        </div>
+
+        {/* Add to Cart CTA — the strongest interactive element */}
         <button
-          onClick={() => setQuantity(Math.max(1, quantity - 1))}
-          disabled={quantity <= 1 || outOfStock}
-          className="self-stretch flex items-center justify-center w-14 text-clay hover:bg-sand/40 transition-colors disabled:opacity-40 disabled:hover:bg-sand/40 disabled:cursor-not-allowed"
-          aria-label="Decrease quantity"
+          onClick={handleAdd}
+          disabled={loading || outOfStock}
+          className={`flex-1 h-[56px] rounded-full font-bold flex items-center justify-center gap-2.5 transition-all duration-300 text-[15px] tracking-[0.01em] ${
+            added
+              ? "!bg-emerald-600 hover:!bg-emerald-600 text-white"
+              : "bg-terracotta text-white hover:bg-terracotta-deep hover:shadow-[0_6px_24px_rgba(166,99,75,0.35)] active:scale-[0.98]"
+          } disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:active:scale-100`}
         >
-          <Minus className="w-[18px] h-[18px]" />
-        </button>
-        <span className="self-stretch flex items-center justify-center flex-1 text-sm font-semibold select-none">
-          {quantity}
-        </span>
-        <button
-          onClick={() => setQuantity(Math.min(stock, quantity + 1))}
-          disabled={quantity >= stock || outOfStock}
-          className="self-stretch flex items-center justify-center w-14 text-clay hover:bg-sand/40 transition-colors disabled:opacity-40 disabled:hover:bg-sand/40 disabled:cursor-not-allowed"
-          aria-label="Increase quantity"
-        >
-          <Plus className="w-[18px] h-[18px]" />
+          {added ? (
+            <>
+              <Check className="w-[18px] h-[18px]" strokeWidth={2.5} />
+              Added to cart
+            </>
+          ) : loading ? (
+            "Adding..."
+          ) : outOfStock ? (
+            "Out of stock"
+          ) : (
+            <>
+              <ShoppingBag className="w-[18px] h-[18px]" strokeWidth={2} />
+              Add to Cart
+            </>
+          )}
         </button>
       </div>
 
-      {/* Primary CTA */}
-      <button
-        onClick={handleAdd}
-        disabled={loading || outOfStock}
-        className={`w-full h-14 rounded-full font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-sm hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 disabled:opacity-60 disabled:hover:translate-y-0 ${
-          added ? "!bg-emerald-600 hover:!bg-emerald-600" : "bg-terracotta text-white"
-        }`}
-      >
-        {added ? (
-          <>
-            <Check className="w-5 h-5" />
-            Added to cart
-          </>
-        ) : loading ? (
-          "Adding..."
-        ) : outOfStock ? (
-          "Out of stock"
-        ) : (
-          <>
-            <ShoppingBag className="w-5 h-5" />
-            Add to Cart
-          </>
-        )}
-      </button>
-
-      {/* Secondary CTA */}
+      {/* Wishlist — secondary, understated */}
       <button
         onClick={handleWishlist}
         disabled={outOfStock}
-        className="w-full h-14 rounded-full border border-clay/15 bg-transparent font-semibold flex items-center justify-center gap-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-terracotta hover:text-terracotta disabled:opacity-60 disabled:hover:translate-y-0"
+        className="w-full h-11 rounded-full border border-clay/10 bg-transparent font-medium text-[13px] flex items-center justify-center gap-2 text-clay/50 transition-all duration-300 hover:border-clay/20 hover:text-clay disabled:opacity-40 disabled:cursor-not-allowed"
       >
         <Heart
-          className={`w-5 h-5 transition-all duration-300 ${
-            wishlisted ? "fill-terracotta text-terracotta scale-110" : ""
+          className={`w-4 h-4 transition-all duration-300 ${
+            wishlisted ? "fill-terracotta text-terracotta" : ""
           }`}
         />
-        {wishlisted ? "Wishlisted" : "Wishlist"}
+        {wishlisted ? "Wishlisted" : "Add to wishlist"}
       </button>
     </div>
   );

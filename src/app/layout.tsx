@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit, Space_Grotesk } from "next/font/google";
 import { Providers } from "@/components/shared/providers";
+import { ScrollToTop } from "@/components/shared/scroll-to-top";
 import "./globals.css";
 
 const BASE_URL =
@@ -69,7 +70,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} h-full antialiased scroll-smooth`}>
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
@@ -109,7 +110,10 @@ export default function RootLayout({
             }).replace(/</g, "\\u003c"),
           }}
         />
-        <Providers>{children}</Providers>
+        <Providers>
+          <ScrollToTop />
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -17,7 +17,7 @@ export function RecentlyViewedTracker({ productId }: { productId: number }) {
       ].slice(0, MAX_ITEMS);
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     } catch {
-      // ignore storage failures (private mode, quota)
+      // ignore storage failures
     }
   }, [productId]);
 
@@ -61,15 +61,13 @@ export function RecentlyViewedSection() {
           setProducts(fetched.filter((p): p is RecentProduct => p !== null));
         }
       } catch {
-        // ignore read/fetch failures
+        // ignore
       } finally {
         if (!cancelled) setLoading(false);
       }
     }
     load();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, []);
 
   if (loading || products.length === 0) return null;
@@ -77,27 +75,24 @@ export function RecentlyViewedSection() {
   return (
     <section
       data-section="recently-viewed"
-      className="section-recently-viewed mt-[120px]"
+      className="section-recently-viewed border-t border-clay/15 py-10 sm:py-12"
     >
-      <div className="flex items-end justify-between mb-12">
-        <div>
-          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta">
-            Continue browsing
-          </span>
-          <h2 className="font-heading text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
-            Recently viewed
-          </h2>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-clay/45 font-label">
+        Recently viewed
+      </span>
+      <div className="flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:overflow-visible mt-6 pb-4 lg:pb-0 px-5 lg:px-0">
         {products.map((product) => (
-          <Link key={product.id} href={`/products/${product.id}`} className="group block">
-            <div className="aspect-square rounded-[20px] overflow-hidden bg-white border border-clay/5 relative mb-4 transition-shadow duration-300 group-hover:shadow-[0_20px_40px_-20px_rgba(61,43,31,0.2)]">
+          <Link
+            key={product.id}
+            href={`/products/${product.id}`}
+            className="group block w-[48%] min-w-[150px] shrink-0 snap-start sm:w-[180px] lg:w-auto"
+          >
+            <div className="aspect-[4/5] rounded-[10px] overflow-hidden bg-[#FAF7EC] mb-2">
               {product.images?.[0] ? (
                 <img
                   src={product.images[0]}
                   alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-clay/30 text-xs italic">
@@ -105,10 +100,10 @@ export function RecentlyViewedSection() {
                 </div>
               )}
             </div>
-            <p className="text-sm font-semibold text-clay group-hover:text-terracotta transition-colors truncate">
+            <p className="text-[12px] font-medium text-clay/70 group-hover:text-clay transition-colors truncate">
               {product.name}
             </p>
-            <p className="text-sm text-clay/50 mt-1">
+            <p className="text-[11px] text-clay/50 mt-0.5">
               ${(product.price / 100).toFixed(2)}
             </p>
           </Link>

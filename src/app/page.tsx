@@ -12,7 +12,6 @@ import { FooterEcommerce } from "@/components/home/footer-ecommerce";
 import { BestSellers } from "@/components/home/best-sellers-variations";
 import { SectionHeading } from "@/components/home/section-heading";
 import { ProductCarousel } from "@/components/home/product-carousel";
-import { CategoryVariationA } from "@/components/home/category-variations";
 import { Reveal } from "@/components/home/reveal";
 import { WhyVellora } from "@/components/home/why-vellora";
 import { NewArrivalsGrid } from "@/components/home/new-arrivals-grid";
@@ -132,7 +131,7 @@ export default async function HomePage() {
 
         <PromoPopup />
 
-        <BestSellers products={bestSellers} />
+        <BestSellers categories={allCategories} />
 
         <Reveal>
           <WhyVellora
@@ -143,31 +142,44 @@ export default async function HomePage() {
         </Reveal>
 
         <Reveal>
-          <section data-section="new-arrivals" className="section-new-arrivals max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-2 lg:pt-24">
+          <section data-section="new-arrivals" className="section-new-arrivals pt-2 sm:pt-8 lg:pt-10 pb-20 sm:pb-28 lg:pb-32">
             {/* Editorial header */}
-            <div className="text-center mb-12 lg:mb-16">
-              <div className="inline-flex items-center gap-0 lg:gap-4 mb-4">
-                <span className="relative w-12 h-[2px] bg-terracotta -right-4 lg:right-auto" />
-                <p className="text-xl font-bold uppercase font-label tracking-[0.3em] text-terracotta">
-                  Check Out What&apos;s New
-                </p>
-                <span className="relative w-12 h-[2px] bg-terracotta -left-4 lg:left-auto" />
+            <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 mb-20 sm:mb-24 lg:mb-28">
+              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-12">
+                <div className="flex flex-col">
+                  <span className="font-label text-2xl font-bold uppercase tracking-[0.3em] text-terracotta mb-3 sm:mb-4">
+                    Check Out What&apos;s New
+                  </span>
+                  <h2 className="font-heading text-[52px] sm:text-[68px] lg:text-[88px] font-semibold text-clay tracking-[-0.02em] leading-[0.92]">
+                    New Arrivals
+                  </h2>
+                </div>
+                <div className="flex flex-col gap-4 lg:items-end lg:text-right lg:min-w-[280px]">
+                  <p className="text-base sm:text-lg text-clay/60 font-medium max-w-[320px] lg:max-w-none leading-relaxed">
+                    Thoughtfully curated pieces from our latest collection — discover what&apos;s new.
+                  </p>
+                  <Link
+                    href="/products"
+                    className="inline-flex items-center gap-2 font-label text-sm sm:text-base font-semibold uppercase tracking-[0.14em] text-clay hover:text-terracotta transition-colors duration-300 group/link"
+                  >
+                    View All
+                    <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">→</span>
+                  </Link>
+                </div>
               </div>
-              <h2 className="-mt-2 font-heading text-4xl sm:text-5xl lg:text-6xl text-clay tracking-tight leading-none">
-                New Arrivals
-              </h2>
-              <div className="mt-6 mx-auto w-24 h-1.5 bg-gradient-to-r from-transparent via-terracotta to-transparent rounded-full" />
             </div>
 
-            <NewArrivalsGrid products={newArrivals} />
+            {/* Product rail — arrows inside content grid, rail extends beyond */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center justify-between max-w-[1440px] mx-auto px-2 sm:px-4 lg:px-6 pointer-events-none z-10">
+                {/* Arrow placeholders — actual buttons are rendered by NewArrivalsGrid */}
+              </div>
+              <NewArrivalsGrid products={newArrivals} />
+            </div>
           </section>
         </Reveal>
 
-        <Reveal>
-          <section data-section="shop-by-category" className="section-shop-by-category max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-16 lg:pt-20 pb-10 lg:pb-14">
-            <CategoryVariationA categories={allCategories} />
-          </section>
-        </Reveal>
+
       </main>
       <div className="bg-sand">
         <div className="w-[95%] mx-auto py-12 lg:py-16">

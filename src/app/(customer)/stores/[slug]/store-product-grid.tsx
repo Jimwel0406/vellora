@@ -4,7 +4,6 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowUpDown, ShoppingCart, Check, Package } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 
 interface Product {
   id: number;
@@ -53,90 +52,101 @@ export function StoreProductGrid({ products, storeSlug }: { products: Product[];
   }, [products, sort]);
 
   if (products.length === 0) {
-    return (
-      <div className="rounded-xl border border-dashed border-[#E5E8E5] bg-white py-14 text-center">
-        <Package className="w-8 h-8 text-[#6B716D] mx-auto mb-3" />
-        <p className="text-sm text-[#6B716D]">This store has no products yet.</p>
-      </div>
+  return (
+    <section data-section="store-products" className="section-store-products mt-12 lg:mt-14">
+      <div className="border-t-2 border-clay/8 pt-10 lg:pt-12">
+          <div className="border border-dashed border-clay/10 py-16 text-center">
+            <Package className="w-8 h-8 text-clay/30 mx-auto mb-3" />
+            <p className="text-sm text-clay/50">This store has no products yet.</p>
+          </div>
+        </div>
+      </section>
     );
   }
 
   return (
-    <section data-section="store-products" className="section-store-products">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-[#17201C]">
-          Products{" "}
-          <span className="text-sm font-semibold text-[#6B716D]">
-            ({products.length})
-          </span>
-        </h2>
-        <div className="flex items-center gap-1.5">
-          <ArrowUpDown className="w-3.5 h-3.5 text-[#6B716D]" />
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value as typeof sort)}
-            className="text-sm bg-transparent border-none outline-none cursor-pointer text-[#6B716D] hover:text-[#17201C] font-medium"
-          >
-            <option value="newest">Newest</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-            <option value="name">Name</option>
-          </select>
+      <section id="store-products" data-section="store-products" className="section-store-products mt-12 lg:mt-14 scroll-mt-32">
+        <div className="border-t-2 border-clay/8 pt-10 lg:pt-12">
+        {/* Section header */}
+        <div className="flex items-end justify-between mb-8 lg:mb-12">
+          <div>
+            <span className="block font-label text-xs font-bold uppercase tracking-[0.25em] text-clay/40 mb-3">
+              Browse
+            </span>
+            <h2 className="font-heading text-2xl sm:text-3xl text-clay tracking-tight">
+              Products{" "}
+              <span className="text-base sm:text-lg font-normal text-clay/40">
+                ({String(products.length).padStart(2, "0")})
+              </span>
+            </h2>
+          </div>
+          <div className="flex items-center gap-2">
+            <ArrowUpDown className="w-3.5 h-3.5 text-clay/40" />
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as typeof sort)}
+              className="text-[11px] bg-transparent border-none outline-none cursor-pointer text-clay/60 hover:text-clay font-bold uppercase tracking-[0.1em] font-label"
+            >
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="name">Name</option>
+            </select>
+          </div>
         </div>
-      </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
-        {sorted.map((product) => (
-          <div key={product.id} className="group block">
-            <Card className="overflow-hidden border border-[#E5E8E5] rounded-xl shadow-sm hover:shadow-[0_18px_40px_-28px_rgba(23,32,28,0.35)] hover:-translate-y-0.5 transition-all duration-300 h-full bg-white">
+        {/* Product grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 lg:gap-x-5 lg:gap-y-10">
+          {sorted.map((product) => (
+            <div key={product.id} className="group block">
+              {/* Image */}
               <Link href={`/products/${product.id}`} aria-label={product.name}>
-                <div className="aspect-square relative overflow-hidden bg-[#F2F1EC]">
+                <div className="aspect-[3/4] relative overflow-hidden bg-sand/40 mb-3">
                   {product.images?.[0] ? (
                     <img
                       src={product.images[0]}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-[#6B716D] text-xs">
+                    <div className="w-full h-full flex items-center justify-center text-clay/30 text-xs">
                       No image
                     </div>
                   )}
                 </div>
               </Link>
-              <CardContent className="p-3 sm:p-4 flex flex-col">
-                <Link href={`/products/${product.id}`} className="group/title">
-                  <h3 className="font-semibold text-sm text-[#17201C] line-clamp-2 leading-snug group-hover/title:text-[#3E8F68] transition-colors">{product.name}</h3>
-                </Link>
-                <p className="font-bold text-base sm:text-lg text-[#17201C] mt-2">
+
+              {/* Info */}
+              <Link href={`/products/${product.id}`} className="group/title block">
+                <h3 className="font-semibold text-sm text-clay leading-snug group-hover/title:text-terracotta transition-colors line-clamp-2">
+                  {product.name}
+                </h3>
+              </Link>
+
+              <div className="mt-2 flex items-end justify-between gap-2">
+                <p className="font-bold text-lg text-clay leading-none">
                   ${(product.price / 100).toFixed(2)}
                 </p>
                 <button
                   onClick={(e) => handleQuickAdd(product.id, e)}
                   disabled={addingId === product.id}
                   aria-label="Add to cart"
-                  className={`mt-3 flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-xs font-bold transition-all duration-200 active:scale-[0.97] ${
+                  className={`shrink-0 flex items-center justify-center gap-1 px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] transition-all duration-200 active:scale-[0.97] ${
                     addingId === product.id
-                      ? "bg-[#3E8F68] text-white"
-                      : "bg-[#17201C] text-white hover:bg-[#3E8F68]"
+                      ? "bg-terracotta text-white"
+                      : "bg-clay/8 text-clay hover:bg-terracotta hover:text-white"
                   }`}
                 >
                   {addingId === product.id ? (
-                    <>
-                      <Check className="w-3.5 h-3.5" />
-                      <span>Added to cart</span>
-                    </>
+                    <Check className="w-3 h-3" />
                   ) : (
-                    <>
-                      <ShoppingCart className="w-3.5 h-3.5" />
-                      <span>Add to Cart</span>
-                    </>
+                    <ShoppingCart className="w-3 h-3" />
                   )}
                 </button>
-              </CardContent>
-            </Card>
-          </div>
-        ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

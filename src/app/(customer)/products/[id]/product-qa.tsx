@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { MessageCircle, HelpCircle, ThumbsUp, Send } from "lucide-react";
+import { ThumbsUp, Send, ChevronRight } from "lucide-react";
 
 interface QaItem {
   id: number;
@@ -30,6 +31,7 @@ export function ProductQa({
   const [pending, startTransition] = useTransition();
   const [upvoted, setUpvoted] = useState<Set<number>>(new Set());
   const [answerDrafts, setAnswerDrafts] = useState<Record<number, string>>({});
+  const [openId, setOpenId] = useState<number | null>(null);
 
   function ask() {
     setError(null);
@@ -89,137 +91,199 @@ export function ProductQa({
   }
 
   return (
-    <section data-section="product-qa" className="section-product-qa max-w-[1400px] mx-auto px-10 pt-[96px] max-sm:px-5">
-      <div className="flex items-end justify-between">
-        <div>
-          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta">
-            Ask the shop
-          </span>
-          <h2 className="font-heading text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
-            Questions &amp; answers
+    <section data-section="product-qa" className="section-product-qa">
+      {/* Header */}
+      <div className="mb-6">
+        <span className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-terracotta font-label">
+          Questions &amp; Answers
+        </span>
+        <div className="flex items-end justify-between mt-3">
+          <h2 className="font-heading text-[24px] sm:text-[28px] lg:text-[32px] text-clay tracking-[-0.02em]">
+            Got a question?
           </h2>
+          {items.length > 0 && (
+            <span className="text-[12px] text-clay/55 hidden sm:block">
+              {items.length} {items.length === 1 ? "question" : "questions"}
+            </span>
+          )}
         </div>
       </div>
 
-      {/* Ask box */}
-      <div className="mt-10 bg-white border border-clay/10 rounded-[20px] p-6 sm:p-8">
-        <div className="flex items-center gap-2 mb-4">
-          <MessageCircle className="w-4 h-4 text-terracotta" aria-hidden />
-          <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-clay">
-            Ask a question
-          </h3>
-        </div>
+      {/* Ask box — inline */}
+      <div className="border-t border-clay/15 pt-6 pb-8">
         {isLoggedIn ? (
           <>
             <textarea
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-              rows={3}
+              rows={2}
               placeholder="Is there anything you'd like to know about this piece?"
-              className="w-full rounded-xl border border-clay/15 bg-transparent px-4 py-3 text-sm text-clay placeholder:text-clay/40 focus:outline-none focus:border-terracotta focus:ring-1 focus:ring-terracotta/30 transition-colors resize-none"
+              className="w-full border-0 border-b border-clay/15 bg-transparent focus:ring-0 focus:border-terracotta resize-none text-[15px] text-clay placeholder:text-clay/40 p-0 pb-2 outline-none transition-colors"
             />
-            <div className="mt-3 flex justify-end">
+            <div className="mt-3 flex items-center justify-between">
+              {error && <p className="text-sm text-red-600">{error}</p>}
+              <div />
               <button
                 type="button"
                 onClick={ask}
                 disabled={pending || question.trim().length < 10}
-                className="inline-flex items-center gap-2 bg-clay hover:bg-terracotta text-white text-[11px] font-bold uppercase tracking-widest px-6 py-3 rounded-lg transition-colors disabled:opacity-40"
+                className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.12em] text-terracotta hover:text-clay transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                {pending ? "Posting…" : "Post question"}
+                {pending ? "Posting..." : "Post question"}
                 <Send className="w-3.5 h-3.5" aria-hidden />
               </button>
             </div>
           </>
         ) : (
-          <p className="text-sm text-clay/60">
-            Sign in to ask a question about this product.
+          <p className="text-[15px] text-clay/60">
+            <Link href="/login" className="underline underline-offset-4 hover:text-terracotta transition-colors">
+              Sign in
+            </Link>{" "}
+            to ask a question about this product.
           </p>
         )}
-        {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
       </div>
 
       {/* Questions list */}
       {items.length === 0 ? (
-        <div className="mt-6 flex flex-col items-center justify-center rounded-[20px] border border-dashed border-clay/15 py-14 text-center">
-          <HelpCircle className="w-8 h-8 text-clay/20 mb-3" aria-hidden />
-          <p className="text-sm text-clay/50">No questions yet. Be the first to ask.</p>
+        <div className="border-t border-clay/15 py-8">
+          <p className="text-[14px] text-clay/55 mb-0.5">
+            No questions yet.
+          </p>
+          <p className="text-[13px] text-clay/60">
+            Be the first to ask about this product.
+          </p>
         </div>
       ) : (
-        <div className="mt-6 space-y-4">
-          {items.map((item) => (
-            <div key={item.id} className="bg-white border border-clay/10 rounded-[20px] p-6 sm:p-8">
-              <div className="flex items-start gap-4">
+        <div className="border-t border-clay/15 divide-y divide-clay/15">
+          {items.map((item) => {
+            const isOpen = openId === item.id;
+            return (
+              <div key={item.id}>
                 <button
                   type="button"
-                  onClick={() => upvote(item.id)}
-                  disabled={!isLoggedIn || upvoted.has(item.id)}
-                  aria-label="Upvote this question"
-                  className={`flex flex-col items-center gap-0.5 shrink-0 rounded-xl border px-3 py-2 transition-colors ${
-                    upvoted.has(item.id)
-                      ? "border-terracotta/40 bg-terracotta/5 text-terracotta"
-                      : "border-clay/15 text-clay/50 hover:border-clay/30 hover:text-clay"
-                  } disabled:opacity-50`}
+                  onClick={() => setOpenId(isOpen ? null : item.id)}
+                  className="w-full flex items-start gap-4 py-5 text-left group"
+                  aria-expanded={isOpen}
                 >
-                  <ThumbsUp className="w-4 h-4" aria-hidden />
-                  <span className="text-xs font-bold">{item.upvotes}</span>
-                </button>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[15px] text-clay leading-relaxed font-medium">
-                    {item.question}
-                  </p>
-                  <p className="mt-1.5 text-[11px] text-clay/40 font-semibold uppercase tracking-wider">
-                    {item.userName} ·{" "}
-                    {new Date(item.createdAt).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </p>
-
-                  {item.answers.map((a) => (
-                    <div key={a.id} className="mt-4 ml-0 sm:ml-6 rounded-xl bg-sand/50 border border-clay/5 p-4">
-                      <p className="text-sm text-clay/80 leading-relaxed">{a.answer}</p>
-                      <p className="mt-1.5 text-[11px] text-clay/40 font-semibold uppercase tracking-wider">
-                        {a.userName} · Answered{" "}
-                        {new Date(a.createdAt).toLocaleDateString("en-US", {
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[15px] text-clay font-medium leading-relaxed group-hover:text-terracotta transition-colors">
+                      {item.question}
+                    </p>
+                    <div className="flex items-center gap-2.5 mt-1.5">
+                      <span className="text-[12px] text-clay/55 font-medium">
+                        {item.userName}
+                      </span>
+                      <span className="text-clay/30">·</span>
+                      <span className="text-[12px] text-clay/55">
+                        {new Date(item.createdAt).toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
                           year: "numeric",
                         })}
-                      </p>
+                      </span>
+                      {item.answers.length > 0 && (
+                        <>
+                          <span className="text-clay/30">·</span>
+                          <span className="text-[12px] text-terracotta font-medium">
+                            {item.answers.length} {item.answers.length === 1 ? "answer" : "answers"}
+                          </span>
+                        </>
+                      )}
                     </div>
-                  ))}
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0 mt-0.5">
+                    {item.upvotes > 0 && (
+                      <span className="text-[12px] text-clay/55 tabular-nums">
+                        {item.upvotes}
+                      </span>
+                    )}
+                    <ChevronRight
+                      className={`w-4 h-4 text-clay/45 transition-transform duration-200 ${
+                        isOpen ? "rotate-90" : ""
+                      }`}
+                    />
+                  </div>
+                </button>
 
-                  {isStoreOwner && (
-                    <div className="mt-4 ml-0 sm:ml-6 space-y-2">
-                      <textarea
-                        value={answerDrafts[item.id] ?? ""}
-                        onChange={(e) =>
-                          setAnswerDrafts((prev) => ({ ...prev, [item.id]: e.target.value }))
-                        }
-                        rows={2}
-                        placeholder="Reply as shop owner…"
-                        className="w-full rounded-xl border border-clay/15 bg-transparent px-4 py-3 text-sm text-clay placeholder:text-clay/40 focus:outline-none focus:border-terracotta focus:ring-1 focus:ring-terracotta/30 transition-colors resize-none"
-                      />
-                      <div className="flex justify-end">
-                        <button
-                          type="button"
-                          onClick={() => answer(item.id)}
-                          disabled={pending || !(answerDrafts[item.id] ?? "").trim()}
-                          className="inline-flex items-center gap-2 rounded-lg border border-clay/15 text-clay text-[11px] font-bold uppercase tracking-widest px-5 py-2.5 hover:border-terracotta/40 hover:text-terracotta transition-colors disabled:opacity-40"
-                        >
-                          {pending ? "Posting…" : "Answer"}
-                          <Send className="w-3.5 h-3.5" aria-hidden />
-                        </button>
-                      </div>
+                {/* Expanded answer area */}
+                <div
+                  className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+                  style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                >
+                  <div className="overflow-hidden min-h-0">
+                    <div className="pb-5 pl-0 sm:pl-6 space-y-4">
+                      {/* Upvote */}
+                      <button
+                        type="button"
+                        onClick={() => upvote(item.id)}
+                        disabled={!isLoggedIn || upvoted.has(item.id)}
+                        aria-label="Upvote this question"
+                        className={`inline-flex items-center gap-1.5 text-[12px] font-medium transition-colors ${
+                          upvoted.has(item.id)
+                            ? "text-terracotta"
+                            : "text-clay/55 hover:text-clay"
+                        } disabled:opacity-50 disabled:cursor-not-allowed`}
+                      >
+                        <ThumbsUp className="w-3.5 h-3.5" aria-hidden />
+                        Helpful
+                      </button>
+
+                      {/* Answers */}
+                      {item.answers.map((a) => (
+                        <div key={a.id} className="border-l-2 border-clay/15 pl-4">
+                          <p className="text-[15px] text-clay/75 leading-relaxed">
+                            {a.answer}
+                          </p>
+                          <p className="mt-1.5 text-[12px] text-clay/55 font-medium">
+                            {a.userName} · Answered{" "}
+                            {new Date(a.createdAt).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </p>
+                        </div>
+                      ))}
+
+                      {/* Store owner reply */}
+                      {isStoreOwner && (
+                        <div className="space-y-2 pt-2">
+                          <textarea
+                            value={answerDrafts[item.id] ?? ""}
+                            onChange={(e) =>
+                              setAnswerDrafts((prev) => ({
+                                ...prev,
+                                [item.id]: e.target.value,
+                              }))
+                            }
+                            rows={2}
+                            placeholder="Reply as shop owner..."
+                            className="w-full border-0 border-b border-clay/15 bg-transparent focus:ring-0 focus:border-terracotta resize-none text-[15px] text-clay placeholder:text-clay/40 p-0 pb-2 outline-none transition-colors"
+                          />
+                          <div className="flex justify-end">
+                            <button
+                              type="button"
+                              onClick={() => answer(item.id)}
+                              disabled={pending || !(answerDrafts[item.id] ?? "").trim()}
+                              className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.12em] text-terracotta hover:text-clay transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                            >
+                              {pending ? "Posting..." : "Reply"}
+                              <Send className="w-3.5 h-3.5" aria-hidden />
+                            </button>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </section>
   );
 }
+
+

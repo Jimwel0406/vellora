@@ -13,9 +13,7 @@ import { ReviewList } from "./review-list";
 import { StickyAddToCart } from "./sticky-add-to-cart";
 import { RelatedProductCard } from "./related-product-card";
 import { RecentlyViewedTracker, RecentlyViewedSection } from "./recently-viewed";
-import { ProductQa } from "./product-qa";
-import { getProductQa } from "@/lib/product-qa";
-import { ChevronRight, Check, Star, Truck, ShieldCheck, RotateCcw, Store } from "lucide-react";
+import { Check, Star, Truck, ShieldCheck, RotateCcw, Store } from "lucide-react";
 
 const BASE_URL =
   process.env.SEO_BASE_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
@@ -132,15 +130,6 @@ export default async function ProductPage({
         .then((r) => r.length > 0)
     : false;
 
-  const [qaItems, isStoreOwner] = await Promise.all([
-    getProductQa(productId),
-    Promise.resolve(
-      !!session?.user &&
-        session.user.role === "vendor" &&
-        product.stores?.userId === parseInt(session.user.id)
-    ),
-  ]);
-
   const stock = product.products.stock;
   const stockSignal =
     stock === 0 ? (
@@ -186,6 +175,7 @@ export default async function ProductPage({
   }));
 
   const galleryImages = (product.products.images?.length ? product.products.images : ["/wishlist-artifact-1.jpg"]);
+  const primaryImage = galleryImages[0];
 
   return (
     <>
@@ -269,65 +259,74 @@ export default async function ProductPage({
           }).replace(/</g, "\\u003c"),
         }}
       />
-      <div className="max-w-[1400px] mx-auto px-10 pt-[60px] pb-[120px] max-sm:px-5 max-sm:pt-10">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="flex text-[14px] text-clay/40 mb-16 max-sm:mb-6">
-          <ol className="inline-flex items-center gap-2">
+
+      {/* ═══════════════════════════════════════════
+          BREADCRUMB
+          ═══════════════════════════════════════════ */}
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <nav aria-label="Breadcrumb" className="pt-5 sm:pt-7 pb-4 sm:pb-6">
+          <ol className="inline-flex items-center gap-1.5 text-[13px] text-clay/40 flex-wrap">
             <li>
-              <Link href="/products" className="hover:text-clay transition-colors">
-                Products
-              </Link>
+              <Link href="/products" className="hover:text-clay transition-colors">Products</Link>
             </li>
-            <li className="text-clay/20">›</li>
+            <li className="text-clay/20">/</li>
             {product.stores && (
               <>
                 <li>
-                  <Link
-                    href={`/stores/${product.stores.slug}`}
-                    className="hover:text-clay transition-colors"
-                  >
+                  <Link href={`/stores/${product.stores.slug}`} className="hover:text-clay transition-colors">
                     {product.stores.name}
                   </Link>
                 </li>
-                <li className="text-clay/20">›</li>
+                <li className="text-clay/20">/</li>
               </>
             )}
-            <li aria-current="page" className="text-clay font-medium truncate max-w-[240px]">
+            <li aria-current="page" className="text-clay font-medium truncate max-w-[200px] sm:max-w-none">
               {product.products.name}
             </li>
           </ol>
         </nav>
+      </div>
 
-        {/* Product Hero */}
-        <section id="product-hero" data-section="product-hero" className="section-product-hero grid grid-cols-1 lg:grid-cols-[58%_42%] gap-[72px] max-sm:gap-8 lg:items-start">
-          {/* Left: Gallery */}
-          <div className="w-full lg:sticky lg:top-8">
+      {/* ═══════════════════════════════════════════
+          01 — PRODUCT HERO
+          ONE editorial composition. Image 55%, info 45%.
+          Purchase panel vertically centered against image.
+          ═══════════════════════════════════════════ */}
+      <section
+        id="product-hero"
+        data-section="product-hero"
+        className="section-product-hero max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pb-12 sm:pb-16 lg:pb-20"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-[48%_52%] gap-6 lg:gap-10 xl:gap-14 items-center">
+          {/* LEFT — Single dominant product image */}
+          <div className="w-full">
             <ImageGallery images={galleryImages} name={product.products.name} />
           </div>
 
-          {/* Right: Information */}
-          <div className="w-full lg:sticky lg:top-8">
-            <div className="space-y-6">
-              {/* Brand */}
+          {/* RIGHT — Purchase panel, vertically centered against image */}
+          <div className="w-full">
+            <div className="space-y-5 lg:space-y-6 lg:max-w-[400px]">
+
+              {/* Store / Category — eyebrow */}
               <Link
                 href={`/stores/${product.stores?.slug}`}
-                className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta hover:underline"
+                className="inline-block text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.2em] text-terracotta hover:text-clay transition-colors font-label"
               >
                 {product.stores?.name || "Vellora"}
               </Link>
 
-              {/* Title */}
-              <h1 className="max-w-[520px] text-[32px] sm:text-[40px] lg:text-[56px] font-bold leading-[1.05] text-[#1A1A1A] font-heading">
+              {/* Product name — THE typographic moment */}
+              <h1 className="text-[36px] sm:text-[44px] lg:text-[52px] font-bold leading-[1.04] text-clay font-heading tracking-[-0.025em]">
                 {product.products.name}
               </h1>
 
-              {/* Rating */}
+              {/* Rating — compact inline */}
               {totalReviews > 0 && avgRating && (
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2">
                   <div className="relative inline-flex">
-                    <div className="flex gap-0.5 text-clay/15">
+                    <div className="flex gap-0.5 text-clay/25">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className="w-[16px] h-[16px]" />
+                        <Star key={i} className="w-[15px] h-[15px]" />
                       ))}
                     </div>
                     <div
@@ -335,106 +334,55 @@ export default async function ProductPage({
                       style={{ width: `${(Number(avgRating) / 5) * 100}%` }}
                     >
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className="w-[16px] h-[16px] fill-rating shrink-0" />
+                        <Star key={i} className="w-[15px] h-[15px] fill-rating shrink-0" />
                       ))}
                     </div>
                   </div>
-                  <span className="text-[14px] font-bold text-[#1A1A1A] leading-none">
-                    {avgRating}
-                  </span>
-                  <span className="text-[13px] text-clay/50">
+                  <span className="text-[14px] lg:text-[16px] font-bold text-clay">{avgRating}</span>
+                  <span className="text-[13px] lg:text-[14px] text-clay/60">
                     ({totalReviews} {totalReviews === 1 ? "review" : "reviews"})
                   </span>
                 </div>
               )}
 
-              {/* Price */}
-              <div className="pt-1">
-                <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-clay/50 mb-2">
-                  Price
-                </p>
-                <div className="flex items-center gap-3 flex-wrap">
-                  <p className="flex items-baseline gap-1.5 text-terracotta">
-                    <span className="text-[20px] font-semibold text-clay/40 align-baseline">
-                      $
-                    </span>
-                    <span className="text-[36px] sm:text-[40px] font-bold leading-none tracking-tight text-terracotta">
-                      {(product.products.price / 100).toFixed(2)}
-                    </span>
-                    <span className="text-[13px] font-medium text-clay/50">
-                      USD
-                    </span>
-                  </p>
-                  {stockSignal}
-                </div>
+              {/* Price — visually important */}
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <span className="text-[17px] font-medium text-clay/55">$</span>
+                <span className="text-[40px] sm:text-[44px] lg:text-[48px] font-bold leading-none tracking-[-0.025em] text-terracotta tabular-nums">
+                  {(product.products.price / 100).toFixed(2)}
+                </span>
+                {stockSignal}
               </div>
 
               {/* Short description */}
               {blurb && (
-                <p className="max-w-[520px] text-[18px] leading-[1.8] text-[#555555]">
+                <p className="text-[15px] sm:text-[16px] leading-[1.7] text-clay/70">
                   {blurb}
                 </p>
               )}
 
-              {/* Tags */}
-              {product.products.tags && product.products.tags.length > 0 && (
-                <div>
-                  <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-clay/50 mb-2.5">
-                    Tags
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {product.products.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3.5 py-1.5 rounded-full bg-terracotta/10 text-terracotta text-[12px] font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Feature highlights */}
-              {features.length > 0 && (
-                <div data-section="product-features" className="section-product-features">
-                  <h2 className="text-[12px] font-semibold uppercase tracking-[0.08em] text-clay/50 mb-3">
-                    Key Features
-                  </h2>
-                  <dl className="space-y-3">
-                    {features.slice(0, 4).map((point, i) => (
-                      <div key={i} className="flex items-center gap-3 text-[15px] font-semibold text-clay">
-                        <dt className="sr-only">Feature {i + 1}</dt>
-                        <dd className="flex items-center gap-3">
-                          <Check className="w-4 h-4 text-terracotta shrink-0" strokeWidth={2} />
-                          {point}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              )}
+              {/* Divider */}
+              <div className="border-t border-clay/15" />
 
               {/* Purchase actions */}
-              <div className="pt-2">
+              <div>
                 {isOwner ? (
                   <VendorProductPanel
                     productId={product.products.id}
                     storeSlug={product.stores?.slug}
                   />
                 ) : isSeller ? (
-                  <div className="rounded-[16px] border border-clay/15 bg-sand/60 p-5">
+                  <div className="border border-clay/10 bg-[#FBF6EC] p-5 space-y-3">
                     <div className="flex items-start gap-3">
-                      <span className="w-10 h-10 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
-                        <Store className="w-5 h-5" strokeWidth={1.75} />
+                      <span className="w-9 h-9 rounded-full bg-terracotta/10 text-terracotta flex items-center justify-center shrink-0">
+                        <Store className="w-[18px] h-[18px]" strokeWidth={1.75} />
                       </span>
                       <div>
-                        <p className="text-[15px] font-bold text-[#1A1A1A] leading-snug">
+                        <p className="text-[15px] font-semibold text-clay leading-snug">
                           Seller accounts can&apos;t purchase
                         </p>
                         <p className="text-[13px] text-clay/60 leading-snug mt-1">
-                          Your account is set up to sell on Vellora. Switch to a
-                          buyer account to shop.
+                          Switch to a buyer account to shop.
                         </p>
                       </div>
                     </div>
@@ -448,8 +396,8 @@ export default async function ProductPage({
                   />
                 )}
                 {!session?.user && (
-                  <p className="text-[13px] text-clay/50 mt-4 text-center">
-                    <Link href="/login" className="underline underline-offset-4 hover:text-terracotta">
+                  <p className="text-[14px] text-clay/55 mt-3">
+                    <Link href="/login" className="underline underline-offset-4 hover:text-terracotta transition-colors">
                       Sign in
                     </Link>{" "}
                     to save items and track orders.
@@ -457,136 +405,179 @@ export default async function ProductPage({
                 )}
               </div>
 
-              {/* Trust badges */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-clay/10 border border-clay/10 rounded-[16px] bg-white overflow-hidden pt-2">
-                <div className="flex flex-col items-center text-center gap-2.5 p-5">
-                  <Truck className="w-6 h-6 text-terracotta shrink-0" strokeWidth={1.75} />
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-[#1A1A1A] leading-tight">Free Shipping</p>
-                    <p className="text-[11px] text-clay/50 leading-snug mt-1">On orders over $50</p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-center text-center gap-2.5 p-5">
-                  <ShieldCheck className="w-6 h-6 text-terracotta shrink-0" strokeWidth={1.75} />
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-[#1A1A1A] leading-tight">Secure Checkout</p>
-                    <p className="text-[11px] text-clay/50 leading-snug mt-1">Your payment is protected</p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-center text-center gap-2.5 p-5">
-                  <RotateCcw className="w-6 h-6 text-terracotta shrink-0" strokeWidth={1.75} />
-                  <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-[#1A1A1A] leading-tight">Easy Returns</p>
-                    <p className="text-[11px] text-clay/50 leading-snug mt-1">30-day returns accepted</p>
-                  </div>
-                </div>
+              {/* Trust — single restrained line */}
+              <div className="flex items-center text-[12px] sm:text-[13px] lg:text-[14px] text-clay/55">
+                <span className="flex items-center gap-1.5">
+                  <Truck className="w-3.5 h-3.5 text-terracotta/80" strokeWidth={1.75} />
+                  Free shipping over $50
+                </span>
+                <span className="hidden sm:block w-px h-3 bg-clay/20 mx-4" aria-hidden />
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-terracotta/80" strokeWidth={1.75} />
+                  Secure checkout
+                </span>
+                <span className="hidden sm:block w-px h-3 bg-clay/20 mx-4" aria-hidden />
+                <span className="flex items-center gap-1.5">
+                  <RotateCcw className="w-3.5 h-3.5 text-terracotta/80" strokeWidth={1.75} />
+                  Easy returns
+                </span>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Reviews */}
-        <section data-section="product-reviews" className="section-product-reviews mt-[120px]">
-          {totalReviews > 0 && avgRating && (
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-              <div>
-                <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta">
-                  Reviews
+      {/* ═══════════════════════════════════════════
+          02 — PRODUCT STORY / WHY YOU'LL LOVE IT
+          Editorial spread. Large statement + features.
+          ═══════════════════════════════════════════ */}
+      {(blurb || features.length > 0) && (
+        <section
+          data-section="product-story"
+          className="section-product-story bg-[#FBF6EC]"
+        >
+          <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20 lg:py-28">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+              {/* LEFT — Editorial statement, oversized */}
+              <div className="lg:col-span-7">
+                <span className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-terracotta font-label">
+                  Why you&apos;ll love it
                 </span>
-                <h2 className="font-heading text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
-                  What our community thinks
-                </h2>
+                {blurb && (
+                  <h2 className="font-heading text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[54px] leading-[1.08] text-clay mt-5 sm:mt-6 tracking-[-0.025em]">
+                    {blurb}
+                  </h2>
+                )}
+                <div className="mt-8 sm:mt-10 w-16 h-px bg-terracotta/40" />
               </div>
-              <div className="flex items-center gap-4">
-                <div className="flex gap-0.5 text-rating">
-                  {Array.from({ length: Math.round(Number(avgRating)) }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-rating" />
-                  ))}
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-[#1A1A1A] leading-none">{avgRating}</p>
-                  <p className="text-[13px] text-clay/50 mt-1">
-                    Based on {totalReviews} {totalReviews === 1 ? "review" : "reviews"}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-            {/* Rating overview */}
-            <div className="lg:col-span-4 space-y-6">
-              {totalReviews > 0 && avgRating && (
-                <div className="bg-white border border-clay/10 rounded-[20px] p-7">
-                  <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-clay mb-6">
-                    Rating overview
+              {/* RIGHT — Key features, clean list */}
+              {features.length > 0 && (
+                <div className="lg:col-span-5 lg:pt-16">
+                  <h3 className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-clay/55 font-label mb-6">
+                    Key features
                   </h3>
-                  <div className="flex items-end gap-3">
-                    <p className="text-5xl font-bold text-[#1A1A1A] leading-none">{avgRating}</p>
-                    <div className="pb-1">
-                      <div className="flex gap-0.5 text-rating">
-                        {Array.from({ length: Math.round(Number(avgRating)) }).map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-rating" />
-                        ))}
-                      </div>
-                      <p className="text-[12px] text-clay/50 mt-1.5">
-                        {totalReviews} {totalReviews === 1 ? "review" : "reviews"}
-                      </p>
-                    </div>
-                  </div>
-
-                  <dl className="mt-6 space-y-2.5">
-                    {ratingDistribution.map((d) => {
-                      return (
-                        <div key={d.star} className="flex items-center gap-3">
-                          <dt className="sr-only">{d.star} star</dt>
-                          <dd className="w-[calc(100%-56px)]">
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs font-semibold text-clay w-3">{d.star}</span>
-                              <div className="flex-1 h-2 rounded-full bg-clay/10 overflow-hidden">
-                                <div
-                                  className="h-full rounded-full bg-ochre transition-[width] duration-500"
-                                  style={{ width: totalReviews > 0 ? `${(d.count / totalReviews) * 100}%` : "0%" }}
-                                />
-                              </div>
-                              <span className="text-xs text-clay/40 w-6 text-right tabular-nums">
-                                {d.count}
-                              </span>
-                            </div>
-                          </dd>
-                        </div>
-                      );
-                    })}
-                  </dl>
+                  <ul className="space-y-4">
+                    {features.slice(0, 6).map((point, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <Check className="w-[18px] h-[18px] text-terracotta shrink-0 mt-px" strokeWidth={2} />
+                        <span className="text-[15px] sm:text-[16px] text-clay leading-relaxed">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
+            </div>
+          </div>
+        </section>
+      )}
 
-              {/* Compose */}
-              <div className="bg-white border border-clay/10 rounded-[20px] p-8">
-                <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-clay mb-6">
-                  Share Your Experience
-                </h3>
-                {session?.user ? (
-                  hasPurchased ? (
-                    <ReviewForm productId={product.products.id} />
-                  ) : (
-                    <p className="text-sm text-clay/60 leading-relaxed">
-                      Leave an impression after you&apos;ve purchased — reviews
-                      are reserved for verified buyers.
+      {/* ═══════════════════════════════════════════
+          03 — VISUAL BREAK — editorial pause
+          ═══════════════════════════════════════════ */}
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="py-10 sm:py-14 lg:py-20 flex items-center gap-6">
+          <div className="flex-1 h-px bg-clay/15" />
+          <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-clay/40 font-label shrink-0">
+            {totalReviews > 0 ? `${totalReviews} ${totalReviews === 1 ? "review" : "reviews"}` : "Reviews"}
+          </span>
+          <div className="flex-1 h-px bg-clay/15" />
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════
+          04 — CUSTOMER VOICES
+          Editorial composition. Left score, right quotes.
+          ═══════════════════════════════════════════ */}
+      <section data-section="product-reviews" className="section-product-reviews">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20 lg:pb-28">
+          {/* Section header */}
+          <div className="mb-10 sm:mb-14">
+            <span className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-terracotta font-label">
+              Reviews
+            </span>
+            <h2 className="font-heading text-[32px] sm:text-[40px] lg:text-[44px] text-clay mt-4 tracking-[-0.025em]">
+              Customer voices
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+            {/* Left — Score summary */}
+            <div className="lg:col-span-4">
+              {totalReviews > 0 && avgRating ? (
+                <div className="space-y-8">
+                  {/* Large score figure */}
+                  <div>
+                    <p className="text-[72px] sm:text-[80px] font-bold text-clay leading-none tracking-[-0.04em] font-heading">
+                      {avgRating}
                     </p>
-                  )
-                ) : (
-                  <p className="text-sm text-clay/60 leading-relaxed">
-                    <Link href="/login" className="underline underline-offset-4 hover:text-terracotta">
-                      Sign in
-                    </Link>{" "}
-                    to leave the first impression of this piece.
+                    <div className="flex gap-0.5 text-rating mt-3">
+                      {Array.from({ length: Math.round(Number(avgRating)) }).map((_, i) => (
+                        <Star key={i} className="w-5 h-5 fill-rating" />
+                      ))}
+                    </div>
+                    <p className="text-[13px] text-clay/60 mt-2">
+                      Based on {totalReviews} {totalReviews === 1 ? "review" : "reviews"}
+                    </p>
+                  </div>
+
+                  {/* Rating distribution */}
+                  <div className="space-y-2.5">
+                    {ratingDistribution.map((d) => (
+                      <div key={d.star} className="flex items-center gap-3">
+                        <span className="text-[12px] text-clay/55 w-3 text-right tabular-nums font-medium">{d.star}</span>
+                        <div className="flex-1 h-[5px] rounded-full bg-clay/15 overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-ochre transition-[width] duration-500"
+                            style={{ width: totalReviews > 0 ? `${(d.count / totalReviews) * 100}%` : "0%" }}
+                          />
+                        </div>
+                        <span className="text-[12px] text-clay/45 w-5 text-right tabular-nums">
+                          {d.count}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-clay/10" />
+
+                  {/* Write a review */}
+                  <div>
+                    <h3 className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-clay/55 font-label mb-4">
+                      Share your experience
+                    </h3>
+                    {session?.user ? (
+                      hasPurchased ? (
+                        <ReviewForm productId={product.products.id} />
+                      ) : (
+                        <p className="text-[14px] text-clay/60 leading-relaxed">
+                          Leave a review after you&apos;ve purchased — reviews are reserved for verified buyers.
+                        </p>
+                      )
+                    ) : (
+                      <p className="text-[14px] text-clay/60 leading-relaxed">
+                        <Link href="/login" className="underline underline-offset-4 hover:text-terracotta transition-colors">
+                          Sign in
+                        </Link>{" "}
+                        to share your experience.
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <p className="text-[13px] font-semibold uppercase tracking-[0.2em] text-clay/55 font-label mb-3">
+                    No reviews yet
                   </p>
-                )}
-              </div>
+                  <p className="text-[15px] text-clay/60 leading-relaxed">
+                    Be the first to share your experience with this product.
+                  </p>
+                </div>
+              )}
             </div>
 
-            {/* Reviews list */}
+            {/* Right — Review entries */}
             <div className="lg:col-span-8">
               <ReviewList
                 reviews={productReviews.map(({ reviews: review, users: user }) => ({
@@ -599,66 +590,73 @@ export default async function ProductPage({
               />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <ProductQa
-          items={qaItems}
-          productId={product.products.id}
-          isLoggedIn={!!session?.user}
-          isStoreOwner={isStoreOwner}
-        />
-
-        {/* Related Products */}
-        {relatedProducts.length > 0 && (
-          <section data-section="related-products" className="section-related-products mt-[120px]">
-            <div className="flex items-end justify-between mb-12">
+      {/* ═══════════════════════════════════════════
+          05 — FROM STORE — Brand discovery moment
+          ═══════════════════════════════════════════ */}
+      {relatedProducts.length > 0 && (
+        <section data-section="related-products" className="section-related-products">
+          <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20 lg:py-28">
+            <div className="flex items-end justify-between mb-10">
               <div>
-                <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-terracotta">
-                  You may also like
+                <span className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.2em] text-terracotta font-label">
+                  From {product.stores?.name || "the store"}
                 </span>
-                <h2 className="font-heading text-3xl sm:text-4xl text-[#1A1A1A] mt-6">
-                  From {product.stores?.name || "the same maker"}
+                <h2 className="font-heading text-[32px] sm:text-[40px] lg:text-[44px] text-clay mt-4 tracking-[-0.025em]">
+                  Continue exploring
                 </h2>
               </div>
               <Link
                 href={`/stores/${product.stores?.slug}`}
-                className="hidden sm:flex items-center gap-2 text-[13px] font-semibold text-clay hover:text-terracotta transition-colors"
+                className="hidden sm:inline-flex items-center gap-1.5 text-[13px] font-semibold text-clay/65 hover:text-terracotta transition-colors"
               >
                 View store
-                <ChevronRight className="w-4 h-4" />
+                <span className="text-[16px]">→</span>
               </Link>
             </div>
 
-            <div className="flex gap-4 sm:gap-6 overflow-x-auto lg:overflow-visible scrollbar-hide snap-x snap-mandatory lg:snap-none lg:grid lg:grid-cols-4 pb-2 lg:pb-0 -mx-5 px-5 sm:-mx-0 sm:px-0 max-sm:scroll-pl-5 max-sm:scroll-pr-5">
-              {relatedProducts.map((p) => (
-                <div key={p.id} className="w-[72%] min-w-[240px] shrink-0 snap-start sm:w-[300px] lg:w-auto">
+            <div className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory lg:grid lg:grid-cols-3 lg:overflow-visible pb-4 lg:pb-0 px-5 lg:px-0">
+              {relatedProducts.slice(0, 3).map((p) => (
+                <div key={p.id} className="w-[75%] min-w-[260px] shrink-0 snap-start sm:w-[300px] lg:w-auto">
                   <RelatedProductCard product={p} />
                 </div>
               ))}
             </div>
 
-            <div className="text-center mt-12 lg:hidden">
+            <div className="text-center mt-10 sm:hidden">
               <Link
                 href={`/stores/${product.stores?.slug}`}
-                className="inline-flex items-center gap-2 text-[13px] font-semibold text-clay hover:text-terracotta transition-colors"
+                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-clay/65 hover:text-terracotta transition-colors"
               >
                 View store
-                <ChevronRight className="w-4 h-4" />
+                <span className="text-[16px]">→</span>
               </Link>
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
+      {/* ═══════════════════════════════════════════
+          07 — RECENTLY VIEWED — quietest utility
+          ═══════════════════════════════════════════ */}
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
         <RecentlyViewedSection />
       </div>
 
+      {/* Mobile sticky add-to-cart */}
       <StickyAddToCart
         productId={product.products.id}
         stock={product.products.stock}
+        productName={product.products.name}
+        productPrice={product.products.price}
+        productImage={primaryImage}
         isOwner={isOwner}
         isSeller={isSeller}
       />
 
+      {/* localStorage tracker */}
       <RecentlyViewedTracker productId={product.products.id} />
     </>
   );

@@ -36,14 +36,20 @@ export function Stars({ rating }: { rating: number | null }) {
           <svg
             key={i}
             viewBox="0 0 20 20"
-            className={"w-4 h-4 " + (i <= rounded ? "text-amber-500" : "text-clay/20")}
-            fill="currentColor"
+            className={
+              "w-3 h-3 " +
+              (i <= rounded
+                ? "text-rating fill-rating"
+                : "text-clay/15 fill-clay/15")
+            }
           >
             <path d="M10 1.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 15l-5.3 2.6 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
           </svg>
         ))}
       </div>
-      <span className="text-[13px] font-bold text-clay">{rating.toFixed(1)}</span>
+      <span className="text-[11px] font-bold text-clay/60 font-label">
+        {rating.toFixed(1)}
+      </span>
     </div>
   );
 }

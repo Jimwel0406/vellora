@@ -2,8 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { SlidersHorizontal, X } from "lucide-react";
-import { SearchSortBarS3A, SearchSortBarS3B, SearchSortBarS3C } from "./search-sort-variations";
+import { X } from "lucide-react";
+import {
+  SearchSortBarS3A,
+  SearchSortBarS3B,
+  SearchSortBarS3C,
+} from "./search-sort-variations";
 import { ProductCardSwitcher } from "./product-card-switcher";
 import { FilterPanelF3 } from "./filter-variations";
 import type { ShopProduct } from "./shop-types";
@@ -54,19 +58,25 @@ export function ShopArea({
 }) {
   const router = useRouter();
   const [filters, setFilters] = useState<FilterOptions>(
-    initialCategory ? { ...DEFAULT_FILTERS, categories: [initialCategory] } : DEFAULT_FILTERS
+    initialCategory
+      ? { ...DEFAULT_FILTERS, categories: [initialCategory] }
+      : DEFAULT_FILTERS
   );
   const [sort, setSort] = useState(initialSort || "featured");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [showMobileSort, setShowMobileSort] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(12);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState(query);
-  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
 
-  useEffect(() => () => {
-    if (searchTimer.current) clearTimeout(searchTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (searchTimer.current) clearTimeout(searchTimer.current);
+    },
+    []
+  );
 
   function handleSearchChange(value: string) {
     setSearchInput(value);
@@ -77,21 +87,27 @@ export function ShopArea({
       return;
     }
     searchTimer.current = setTimeout(() => {
-      router.replace(q ? `/products?q=${encodeURIComponent(q)}` : "/products", { scroll: false });
+      router.replace(
+        q ? `/products?q=${encodeURIComponent(q)}` : "/products",
+        { scroll: false }
+      );
     }, 350);
   }
 
   function clearFilters() {
     setFilters(DEFAULT_FILTERS);
     setSort("featured");
-    setVisibleCount(12);
+    setCurrentPage(1);
     setSearchInput("");
     router.replace("/products", { scroll: false });
   }
 
-  function updateFilter<K extends keyof FilterOptions>(key: K, value: FilterOptions[K]) {
+  function updateFilter<K extends keyof FilterOptions>(
+    key: K,
+    value: FilterOptions[K]
+  ) {
     setFilters((f) => ({ ...f, [key]: value }));
-    setVisibleCount(12);
+    setCurrentPage(1);
   }
 
   function toggleCategory(name: string) {
@@ -123,13 +139,34 @@ export function ShopArea({
   const filtered = [...products]
     .filter((p) => {
       const needle = query.trim().toLowerCase();
-      if (needle && !p.name.toLowerCase().includes(needle)) return false;
-      if (filters.categories.length && !filters.categories.includes(p.categoryName ?? "")) return false;
-      if (filters.vendors.length && !filters.vendors.includes(p.storeName)) return false;
-      if (p.price < filters.priceRange.min || p.price > filters.priceRange.max) return false;
+      if (needle && !p.name.toLowerCase().includes(needle))
+        return false;
+      if (
+        filters.categories.length &&
+        !filters.categories.includes(p.categoryName ?? "")
+      )
+        return false;
+      if (
+        filters.vendors.length &&
+        !filters.vendors.includes(p.storeName)
+      )
+        return false;
+      if (
+        p.price < filters.priceRange.min ||
+        p.price > filters.priceRange.max
+      )
+        return false;
       if (filters.inStock && p.stock <= 0) return false;
-      if (filters.rating > 0 && (p.rating ?? 0) < filters.rating) return false;
-      if (filters.featuredOnly && !p.tags?.includes("Featured")) return false;
+      if (
+        filters.rating > 0 &&
+        (p.rating ?? 0) < filters.rating
+      )
+        return false;
+      if (
+        filters.featuredOnly &&
+        !p.tags?.includes("Featured")
+      )
+        return false;
       return true;
     })
     .sort((a, b) => {
@@ -143,7 +180,9 @@ export function ShopArea({
         case "popular":
           return b.ratingCount - a.ratingCount;
         case "newest":
-          return b.createdAt.getTime() - a.createdAt.getTime();
+          return (
+            b.createdAt.getTime() - a.createdAt.getTime()
+          );
         default:
           return (b.ratingCount ?? 0) - (a.ratingCount ?? 0);
       }
@@ -151,10 +190,11 @@ export function ShopArea({
 
   const ITEMS_PER_PAGE = 12;
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-  const visible = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
-  const hasMore = currentPage < totalPages;
+  const visible = filtered.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
-  // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [filters, sort, query]);
@@ -162,7 +202,10 @@ export function ShopArea({
   const activeFilterCount =
     filters.categories.length +
     filters.vendors.length +
-    (filters.priceRange.min > 0 || filters.priceRange.max !== Infinity ? 1 : 0) +
+    (filters.priceRange.min > 0 ||
+    filters.priceRange.max !== Infinity
+      ? 1
+      : 0) +
     (filters.inStock ? 1 : 0) +
     (filters.rating > 0 ? 1 : 0);
 
@@ -179,21 +222,33 @@ export function ShopArea({
     />
   );
 
+  const searchSortProps = {
+    searchInput,
+    query,
+    onSearchChange: handleSearchChange,
+    filteredCount: filtered.length,
+    sort,
+    onSortChange: setSort,
+    sortOptions: SORT_OPTIONS,
+    activeFilterCount,
+    onOpenMobileFilters: () => setShowMobileFilters(true),
+    onOpenMobileSort: () => setShowMobileSort(true),
+  };
+
   return (
     <div data-section="shop-area" className="section-shop-area">
-      <div className="lg:grid lg:grid-cols-[260px_1fr] lg:gap-10">
+      <div className="lg:grid lg:grid-cols-[240px_1fr] lg:gap-10">
         {/* Desktop sidebar */}
         <aside className="hidden lg:block">
           <div className="sticky top-24">
-            <div className="flex items-center justify-between mb-8">
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-clay inline-flex items-center gap-2">
-                <SlidersHorizontal className="w-4 h-4 text-terracotta" />
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-clay/60">
                 Filters
               </p>
               {activeFilterCount > 0 && (
                 <button
                   onClick={clearFilters}
-                  className="text-xs font-medium text-terracotta hover:text-clay transition-colors cursor-pointer"
+                  className="text-[11px] font-medium text-terracotta hover:text-clay transition-colors cursor-pointer"
                 >
                   Clear all
                 </button>
@@ -206,50 +261,20 @@ export function ShopArea({
         {/* Main column */}
         <div>
           {searchSortStyle === "S3B" ? (
-            <SearchSortBarS3B
-              searchInput={searchInput}
-              query={query}
-              onSearchChange={handleSearchChange}
-              filteredCount={filtered.length}
-              sort={sort}
-              onSortChange={setSort}
-              sortOptions={SORT_OPTIONS}
-              activeFilterCount={activeFilterCount}
-              onOpenMobileFilters={() => setShowMobileFilters(true)}
-              onOpenMobileSort={() => setShowMobileSort(true)}
-            />
+            <SearchSortBarS3B {...searchSortProps} />
           ) : searchSortStyle === "S3C" ? (
-            <SearchSortBarS3C
-              searchInput={searchInput}
-              query={query}
-              onSearchChange={handleSearchChange}
-              filteredCount={filtered.length}
-              sort={sort}
-              onSortChange={setSort}
-              sortOptions={SORT_OPTIONS}
-              activeFilterCount={activeFilterCount}
-              onOpenMobileFilters={() => setShowMobileFilters(true)}
-              onOpenMobileSort={() => setShowMobileSort(true)}
-            />
+            <SearchSortBarS3C {...searchSortProps} />
           ) : (
-            <SearchSortBarS3A
-              searchInput={searchInput}
-              query={query}
-              onSearchChange={handleSearchChange}
-              filteredCount={filtered.length}
-              sort={sort}
-              onSortChange={setSort}
-              sortOptions={SORT_OPTIONS}
-              activeFilterCount={activeFilterCount}
-              onOpenMobileFilters={() => setShowMobileFilters(true)}
-              onOpenMobileSort={() => setShowMobileSort(true)}
-            />
+            <SearchSortBarS3A {...searchSortProps} />
           )}
 
           {/* Mobile sort sheet */}
           {showMobileSort && (
-            <MobileSheet title="Sort" onClose={() => setShowMobileSort(false)}>
-              <div className="flex flex-col gap-1 p-4">
+            <MobileSheet
+              title="Sort"
+              onClose={() => setShowMobileSort(false)}
+            >
+              <div className="flex flex-col gap-0.5 p-4">
                 {SORT_OPTIONS.map((opt) => (
                   <button
                     key={opt.value}
@@ -257,11 +282,12 @@ export function ShopArea({
                       setSort(opt.value);
                       setShowMobileSort(false);
                     }}
-                    className={`text-left px-5 py-3.5 rounded-xl text-base transition-colors cursor-pointer ${
-                      sort === opt.value
+                    className={
+                      "text-left px-4 py-3 rounded-lg text-sm transition-colors cursor-pointer " +
+                      (sort === opt.value
                         ? "bg-clay/5 text-clay font-semibold"
-                        : "text-clay/60 hover:bg-clay/5 hover:text-clay"
-                    }`}
+                        : "text-clay/50 hover:bg-clay/5 hover:text-clay")
+                    }
                   >
                     {opt.label}
                   </button>
@@ -272,19 +298,22 @@ export function ShopArea({
 
           {/* Mobile filter sheet */}
           {showMobileFilters && (
-            <MobileSheet title="Filter" onClose={() => setShowMobileFilters(false)}>
+            <MobileSheet
+              title="Filter"
+              onClose={() => setShowMobileFilters(false)}
+            >
               <div className="p-4">
                 {filterBody}
-                <div className="flex gap-3 mt-6 border-t border-clay/10 pt-5">
+                <div className="flex gap-3 mt-6 border-t border-clay/8 pt-5">
                   <button
                     onClick={clearFilters}
-                    className="flex-1 h-12 rounded-xl border border-clay/20 text-clay text-xs font-bold uppercase tracking-[0.15em] hover:bg-clay/5 transition-colors cursor-pointer"
+                    className="flex-1 h-11 rounded-lg border border-clay/15 text-clay text-xs font-bold uppercase tracking-[0.12em] hover:bg-clay/5 transition-colors cursor-pointer"
                   >
                     Clear all
                   </button>
                   <button
                     onClick={() => setShowMobileFilters(false)}
-                    className="flex-1 h-12 rounded-xl bg-clay text-sand text-xs font-bold uppercase tracking-[0.15em] hover:bg-terracotta transition-colors cursor-pointer"
+                    className="flex-1 h-11 rounded-lg bg-clay text-sand text-xs font-bold uppercase tracking-[0.12em] hover:bg-terracotta transition-colors cursor-pointer"
                   >
                     Apply
                   </button>
@@ -295,12 +324,16 @@ export function ShopArea({
 
           {/* Empty state */}
           {filtered.length === 0 ? (
-            <div className="border border-clay/15 rounded-3xl py-36 text-center">
-              <p className="font-heading text-3xl text-clay/60">Nothing here yet.</p>
-              <p className="text-sm text-clay/40 mt-3">No products match your selection.</p>
+            <div className="py-32 text-center">
+              <p className="font-heading text-2xl text-clay/50">
+                Nothing here yet.
+              </p>
+              <p className="text-sm text-clay/50 mt-2">
+                No products match your selection.
+              </p>
               <button
                 onClick={clearFilters}
-                className="mt-8 px-10 py-3 rounded-full border border-clay/25 text-xs font-bold uppercase tracking-[0.2em] text-clay/70 hover:text-clay hover:border-clay/40 transition-colors cursor-pointer"
+                className="mt-8 px-8 py-2.5 rounded-lg border border-clay/15 text-[11px] font-bold uppercase tracking-[0.15em] text-clay/60 hover:text-clay hover:border-clay/30 transition-colors cursor-pointer"
               >
                 Clear all
               </button>
@@ -309,33 +342,42 @@ export function ShopArea({
             <ProductCardSwitcher products={visible} />
           )}
 
+          {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-14">
+            <div className="flex items-center justify-center gap-1.5 mt-12">
               {currentPage > 1 && (
                 <button
-                  onClick={() => setCurrentPage((p) => p - 1)}
-                  className="px-4 py-2.5 rounded-full border border-clay/25 text-xs font-bold uppercase tracking-[0.15em] text-clay/70 hover:bg-clay hover:text-sand hover:border-clay transition-all cursor-pointer"
+                  onClick={() =>
+                    setCurrentPage((p) => p - 1)
+                  }
+                  className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay/50 hover:text-clay transition-colors cursor-pointer"
                 >
                   Prev
                 </button>
               )}
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              {Array.from(
+                { length: totalPages },
+                (_, i) => i + 1
+              ).map((page) => (
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`w-10 h-10 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                    currentPage === page
+                  className={
+                    "w-9 h-9 rounded-lg text-[12px] font-bold transition-all cursor-pointer " +
+                    (currentPage === page
                       ? "bg-clay text-sand"
-                      : "border border-clay/25 text-clay/70 hover:bg-clay hover:text-sand hover:border-clay"
-                  }`}
+                      : "text-clay/60 hover:text-clay hover:bg-clay/5")
+                  }
                 >
                   {page}
                 </button>
               ))}
               {currentPage < totalPages && (
                 <button
-                  onClick={() => setCurrentPage((p) => p + 1)}
-                  className="px-4 py-2.5 rounded-full border border-clay/25 text-xs font-bold uppercase tracking-[0.15em] text-clay/70 hover:bg-clay hover:text-sand hover:border-clay transition-all cursor-pointer"
+                  onClick={() =>
+                    setCurrentPage((p) => p + 1)
+                  }
+                  className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay/50 hover:text-clay transition-colors cursor-pointer"
                 >
                   Next
                 </button>
@@ -348,7 +390,6 @@ export function ShopArea({
   );
 }
 
-
 function MobileSheet({
   title,
   onClose,
@@ -360,16 +401,21 @@ function MobileSheet({
 }) {
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
-      <div className="absolute inset-0 bg-clay/30" onClick={onClose} />
-      <div className="absolute bottom-0 inset-x-0 bg-[#F1EDE1] rounded-t-3xl max-h-[85vh] overflow-y-auto">
-        <div className="flex items-center justify-between px-6 h-16 border-b border-clay/10 sticky top-0 bg-[#F1EDE1]">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-clay">{title}</p>
+      <div
+        className="absolute inset-0 bg-clay/30"
+        onClick={onClose}
+      />
+      <div className="absolute bottom-0 inset-x-0 bg-[#F1EDE1] rounded-t-2xl max-h-[85vh] overflow-y-auto">
+        <div className="flex items-center justify-between px-5 h-14 border-b border-clay/8 sticky top-0 bg-[#F1EDE1]">
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-clay">
+            {title}
+          </p>
           <button
             onClick={onClose}
-            className="w-10 h-10 rounded-full hover:bg-clay/5 flex items-center justify-center text-clay/60 hover:text-clay transition-colors cursor-pointer"
+            className="w-9 h-9 rounded-full hover:bg-clay/5 flex items-center justify-center text-clay/50 hover:text-clay transition-colors cursor-pointer"
             aria-label="Close"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </button>
         </div>
         {children}

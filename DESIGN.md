@@ -1,20 +1,17 @@
 ---
-version: 1.0
-name: Vellora Dashboard Design System
-description: The earthy, editorial design language for Vellora's dashboards (admin, vendor, customer account). Colors, typography, radius, spacing, components, do's/don'ts, and responsive behavior. This file is the design source of truth — apply its values to every dashboard UI element.
+version: 2.0
+name: Vellora Design System
+description: The earthy, editorial design language for Vellora — storefront, dashboards (admin, vendor, customer account). Colors, typography, radius, spacing, components, do's/don'ts, and responsive behavior. This file is the design source of truth — apply its values to every UI element.
 ---
 
-# Vellora Dashboard Design System
+# Vellora Design System
 
-Vellora is a multi-vendor marketplace for thoughtfully made products — electronics, home goods, stationery, and sustainable lifestyle essentials from independent sellers. The storefront brand is **warm, earthy, and editorial**: a sand canvas, clay ink, and terracotta accent, with a serif display face for character and `Outfit`/`Space Grotesk` for structure. The dashboards inherit that brand so the internal tools feel like the same product, not a separate app.
-
-This `DESIGN.md` follows the `VoltAgent/awesome-design-md` format. The guides (`02` a11y, `05` responsive, `11` anti-slop) define the *rules*; this file defines the *values*. If any value here conflicts with a rule (e.g. low contrast), keep the brand intent but fix the violation.
+Vellora is a multi-vendor marketplace for thoughtfully made products — electronics, home goods, stationery, and sustainable lifestyle essentials from independent sellers. The brand is **warm, earthy, and editorial**: a sand canvas, clay ink, and terracotta accent, with Outfit/Space Grotesk for structure.
 
 ## Brand principles
 
 - **Earthy, not techy.** Warm neutrals (sand/clay) over cold greys. Terracotta is the only "hot" color and is used sparingly for primary actions and active states.
-- **Editorial hierarchy.** Generous whitespace, large display numerals, uppercase `Space Grotesk` eyebrow labels with wide tracking, and a serif used for hero/section display.
-- **Calm data.** Dashboards are dense but quiet: white cards on a sand field, hairline borders, one accent per surface. Charts use the brand palette, not a rainbow.
+- **Editorial hierarchy.** Generous whitespace, large display numerals, uppercase `Space Grotesk` eyebrow labels with wide tracking, and Outfit for hero/section display.
 - **No AI-slop.** No pulsing dots, sparkles, purple-pink gradients, glassmorphism, or superlative filler. Icons are `lucide-react`, one set, consistent 1.75px stroke.
 
 ## Colors
@@ -39,25 +36,11 @@ colors:
 
   # Text on accent
   on-accent:   "#FFFFFF"
-
-  # Semantic status (orders, payouts)
-  success:     "#15803D"   # paid / completed
-  success-bg:  "#ECFDF3"
-  warning:     "#B45309"   # pending / processing (amber-700)
-  warning-bg:  "#FEF6E7"
-  info:        "#1D4ED8"   # shipped (blue)
-  info-bg:     "#EFF4FF"
-  danger:      "#B91C1C"   # cancelled / failed
-  danger-bg:   "#FDECEC"
 ```
-
-Contrast notes:
-- `clay #3D2B1F` on `white` / `sand` → > 10:1 (AAA body). `clay-mute #8A7565` on white → ~4.6:1 (AA). `terracotta` on white text → use white text on terracotta fills (7:1+).
-- Status pills use 700-weight text on 50-weight tinted backgrounds (≥ 4.5:1). Never put status text color alone as the only signal — pair with a dot.
 
 ## Typography
 
-Fonts are loaded in `src/app/layout.tsx` via `next/font`: `--font-sans` (Inter), `--font-heading` (Outfit), `--font-label` (Space Grotesk). Outfit is used for both headings and editorial display — no serif font.
+Fonts: `--font-sans` (Inter), `--font-heading` (Outfit), `--font-label` (Space Grotesk).
 
 ```yaml
 typography:
@@ -65,7 +48,7 @@ typography:
   display-lg:   # section / card title — Outfit 600, 28–32px, tracking -0.01em
   heading-md:   # card heading — Outfit 600, 18–20px
   heading-sm:   # sub-heading — Outfit 600, 16px
-  eyebrow:      # Space Grotesk 600, 10–11px, uppercase, tracking +0.2em, terracotta
+  eyebrow:      # Space Grotesk 600, 11–13px, uppercase, tracking +0.2em, terracotta
   body-lg:      # Inter 400, 16px, line-height 1.6
   body-md:      # Inter 400, 14px, line-height 1.6
   body-sm:      # Inter 400, 13px, line-height 1.5
@@ -74,11 +57,6 @@ typography:
   display-hero: # Outfit 600, 40–110px, tracking -0.02em — editorial display headings
   button:       # Space Grotesk 600, 11px, uppercase, tracking +0.12em
 ```
-
-Principles:
-- Headings and display text always `Outfit`; body always `Inter`; eyebrows/labels/buttons always `Space Grotesk` uppercase. One type scale, no ad-hoc sizes. No serif fonts.
-- KPI figures use `font-variant-numeric: tabular-nums` so columns align.
-- Body line-height 1.5–1.7; headings 1.1–1.3. Display tracking tighter, eyebrow tracking wider.
 
 ## Radius
 
@@ -92,11 +70,9 @@ rounded:
   "2xl": 20px # large panels, hero wells
 ```
 
-Buttons are `rounded-lg` (12px) — not pills. Cards `rounded-xl` (16px). One consistent scale; no arbitrary radii.
-
 ## Spacing
 
-8px base unit. Tokens map to Tailwind defaults: `1` 4px, `2` 8px, `3` 12px, `4` 16px, `6` 24px, `8` 32px, `10` 40px, `12` 48px. Section gaps lean generous (32–48px); card padding 20–24px; panel header padding 16–20px.
+8px base unit. Tokens map to Tailwind defaults: `1` 4px, `2` 8px, `3` 12px, `4` 16px, `6` 24px, `8` 32px, `10` 40px, `12` 48px.
 
 ## Elevation
 
@@ -108,64 +84,88 @@ elevation:
   3: "0 12px 32px rgba(61,43,31,0.12)"        # popovers, sticky chrome
 ```
 
-Depth comes from subtle clay-tinted shadow + border, not from blur or color washes. No drop shadows in brand colors.
+---
 
-## Components
+## CRITICAL — Text Contrast & Visibility Rules
+
+**These rules prevent invisible text. Follow them on EVERY page.**
+
+### Background Colors Used
+
+| Token | Hex | Used for |
+|---|---|---|
+| `sand` | `#F2E8CF` | Page canvas, lighter sections |
+| `#F1EDE1` | `#F1EDE1` | Main page background (slightly cooler than sand) |
+| `#FAF7EF` | `#FAF7EF` | Card surfaces, testimonial backgrounds |
+| `white` | `#FFFFFF` | Cards, inputs, modals |
+| `clay` | `#3D2B1F` | Dark sections, hero backgrounds |
+| `#1a1410` | `#1a1410` | Darkest sections (seller CTA) |
+
+### Minimum Opacity Rules for Clay Text
+
+On **light backgrounds** (`sand`, `#F1EDE1`, `#FAF7EF`, `white`):
+
+| Purpose | Minimum Opacity | Tailwind Class | Example |
+|---|---|---|---|
+| **Primary text** (headings, body) | 90–100% | `text-clay` or `text-clay/90` | Product names, descriptions |
+| **Secondary text** (labels, metadata) | 50–60% | `text-clay/50` to `text-clay/60` | Store counts, "reviews", category labels |
+| **Tertiary text** (captions, hints) | 45–50% | `text-clay/45` to `text-clay/50` | "Unsubscribe anytime", placeholder hints |
+| **Placeholder text** (inputs) | 40–50% | `placeholder:text-clay/40` to `placeholder:text-clay/50` | "Search products...", "Enter email" |
+| **Decorative only** (icons, dividers) | 20–30% | `text-clay/20` to `text-clay/30` | Star outlines, chevron icons, dot separators |
+
+**NEVER go below `/40` for any text that needs to be read.**
+
+### Quick Reference — Safe Opacity Values
 
 ```yaml
-button-primary:
-  background: terracotta; color: on-accent
-  typography: button; padding: "0 20px"; height: 40px; radius: lg
-  hover: terracotta-deep; active: terracotta-deep
-button-secondary:
-  background: canvas; color: clay
-  border: 1px hairline-strong; typography: button; radius: lg; height: 40px
-  hover: bg canvas-sand, border terracotta/40
-chip:
-  background: terracotta/10; color: terracotta
-  typography: caption (uppercase); radius: xs; padding: "4px 8px"
-kpi-card:
-  background: canvas; border: 1px hairline; radius: xl
-  padding: 20px; shadow: elevation 1; hover: elevation 2
-panel:
-  background: canvas; border: 1px hairline; radius: xl
-  header: eyebrow/title row, border-b hairline, padding 16–20px
-  body: padding 20px
-table:
-  header: eyebrow style, clay-mute, uppercase, tracking +0.2em
-  row: border-b hairline; hover bg canvas-sand
-  cell: body-md, clay
-status-pill:
-  radius: 9999px; typography: caption uppercase; ring 1px inset
-  # success / warning / info / danger per color tokens, paired with a dot
-input:
-  background: canvas; color: clay; radius: sm; border: 1px hairline-strong
-  padding: "10px 14px"; height: 44px (touch target)
-  focus: border terracotta, ring 2px terracotta/20
+text-contrast:
+  # SAFE — always readable
+  primary:    "text-clay"           # 100% — headings, body
+  secondary:  "text-clay/60"        # 60% — labels, metadata, secondary info
+  muted:      "text-clay/50"        # 50% — captions, hints, support text
+  placeholder:"text-clay/40"        # 40% — input placeholders only
+
+  # DECORATIVE — non-text elements only
+  icons:      "text-clay/30"        # 30% — decorative icons, chevrons
+  dividers:   "text-clay/20"        # 20% — dot separators, star outlines
+
+  # ON DARK BACKGROUNDS (clay, #1a1410)
+  on-dark-primary:   "text-sand"    # 100% — headings on dark bg
+  on-dark-secondary: "text-sand/60" # 60% — body on dark bg
+  on-dark-muted:     "text-sand/40" # 40% — captions on dark bg
+  on-dark-accent:    "text-white/30" # 30% — eyebrows on dark bg
 ```
 
-## Chart conventions (hand-built SVG, no deps)
+### Eyebrow Labels
 
-- **Sparkline** — single thin line (1.75px) in the accent, optional soft area fill (accent at 10% alpha). No axes, no gridlines. Used inside KPI cards.
-- **Area chart** — brand-safe trend (e.g. revenue over months). Line in `terracotta`, gradient fill `terracotta` 18%→0%. Hairline gridlines `hairline`, axis labels `clay-mute` caption. Hover dots use `<title>` for accessibility. Animate path draw only if `prefers-reduced-motion` is off.
-- **Donut chart** — order-status breakdown. Segments use `success` / `warning` / `info` / `clay-mute`; center shows total; legend lists segments with values. Segments must remain distinguishable (do not use terracotta + ochre + amber together — keep ≤ 4 sequential, high-contrast hues).
+- Minimum size: `text-xs` (12px) on mobile, `text-sm` (14px) on desktop
+- Never use `text-[10px]` or `text-[11px]` for readable labels
+- Always uppercase with wide tracking: `tracking-[0.2em]` to `tracking-[0.3em]`
+- Always use terracotta color: `text-terracotta`
+
+### Section Labels / "More Stores" type labels
+
+- Use `text-clay/50` minimum — never `text-clay/25` or `text-clay/30`
+- Font size minimum: `text-xs` (12px)
+- These are readable labels, not decorative elements
+
+---
 
 ## Do's and Don'ts
 
 ### Do
 - Reference tokens (CSS vars / Tailwind theme) — never hard-code hex in components.
 - Use `Space Grotesk` uppercase eyebrows to label every section.
-- Pair every status with a dot, not color alone.
 - Keep one accent (terracotta) dominant per surface; ochre is secondary.
-- Provide loading (skeleton), empty (icon + action), and error states for every data-driven view.
 - Respect `prefers-reduced-motion`; keep motion ≤ 250ms, transform/opacity only.
 
 ### Don't
 - Don't use pulsing dots, sparkles, crystal/rocket icons, or purple-pink gradients.
-- Don't put raw system font stack as the design font — Inter/Outfit/Space Grotesk are deliberate.
 - Don't use glassmorphism or floating 3D shapes without purpose.
 - Don't ship superlative filler ("unleash", "seamless", "best-in-class").
-- Don't mix the dashboard palette with cold greys or the storefront's teal `--primary` token — dashboards use the earthy tokens above.
+- **Don't use `text-clay/25`, `text-clay/30`, or `text-clay/35` for any readable text.**
+- **Don't use font sizes below 12px for any text that needs to be read.**
+- Don't use `text-[10px]` or `text-[11px]` for labels, metadata, or section headers.
 
 ## Responsive behavior
 
