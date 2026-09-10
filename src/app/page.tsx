@@ -210,7 +210,7 @@ export default async function HomePage() {
             <div className="absolute inset-0 bg-sand/60" aria-hidden="true" />
 
             {/* Content grid */}
-            <div className="relative grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-6 lg:gap-8 items-start p-4 sm:p-6 lg:p-8">
+            <div className="relative grid grid-cols-1 lg:grid-cols-[4fr_2fr] gap-6 lg:gap-8 items-stretch p-4 sm:p-6 lg:p-8">
               <TestimonialsVariationB />
               <BenefitsBarBigStatsH />
             </div>

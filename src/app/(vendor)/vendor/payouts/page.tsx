@@ -49,7 +49,7 @@ export default async function VendorPayoutsPage() {
       </div>
 
       {completedPayouts.length === 0 ? (
-        <Card className="p-8 text-center text-sm text-clay/50">
+        <Card className="p-8 text-center text-sm text-clay">
           No completed payouts yet.
         </Card>
       ) : (

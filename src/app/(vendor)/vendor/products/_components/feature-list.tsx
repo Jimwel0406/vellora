@@ -45,7 +45,7 @@ export function FeatureList({
               type="button"
               onClick={() => remove(index)}
               aria-label={`Remove feature ${index + 1}`}
-              className="w-8 h-8 shrink-0 rounded-full border border-clay/15 text-clay/50 hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-center"
+              className="w-8 h-8 shrink-0 rounded-full border border-clay/15 text-clay hover:text-terracotta hover:border-terracotta/40 transition-colors flex items-center justify-center"
             >
               <X className="w-4 h-4" />
             </button>

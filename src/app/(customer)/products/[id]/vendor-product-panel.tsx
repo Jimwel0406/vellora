@@ -45,7 +45,7 @@ export async function VendorProductPanel({
             <p className="text-[15px] font-semibold text-clay leading-snug">
               Vendor preview
             </p>
-            <p className="text-[13px] text-clay/50 leading-snug mt-1">
+            <p className="text-[13px] text-clay leading-snug mt-1">
               You&apos;re viewing one of your own products — shoppers see the buy panel instead of this.
             </p>
           </div>

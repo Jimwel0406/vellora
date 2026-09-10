@@ -80,12 +80,12 @@ export function RecentlyViewedSection() {
       <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-clay/45 font-label">
         Recently viewed
       </span>
-      <div className="flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:overflow-visible mt-6 pb-4 lg:pb-0 px-5 lg:px-0">
+      <div className="flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory mt-6 pb-4 px-5 lg:px-0">
         {products.map((product) => (
           <Link
             key={product.id}
             href={`/products/${product.id}`}
-            className="group block w-[48%] min-w-[150px] shrink-0 snap-start sm:w-[180px] lg:w-auto"
+            className="group block w-[48%] min-w-[150px] shrink-0 snap-start sm:w-[180px]"
           >
             <div className="aspect-[4/5] rounded-[10px] overflow-hidden bg-[#FAF7EC] mb-2">
               {product.images?.[0] ? (
@@ -95,7 +95,7 @@ export function RecentlyViewedSection() {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-clay/30 text-xs italic">
+                <div className="w-full h-full flex items-center justify-center text-clay/45 text-xs italic">
                   No image
                 </div>
               )}
@@ -103,7 +103,7 @@ export function RecentlyViewedSection() {
             <p className="text-[12px] font-medium text-clay/70 group-hover:text-clay transition-colors truncate">
               {product.name}
             </p>
-            <p className="text-[11px] text-clay/50 mt-0.5">
+            <p className="text-[11px] text-clay mt-0.5">
               ${(product.price / 100).toFixed(2)}
             </p>
           </Link>

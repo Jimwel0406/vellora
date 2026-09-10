@@ -76,7 +76,7 @@ export function ProductsHeaderSwitcher({
             </h1>
 
             {/* Description */}
-            <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-clay/50 leading-relaxed max-w-md">
+            <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-clay leading-relaxed max-w-md">
               Quality products from independent sellers you can trust.
             </p>
           </div>

@@ -26,7 +26,7 @@ export default async function AdminPayoutsPage() {
       />
 
       {allPayouts.length === 0 ? (
-        <p className="text-sm text-clay/50">No payouts yet.</p>
+        <p className="text-sm text-clay">No payouts yet.</p>
       ) : (
         <Panel bodyClassName="p-0">
           <div className="overflow-x-auto">
@@ -49,7 +49,7 @@ export default async function AdminPayoutsPage() {
                     <td className="p-4 text-sm text-clay/70">
                       ${(payout.commissionDeducted / 100).toFixed(2)}
                     </td>
-                    <td className="p-4 text-sm text-clay/50">
+                    <td className="p-4 text-sm text-clay">
                       {new Date(payout.createdAt).toLocaleDateString()}
                     </td>
                     <td className="p-4">

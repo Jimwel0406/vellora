@@ -16,9 +16,9 @@ export type SavedShipping = {
 };
 
 const inputCls =
-  "mt-1.5 block w-full rounded-lg border border-clay/10 bg-white px-3.5 py-3 text-sm text-clay shadow-sm focus:outline-none focus:ring-2 focus:ring-terracotta/30 focus:border-terracotta/50 placeholder:text-clay/30 transition-all";
+  "mt-1.5 block w-full rounded-lg border border-clay/15 bg-[#FAF7EF] px-4 py-3 text-[14px] text-clay focus:outline-none focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta/40 placeholder:text-clay/40 transition-all";
 const labelCls =
-  "block text-[11px] font-bold uppercase tracking-widest text-clay/50";
+  "block text-[11px] font-bold uppercase tracking-[0.15em] text-clay/60 font-label";
 
 export function ShippingAddressForm({ address }: { address: SavedShipping }) {
   const router = useRouter();
@@ -163,7 +163,7 @@ export function ShippingAddressForm({ address }: { address: SavedShipping }) {
       {msg && (
         <p
           role="status"
-          className={`text-sm font-medium ${msg.type === "success" ? "text-emerald-600" : "text-red-500"}`}
+          className={`text-[13px] font-medium ${msg.type === "success" ? "text-emerald-600" : "text-red-500"}`}
         >
           {msg.text}
         </p>
@@ -172,7 +172,7 @@ export function ShippingAddressForm({ address }: { address: SavedShipping }) {
       <button
         type="submit"
         disabled={loading}
-        className="inline-flex items-center gap-2 bg-terracotta hover:bg-clay text-white px-8 py-3.5 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all shadow-lg shadow-terracotta/20 hover:scale-[1.02] disabled:opacity-60 disabled:pointer-events-none cursor-pointer"
+        className="inline-flex items-center gap-2 bg-terracotta hover:bg-clay text-white px-8 py-3 rounded-lg text-[11px] font-bold uppercase tracking-[0.15em] transition-all disabled:opacity-60 disabled:pointer-events-none cursor-pointer"
       >
         <MapPin className="w-4 h-4" strokeWidth={2} />
         {loading ? "Saving..." : "Save Shipping Address"}

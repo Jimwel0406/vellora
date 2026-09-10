@@ -34,7 +34,7 @@ export function ProductCard({ product }: { product: HomeProduct }) {
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-clay/30 text-xs italic">
+          <div className="w-full h-full flex items-center justify-center text-clay/45 text-xs italic">
             No image
           </div>
         )}

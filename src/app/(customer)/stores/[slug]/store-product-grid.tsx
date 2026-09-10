@@ -56,8 +56,8 @@ export function StoreProductGrid({ products, storeSlug }: { products: Product[];
     <section data-section="store-products" className="section-store-products mt-12 lg:mt-14">
       <div className="border-t-2 border-clay/8 pt-10 lg:pt-12">
           <div className="border border-dashed border-clay/10 py-16 text-center">
-            <Package className="w-8 h-8 text-clay/30 mx-auto mb-3" />
-            <p className="text-sm text-clay/50">This store has no products yet.</p>
+            <Package className="w-8 h-8 text-clay/45 mx-auto mb-3" />
+            <p className="text-sm text-clay">This store has no products yet.</p>
           </div>
         </div>
       </section>
@@ -109,7 +109,7 @@ export function StoreProductGrid({ products, storeSlug }: { products: Product[];
                       className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-clay/30 text-xs">
+                    <div className="w-full h-full flex items-center justify-center text-clay/45 text-xs">
                       No image
                     </div>
                   )}

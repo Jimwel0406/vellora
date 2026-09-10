@@ -39,7 +39,7 @@ export default async function AdminVendorsPage() {
       </div>
 
       {allStores.length === 0 ? (
-        <p className="text-sm text-clay/50">No vendors registered yet.</p>
+        <p className="text-sm text-clay">No vendors registered yet.</p>
       ) : (
         <Panel bodyClassName="p-0">
           <div className="overflow-x-auto">
@@ -66,7 +66,7 @@ export default async function AdminVendorsPage() {
                     </td>
                     <td className="p-4 text-sm text-clay/70">{user?.name}</td>
                     <td className="p-4 text-sm text-clay/70">{user?.email}</td>
-                    <td className="p-4 text-sm text-clay/50">
+                    <td className="p-4 text-sm text-clay">
                       {new Date(store.createdAt).toLocaleDateString()}
                     </td>
                     <td className="p-4">

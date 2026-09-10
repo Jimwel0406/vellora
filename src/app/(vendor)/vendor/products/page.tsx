@@ -69,7 +69,7 @@ export default async function VendorProductsPage() {
       />
 
       {vendorProducts.length === 0 ? (
-        <Card className="p-8 text-center text-sm text-clay/50">
+        <Card className="p-8 text-center text-sm text-clay">
           No products yet.{" "}
           <Link
             href="/vendor/products/new"

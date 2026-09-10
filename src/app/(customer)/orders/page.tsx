@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { db } from "@/db";
-import { orders } from "@/db/schema";
-import { eq, ne, and, desc } from "drizzle-orm";
+import { orders, orderItems, wishlistItems } from "@/db/schema";
+import { eq, ne, and, desc, inArray } from "drizzle-orm";
 import { auth } from "@/lib/auth";
 import { cancelPendingOrders } from "@/lib/complete-order";
 import { AccountSidebar } from "@/components/account/account-sidebar";
@@ -31,51 +30,43 @@ export default async function OrdersPage() {
     )
     .orderBy(desc(orders.createdAt));
 
+  const orderIds = userOrders.map((o) => o.id);
+
+  const allItems =
+    orderIds.length > 0
+      ? await db
+          .select()
+          .from(orderItems)
+          .where(inArray(orderItems.orderId, orderIds))
+      : [];
+
+  const itemsByOrder = new Map<number, typeof allItems>();
+  for (const item of allItems) {
+    const list = itemsByOrder.get(item.orderId) ?? [];
+    list.push(item);
+    itemsByOrder.set(item.orderId, list);
+  }
+
+  const wishlistRows = await db
+    .select({ id: wishlistItems.id })
+    .from(wishlistItems)
+    .where(eq(wishlistItems.userId, userId));
+
   const user = session.user;
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-36 pb-16 lg:pb-20">
+    <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-36 pb-16 lg:pb-20">
       <AccountHero
         user={user}
         title="My Orders"
         subtitle="Track, review, and revisit every order you have placed across Vellora."
       />
 
-      <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-        <AccountSidebar active="/orders" />
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+        <AccountSidebar active="/orders" orderCount={userOrders.length} wishlistCount={wishlistRows.length} />
 
-        {/* Content Area */}
         <section data-section="orders-content" className="section-orders-content flex-grow min-w-0">
-          <div className="bg-white rounded-xl border border-clay/5 shadow-[0px_4px_20px_rgba(0,0,0,0.04)] overflow-hidden">
-            {userOrders.length === 0 ? (
-              <>
-                <div className="px-4 sm:px-8 py-4 sm:py-5 border-b border-clay/5 bg-sand/30">
-                  <h2 className="text-lg sm:text-xl font-bold text-clay truncate">
-                    Order History
-                  </h2>
-                </div>
-                <div className="flex flex-col items-center justify-center px-6 py-16 sm:py-20 text-center">
-                <div className="w-16 h-16 rounded-full bg-sand/60 flex items-center justify-center mb-5">
-                  <svg className="w-8 h-8 text-clay/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" strokeWidth="1" />
-                  </svg>
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-clay mb-3">No orders yet</h3>
-                <p className="text-sm text-clay/60 mb-8 leading-relaxed max-w-sm">
-                  When you place an order, you&apos;ll be able to track it right here.
-                </p>
-                <Link
-                  href="/products"
-                  className="inline-block bg-terracotta hover:bg-clay text-white px-8 sm:px-10 py-3.5 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all shadow-lg shadow-terracotta/20 hover:scale-[1.02]"
-                >
-                  Start Shopping
-                </Link>
-              </div>
-              </>
-            ) : (
-              <OrderHistoryList orders={userOrders} />
-            )}
-          </div>
+          <OrderHistoryList orders={userOrders} itemsByOrder={itemsByOrder} />
         </section>
       </div>
     </div>

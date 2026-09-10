@@ -86,7 +86,7 @@ export function StatTile({
           <span className={cn("w-8 h-8 rounded-lg flex items-center justify-center", accentChip[accent])}>
             <Icon className="w-4 h-4" />
           </span>
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-clay/50">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-clay">
             {label}
           </span>
         </div>
@@ -98,7 +98,7 @@ export function StatTile({
       {(trend || hint) && (
         <div className="mt-1 flex items-center gap-2">
           {trend && <TrendDelta value={trend.value} label={trend.label} />}
-          {hint && !trend && <p className="text-xs text-clay/50">{hint}</p>}
+          {hint && !trend && <p className="text-xs text-clay">{hint}</p>}
         </div>
       )}
     </div>
@@ -176,7 +176,7 @@ export function Panel({
         <div className="flex items-center justify-between gap-4 px-5 py-4 border-b border-clay/10">
           <div>
             {title && <h2 className="text-sm font-bold text-clay">{title}</h2>}
-            {description && <p className="text-xs text-clay/50 mt-0.5">{description}</p>}
+            {description && <p className="text-xs text-clay mt-0.5">{description}</p>}
           </div>
           {action}
         </div>
@@ -196,10 +196,10 @@ export const fieldInput =
   "mt-2 w-full h-11 px-4 rounded-lg border border-clay/20 bg-white text-clay text-sm placeholder:text-clay/40 focus:outline-none focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta transition-shadow";
 
 export const fieldLabel =
-  "block text-[10px] font-bold uppercase tracking-[0.2em] text-clay/50";
+  "block text-[10px] font-bold uppercase tracking-[0.2em] text-clay";
 
 export const tableHead =
-  "text-left p-4 text-[10px] font-bold uppercase tracking-[0.2em] text-clay/50";
+  "text-left p-4 text-[10px] font-bold uppercase tracking-[0.2em] text-clay";
 
 /* -- Empty state -- */
 export function EmptyState({
@@ -221,7 +221,7 @@ export function EmptyState({
         <Icon className="w-5 h-5 text-clay/40" aria-hidden />
       </span>
       <p className="font-semibold text-clay">{title}</p>
-      {description && <p className="text-sm text-clay/50 mt-1 max-w-sm">{description}</p>}
+      {description && <p className="text-sm text-clay mt-1 max-w-sm">{description}</p>}
       {action && <div className="mt-4">{action}</div>}
     </div>
   );

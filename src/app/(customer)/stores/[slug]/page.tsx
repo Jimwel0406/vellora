@@ -49,7 +49,7 @@ export default async function StorePage({
     return (
       <div className="bg-canvas min-h-screen">
       <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-12 pt-8 pb-12 lg:pb-16">
-          <nav className="flex items-center gap-1.5 text-sm text-clay/50 mb-6">
+          <nav className="flex items-center gap-1.5 text-sm text-clay mb-6">
             <Link href="/stores" className="hover:text-clay transition-colors">
               Stores
             </Link>
@@ -149,7 +149,7 @@ export default async function StorePage({
       <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-12 pt-8 pb-12 lg:pb-16">
 
         {/* ─── Breadcrumb ──────────────────────────────────────────── */}
-        <nav className="flex items-center gap-1.5 text-sm text-clay/50 mb-6 lg:mb-8">
+        <nav className="flex items-center gap-1.5 text-sm text-clay mb-6 lg:mb-8">
           <Link href="/stores" className="hover:text-clay transition-colors">
             Stores
           </Link>
@@ -178,7 +178,7 @@ export default async function StorePage({
             </h1>
 
             {store.description && (
-              <p className="mt-4 text-base sm:text-lg text-clay/50 leading-relaxed max-w-lg">
+              <p className="mt-4 text-base sm:text-lg text-clay leading-relaxed max-w-lg">
                 {store.description}
               </p>
             )}

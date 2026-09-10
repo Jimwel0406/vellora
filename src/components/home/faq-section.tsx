@@ -52,14 +52,14 @@ function FaqItem({
         onClick={onToggle}
         className="w-full flex items-start gap-5 py-6 sm:py-7 text-left cursor-pointer group"
       >
-        <span className="font-label text-xs font-semibold uppercase tracking-[0.15em] text-clay/50 mt-1 shrink-0 w-6">
+        <span className="font-label text-xs font-semibold uppercase tracking-[0.15em] text-clay mt-1 shrink-0 w-6">
           {number}
         </span>
         <span className="flex-1 font-heading text-lg sm:text-xl text-clay group-hover:text-terracotta transition-colors duration-200">
           {question}
         </span>
         <span
-          className={`mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center text-clay/50 transition-transform duration-300 ${
+          className={`mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center text-clay transition-transform duration-300 ${
             isOpen ? "rotate-45 text-terracotta" : ""
           }`}
           aria-hidden="true"
@@ -104,7 +104,7 @@ export function FaqSection() {
               Asked
             </h2>
 
-            <p className="mt-5 text-base sm:text-lg text-clay/50 leading-relaxed max-w-sm">
+            <p className="mt-5 text-base sm:text-lg text-clay leading-relaxed max-w-sm">
               Everything you need to know about shopping and selling on Vellora.
             </p>
 
@@ -113,7 +113,7 @@ export function FaqSection() {
 
             {/* Support — minimal editorial CTA */}
             <div className="mt-8 lg:mt-10">
-              <p className="text-sm text-clay/50 font-medium mb-3">
+              <p className="text-sm text-clay font-medium mb-3">
                 Still have questions?
               </p>
               <Link

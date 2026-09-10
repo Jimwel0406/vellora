@@ -90,7 +90,7 @@ export function NewsletterMinimal() {
             </p>
           )}
 
-          <p className="mt-4 text-xs text-white/30">
+          <p className="mt-4 text-xs text-white/60">
             Unsubscribe anytime.
           </p>
         </div>

@@ -125,7 +125,7 @@ export default function AdminCategoriesPage() {
       {error && <p className="text-sm text-destructive mb-4">{error}</p>}
 
       {categories.length === 0 ? (
-        <p className="text-sm text-clay/50">No categories yet.</p>
+        <p className="text-sm text-clay">No categories yet.</p>
       ) : (
         <ul className="space-y-2">
           {categories.map((cat) => (

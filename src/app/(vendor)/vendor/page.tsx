@@ -142,13 +142,13 @@ export default async function VendorOverviewPage() {
           description="The 5 most recent orders for your store"
           bodyClassName="p-0"
           action={
-            <Link href="/vendor/orders" className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-clay/50 hover:text-terracotta transition-colors">
+            <Link href="/vendor/orders" className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-clay hover:text-terracotta transition-colors">
               View all <ArrowRight className="w-3 h-3" aria-hidden />
             </Link>
           }
         >
           {recentOrders.length === 0 ? (
-            <div className="p-8 text-center text-sm text-clay/50">
+            <div className="p-8 text-center text-sm text-clay">
               No orders yet. Once customers purchase your products, they&apos;ll appear here.
             </div>
           ) : (
@@ -157,7 +157,7 @@ export default async function VendorOverviewPage() {
                 <li key={sub.id} className="px-5 py-3.5 flex items-center justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-clay">Order #{sub.orderId}</p>
-                    <p className="text-xs text-clay/50 mt-0.5">
+                    <p className="text-xs text-clay mt-0.5">
                       {order?.users?.name || "Customer"} &middot; {money(sub.subtotal)}
                     </p>
                   </div>

@@ -93,7 +93,7 @@ export function Testimonials() {
               ))}
             </div>
             <p className="mt-4 text-[15px] lg:text-base text-[#17201C]/80 leading-relaxed font-medium">
-              &ldquo;{current.quote}&rdquo;
+              {"\u201C"}{current.quote}{"\u201D"}
             </p>
             <p className="mt-4 text-sm font-semibold text-clay">&mdash; {current.author}</p>
 

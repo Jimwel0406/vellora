@@ -72,7 +72,7 @@ function DiscoverRail({
         </div>
         <Link
           href={`/products?sort=${sort}`}
-          className="group inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-clay/50 hover:text-terracotta transition-colors"
+          className="group inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-clay hover:text-terracotta transition-colors"
         >
           View all
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

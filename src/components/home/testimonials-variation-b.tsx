@@ -72,7 +72,7 @@ export function TestimonialsVariationB() {
             <div className="relative lg:pr-[45%]">
               {/* Oversized typographic quotation mark */}
               <span
-                className="block text-[120px] sm:text-[160px] lg:text-[200px] font-black leading-none text-terracotta/[0.08] select-none -mb-10 sm:-mb-14 lg:-mb-20"
+                className="block text-[120px] sm:text-[160px] lg:text-[200px] font-serif leading-none text-terracotta/[0.08] select-none -mb-10 sm:-mb-14 lg:-mb-20"
                 aria-hidden="true"
               >
                 &ldquo;
@@ -122,7 +122,7 @@ export function TestimonialsVariationB() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-clay">{SUPPORTING[0].author}</p>
-                      <p className="text-[11px] font-semibold text-clay/50 font-label uppercase tracking-wider">
+                      <p className="text-[11px] font-semibold text-clay font-label uppercase tracking-wider">
                         {SUPPORTING[0].role}
                       </p>
                     </div>
@@ -144,7 +144,7 @@ export function TestimonialsVariationB() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-clay">{SUPPORTING[1].author}</p>
-                      <p className="text-[11px] font-semibold text-clay/50 font-label uppercase tracking-wider">
+                      <p className="text-[11px] font-semibold text-clay font-label uppercase tracking-wider">
                         {SUPPORTING[1].role}
                       </p>
                     </div>

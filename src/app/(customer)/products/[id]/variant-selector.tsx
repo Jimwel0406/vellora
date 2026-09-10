@@ -48,7 +48,7 @@ export function VariantSelector({
                     "px-4 py-2 rounded-full text-[14px] border transition-all duration-200",
                     isSelected
                       ? "border-terracotta bg-terracotta/5 text-clay font-medium"
-                      : "border-clay/10 text-clay/50 hover:border-clay/25"
+                      : "border-clay/10 text-clay hover:border-clay/25"
                   )}
                 >
                   {opt}

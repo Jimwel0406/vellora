@@ -90,7 +90,7 @@ function ResetPasswordForm() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-[11px] font-bold uppercase tracking-widest text-clay/50">
+              <label htmlFor="password" className="block text-[11px] font-bold uppercase tracking-widest text-clay">
                 New password
               </label>
               <div className="relative">
@@ -101,7 +101,7 @@ function ResetPasswordForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full h-12 rounded-lg border border-clay/20 bg-white px-4 pr-11 text-sm text-clay transition-all placeholder:text-clay/30 focus:border-terracotta/70 focus:ring-2 focus:ring-terracotta/15 outline-none"
+                  className="w-full h-12 rounded-lg border border-clay/20 bg-white px-4 pr-11 text-sm text-clay transition-all placeholder:text-clay/40 focus:border-terracotta/70 focus:ring-2 focus:ring-terracotta/15 outline-none"
                 />
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-clay/30" aria-hidden />
                 <button
@@ -116,7 +116,7 @@ function ResetPasswordForm() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="confirm" className="block text-[11px] font-bold uppercase tracking-widest text-clay/50">
+              <label htmlFor="confirm" className="block text-[11px] font-bold uppercase tracking-widest text-clay">
                 Confirm password
               </label>
               <input
@@ -126,7 +126,7 @@ function ResetPasswordForm() {
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
                 placeholder="••••••••"
-                className="w-full h-12 rounded-lg border border-clay/20 bg-white px-4 text-sm text-clay transition-all placeholder:text-clay/30 focus:border-terracotta/70 focus:ring-2 focus:ring-terracotta/15 outline-none"
+                className="w-full h-12 rounded-lg border border-clay/20 bg-white px-4 text-sm text-clay transition-all placeholder:text-clay/40 focus:border-terracotta/70 focus:ring-2 focus:ring-terracotta/15 outline-none"
               />
             </div>
 
@@ -149,7 +149,7 @@ function ResetPasswordForm() {
       </div>
 
       <footer className="mt-8 text-center">
-        <p className="text-[10px] text-clay/30">&copy; 2026 Vellora. Multi-vendor marketplace.</p>
+        <p className="text-[10px] text-clay/50">&copy; 2026 Vellora. Multi-vendor marketplace.</p>
       </footer>
     </div>
   );
@@ -163,7 +163,7 @@ export default function ResetPasswordPage() {
           <LogoMark className="h-7 w-7 lg:h-8 lg:w-8 text-foreground" />
           <h1 className="text-xl lg:text-2xl font-black tracking-tighter uppercase text-foreground">VELLORA</h1>
         </Link>
-        <Link href="/login" className="text-[11px] font-semibold text-clay/50 hover:text-clay transition-colors inline-flex items-center gap-1.5">
+        <Link href="/login" className="text-[11px] font-semibold text-clay hover:text-clay transition-colors inline-flex items-center gap-1.5">
           Sign in
         </Link>
       </header>

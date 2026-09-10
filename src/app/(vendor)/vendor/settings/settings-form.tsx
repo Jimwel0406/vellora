@@ -69,7 +69,7 @@ export function StoreSettingsForm() {
 
   if (loading)
     return (
-      <div className="flex items-center gap-2 text-clay/50 text-sm">
+      <div className="flex items-center gap-2 text-clay text-sm">
         <Loader2 className="w-4 h-4 animate-spin" />
         Loading...
       </div>
@@ -124,7 +124,7 @@ export function StoreSettingsForm() {
                 {formData.slug}
               </span>
             </div>
-            <p className="text-[11px] text-clay/50 mt-1.5">
+            <p className="text-[11px] text-clay mt-1.5">
               Your store link is permanent and can&apos;t be changed.
             </p>
           </div>

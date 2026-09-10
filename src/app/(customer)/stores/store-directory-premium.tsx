@@ -143,8 +143,8 @@ export function StoreDirectoryPremium({ items }: { items: StoreItem[] }) {
     <>
       {display.length === 0 ? (
         <div className="py-28 text-center">
-          <p className="font-heading text-2xl text-clay/50">No stores found</p>
-          <p className="text-sm text-clay/50 mt-2">Try adjusting your filters.</p>
+          <p className="font-heading text-2xl text-clay">No stores found</p>
+          <p className="text-sm text-clay mt-2">Try adjusting your filters.</p>
           <button
             onClick={clearFilters}
             className="mt-8 px-8 py-2.5 rounded-lg border border-clay/15 text-[11px] font-bold uppercase tracking-[0.15em] text-clay/60 hover:text-clay hover:border-clay/30 transition-colors cursor-pointer"
@@ -164,7 +164,7 @@ export function StoreDirectoryPremium({ items }: { items: StoreItem[] }) {
           {/* Remaining stores — editorial grid */}
           {remainingStores.length > 0 && (
             <div>
-              <span className="block font-label text-xs font-bold uppercase tracking-[0.2em] text-clay/50 mb-5">
+              <span className="block font-label text-xs font-bold uppercase tracking-[0.2em] text-clay mb-5">
                 More Stores
               </span>
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
@@ -183,7 +183,7 @@ export function StoreDirectoryPremium({ items }: { items: StoreItem[] }) {
           {currentPage > 1 && (
             <button
               onClick={() => setCurrentPage((p) => p - 1)}
-              className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay/50 hover:text-clay transition-colors cursor-pointer"
+              className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay hover:text-clay transition-colors cursor-pointer"
             >
               Prev
             </button>
@@ -205,7 +205,7 @@ export function StoreDirectoryPremium({ items }: { items: StoreItem[] }) {
           {currentPage < totalPages && (
             <button
               onClick={() => setCurrentPage((p) => p + 1)}
-              className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay/50 hover:text-clay transition-colors cursor-pointer"
+              className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay hover:text-clay transition-colors cursor-pointer"
             >
               Next
             </button>
@@ -236,7 +236,7 @@ export function StoreDirectoryPremium({ items }: { items: StoreItem[] }) {
                 Stores
               </h1>
 
-              <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-clay/50 leading-relaxed max-w-md">
+              <p className="mt-6 sm:mt-8 text-lg sm:text-xl text-clay leading-relaxed max-w-md">
                 Discover independent sellers offering thoughtfully made
                 products — from electronics and home goods to fashion and
                 lifestyle essentials.
@@ -307,7 +307,7 @@ export function StoreDirectoryPremium({ items }: { items: StoreItem[] }) {
                   <span className="font-label text-sm sm:text-base lg:text-lg font-bold uppercase tracking-[0.25em] text-clay/60">
                     {cat}
                   </span>
-                    <span className="mx-6 sm:mx-10 lg:mx-14 text-clay/30 text-lg">
+                    <span className="mx-6 sm:mx-10 lg:mx-14 text-clay/45 text-lg">
                     ·
                   </span>
                 </span>
@@ -338,7 +338,7 @@ export function StoreDirectoryPremium({ items }: { items: StoreItem[] }) {
               onClick={() => setShowSortDropdown(!showSortDropdown)}
               className="flex items-center gap-2 h-9 px-4 rounded-lg border border-clay/12 bg-white text-clay text-[11px] font-bold uppercase tracking-[0.12em] hover:border-clay/25 transition-colors cursor-pointer"
             >
-              <ArrowUpDown className="w-3.5 h-3.5 text-clay/50" />
+              <ArrowUpDown className="w-3.5 h-3.5 text-clay" />
               {SORT_OPTIONS.find((o) => o.value === sort)?.label}
               <ChevronDown
                 className={
@@ -360,7 +360,7 @@ export function StoreDirectoryPremium({ items }: { items: StoreItem[] }) {
                       "w-full text-left px-4 py-2.5 text-[11px] font-medium transition-colors cursor-pointer " +
                       (sort === opt.value
                         ? "bg-clay/5 text-clay"
-                        : "text-clay/50 hover:bg-clay/[0.03] hover:text-clay")
+                        : "text-clay hover:bg-clay/[0.03] hover:text-clay")
                     }
                   >
                     {opt.label}
@@ -472,7 +472,7 @@ export function StoreDirectoryPremium({ items }: { items: StoreItem[] }) {
                   "text-left px-4 py-3 rounded-lg text-sm transition-colors cursor-pointer " +
                   (sort === opt.value
                     ? "bg-clay/5 text-clay font-semibold"
-                    : "text-clay/50 hover:bg-clay/5 hover:text-clay")
+                    : "text-clay hover:bg-clay/5 hover:text-clay")
                 }
               >
                 {opt.label}
@@ -522,7 +522,7 @@ function MobileFilterBody({
           {CATEGORY_OPTIONS.map((c) => {
             const active = filters.categories.includes(c);
             return (
-              <label key={c} className={"flex items-center gap-3 py-2 px-1 cursor-pointer transition-colors " + (active ? "text-clay" : "text-clay/50 hover:text-clay")}>
+              <label key={c} className={"flex items-center gap-3 py-2 px-1 cursor-pointer transition-colors " + (active ? "text-clay" : "text-clay hover:text-clay")}>
                 <input type="checkbox" checked={active} onChange={() => update("categories", toggleList(filters.categories, c))} className="sr-only" />
                 <span className={"relative flex h-4 w-4 items-center justify-center rounded border transition-all shrink-0 " + (active ? "bg-terracotta border-terracotta" : "border-clay/25 bg-white")}>
                   {active && <svg className="h-2.5 w-2.5 text-white" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
@@ -539,7 +539,7 @@ function MobileFilterBody({
           {TYPE_OPTIONS.map((t) => {
             const active = filters.types.includes(t);
             return (
-              <button key={t} onClick={() => update("types", toggleList(filters.types, t))} className={"inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[11px] font-bold uppercase tracking-[0.12em] transition-all cursor-pointer border " + (active ? "bg-clay text-sand border-clay" : "bg-white text-clay/50 border-clay/12")}>
+              <button key={t} onClick={() => update("types", toggleList(filters.types, t))} className={"inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[11px] font-bold uppercase tracking-[0.12em] transition-all cursor-pointer border " + (active ? "bg-clay text-sand border-clay" : "bg-white text-clay border-clay/12")}>
                 {t}
               </button>
             );
@@ -552,7 +552,7 @@ function MobileFilterBody({
           {LOCATION_OPTIONS.map((l) => {
             const active = filters.locations.includes(l);
             return (
-              <button key={l} onClick={() => update("locations", toggleList(filters.locations, l))} className={"inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[11px] font-bold uppercase tracking-[0.12em] transition-all cursor-pointer border " + (active ? "bg-clay text-sand border-clay" : "bg-white text-clay/50 border-clay/12")}>
+              <button key={l} onClick={() => update("locations", toggleList(filters.locations, l))} className={"inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-[11px] font-bold uppercase tracking-[0.12em] transition-all cursor-pointer border " + (active ? "bg-clay text-sand border-clay" : "bg-white text-clay border-clay/12")}>
                 {l}
               </button>
             );
@@ -565,7 +565,7 @@ function MobileFilterBody({
           {RATING_OPTIONS.map((r) => {
             const active = filters.minRating === r.value;
             return (
-              <label key={r.value} className={"flex items-center gap-3 py-2 px-1 cursor-pointer transition-colors " + (active ? "text-clay" : "text-clay/50 hover:text-clay")}>
+              <label key={r.value} className={"flex items-center gap-3 py-2 px-1 cursor-pointer transition-colors " + (active ? "text-clay" : "text-clay hover:text-clay")}>
                 <input type="radio" name="mobile-rating" checked={active} onChange={() => update("minRating", active ? 0 : r.value)} className="sr-only" />
                 <span className={"relative flex h-4 w-4 items-center justify-center rounded-full border transition-all shrink-0 " + (active ? "border-terracotta" : "border-clay/25")}>
                   {active && <span className="h-2 w-2 rounded-full bg-terracotta" />}
@@ -579,14 +579,14 @@ function MobileFilterBody({
 
       <MobileAccordion id="collections" title="Collections" count={(filters.featuredOnly ? 1 : 0) + (filters.newOnly ? 1 : 0)} open={openSection} setOpen={setOpenSection}>
         <div className="flex flex-col gap-0.5">
-          <label className={"flex items-center gap-3 py-2 px-1 cursor-pointer transition-colors " + (filters.featuredOnly ? "text-clay" : "text-clay/50 hover:text-clay")}>
+          <label className={"flex items-center gap-3 py-2 px-1 cursor-pointer transition-colors " + (filters.featuredOnly ? "text-clay" : "text-clay hover:text-clay")}>
             <input type="checkbox" checked={filters.featuredOnly} onChange={(e) => update("featuredOnly", e.target.checked)} className="sr-only" />
             <span className={"relative flex h-4 w-4 items-center justify-center rounded border transition-all shrink-0 " + (filters.featuredOnly ? "bg-terracotta border-terracotta" : "border-clay/25 bg-white")}>
               {filters.featuredOnly && <svg className="h-2.5 w-2.5 text-white" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
             </span>
             <span className="flex-1 text-sm">Featured Stores</span>
           </label>
-          <label className={"flex items-center gap-3 py-2 px-1 cursor-pointer transition-colors " + (filters.newOnly ? "text-clay" : "text-clay/50 hover:text-clay")}>
+          <label className={"flex items-center gap-3 py-2 px-1 cursor-pointer transition-colors " + (filters.newOnly ? "text-clay" : "text-clay hover:text-clay")}>
             <input type="checkbox" checked={filters.newOnly} onChange={(e) => update("newOnly", e.target.checked)} className="sr-only" />
             <span className={"relative flex h-4 w-4 items-center justify-center rounded border transition-all shrink-0 " + (filters.newOnly ? "bg-terracotta border-terracotta" : "border-clay/25 bg-white")}>
               {filters.newOnly && <svg className="h-2.5 w-2.5 text-white" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>}
@@ -629,7 +629,7 @@ function MobileSheet({ title, onClose, children }: { title: string; onClose: () 
       <div className="absolute bottom-0 inset-x-0 bg-[#FAF7EF] rounded-t-2xl max-h-[85vh] overflow-y-auto">
         <div className="flex items-center justify-between px-5 h-14 border-b border-clay/8 sticky top-0 bg-[#FAF7EF]">
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-clay">{title}</p>
-          <button onClick={onClose} className="w-9 h-9 rounded-full hover:bg-clay/5 flex items-center justify-center text-clay/50 hover:text-clay transition-colors cursor-pointer" aria-label="Close">
+          <button onClick={onClose} className="w-9 h-9 rounded-full hover:bg-clay/5 flex items-center justify-center text-clay hover:text-clay transition-colors cursor-pointer" aria-label="Close">
             <X className="w-5 h-5" />
           </button>
         </div>

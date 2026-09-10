@@ -53,14 +53,14 @@ function ForgotPasswordForm() {
                 </p>
               </div>
             </div>
-            <Link href="/login" className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-clay/50 hover:text-clay transition-colors">
+            <Link href="/login" className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-clay hover:text-clay transition-colors">
               <ArrowLeft className="w-4 h-4" aria-hidden /> Back to sign in
             </Link>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-[11px] font-bold uppercase tracking-widest text-clay/50">
+              <label htmlFor="email" className="block text-[11px] font-bold uppercase tracking-widest text-clay">
                 Email Address
               </label>
               <div className="relative">
@@ -71,7 +71,7 @@ function ForgotPasswordForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@vellora.com"
-                  className="w-full h-12 rounded-lg border border-clay/20 bg-white px-4 pr-11 text-sm text-clay transition-all placeholder:text-clay/30 focus:border-terracotta/70 focus:ring-2 focus:ring-terracotta/15 outline-none"
+                  className="w-full h-12 rounded-lg border border-clay/20 bg-white px-4 pr-11 text-sm text-clay transition-all placeholder:text-clay/40 focus:border-terracotta/70 focus:ring-2 focus:ring-terracotta/15 outline-none"
                 />
                 <Mail className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-clay/30" aria-hidden />
               </div>
@@ -103,7 +103,7 @@ function ForgotPasswordForm() {
       </div>
 
       <footer className="mt-8 text-center">
-        <p className="text-[10px] text-clay/30">&copy; 2026 Vellora. Multi-vendor marketplace.</p>
+        <p className="text-[10px] text-clay/50">&copy; 2026 Vellora. Multi-vendor marketplace.</p>
       </footer>
     </div>
   );
@@ -117,7 +117,7 @@ export default function ForgotPasswordPage() {
           <LogoMark className="h-7 w-7 lg:h-8 lg:w-8 text-foreground" />
           <h1 className="text-xl lg:text-2xl font-black tracking-tighter uppercase text-foreground">VELLORA</h1>
         </Link>
-        <Link href="/login" className="text-[11px] font-semibold text-clay/50 hover:text-clay transition-colors inline-flex items-center gap-1.5">
+        <Link href="/login" className="text-[11px] font-semibold text-clay hover:text-clay transition-colors inline-flex items-center gap-1.5">
           <ArrowLeft className="w-4 h-4" aria-hidden /> Back to Sign in
         </Link>
       </header>

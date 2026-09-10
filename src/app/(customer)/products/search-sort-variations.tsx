@@ -39,7 +39,7 @@ function SearchInput({
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder="Search products..."
         aria-label="Search products"
-        className="w-full h-12 pl-11 pr-11 rounded-lg bg-white border border-clay/10 text-[15px] text-clay placeholder:text-clay/50 focus:outline-none focus:border-terracotta/40 transition-all"
+        className="w-full h-12 pl-11 pr-11 rounded-lg bg-white border border-clay/10 text-[15px] text-clay placeholder:text-clay focus:outline-none focus:border-terracotta/40 transition-all"
       />
       {searchInput !== query ? (
         <Loader2 className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-clay/40 animate-spin pointer-events-none" />
@@ -75,7 +75,7 @@ function SortButtons({
             "px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-[0.1em] transition-all duration-200 cursor-pointer " +
             (sort === opt.value
               ? "bg-clay text-sand"
-              : "text-clay/50 hover:text-clay/70 hover:bg-clay/5")
+              : "text-clay hover:text-clay/70 hover:bg-clay/5")
           }
         >
           {opt.label}
@@ -127,7 +127,7 @@ export function SearchSortBarS3A({
           query={query}
           onSearchChange={onSearchChange}
         />
-        <p className="text-sm text-clay/50 whitespace-nowrap font-label">
+        <p className="text-sm text-clay whitespace-nowrap font-label">
           <span className="font-bold text-clay">{filteredCount}</span>{" "}
           products
         </p>
@@ -183,7 +183,7 @@ export function SearchSortBarS3B({
           onSearchChange={onSearchChange}
         />
         <div className="flex items-center justify-between mt-4">
-          <p className="text-sm text-clay/50 font-label">
+          <p className="text-sm text-clay font-label">
             <span className="font-bold text-clay">{filteredCount}</span>{" "}
             products
           </p>
@@ -241,7 +241,7 @@ export function SearchSortBarS3C({
           onSearchChange={onSearchChange}
         />
         <div className="flex items-center justify-between">
-          <p className="text-sm text-clay/50 font-label">
+          <p className="text-sm text-clay font-label">
             <span className="font-bold text-clay">{filteredCount}</span>{" "}
             products
           </p>

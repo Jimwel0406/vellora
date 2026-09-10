@@ -38,7 +38,7 @@ export default function ContactPage() {
         {/* Asymmetric text — left-aligned */}
         <div className="relative z-10 flex h-full items-center max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
           <div className="py-10 sm:py-0">
-            <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50 font-label">
+            <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70 font-label">
               Get in touch
             </span>
             <h1 className="mt-3 font-heading text-[48px] sm:text-[56px] lg:text-[72px] xl:text-[80px] leading-[0.92] text-[#FAF7EF] tracking-[-0.03em]"
@@ -106,7 +106,7 @@ export default function ContactPage() {
 
               {/* Map */}
               <div>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-clay/40 font-label block mb-3">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-clay/50 font-label block mb-3">
                   Location
                 </span>
                 <div className="relative w-full h-[200px] sm:h-[240px] overflow-hidden bg-[#F1EDE6] rounded-[4px]">
@@ -137,10 +137,10 @@ export default function ContactPage() {
                         <circle cx="12" cy="10" r="3" />
                       </svg>
                     </span>
-                    <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-clay/50 font-label">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-clay/60 font-label">
                       Vellora
                     </span>
-                    <span className="text-[8px] uppercase tracking-[0.12em] text-clay/35 font-label">
+                    <span className="text-[9px] uppercase tracking-[0.12em] text-clay/50 font-label">
                       Omaha Store
                     </span>
                   </div>
@@ -183,7 +183,7 @@ function ContactItem({
 }) {
   return (
     <div className={`py-5 ${border ? "border-b border-clay/10" : ""}`}>
-      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/40 font-label block mb-1.5">
+      <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/55 font-label block mb-1.5">
         {label}
       </span>
       <div className="text-[16px] sm:text-[17px] text-clay leading-relaxed">

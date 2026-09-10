@@ -85,7 +85,7 @@ export function StickyAddToCart({
             </p>
           )}
           {productPrice != null && (
-            <p className="text-[12px] text-clay/50 tabular-nums">
+            <p className="text-[12px] text-clay tabular-nums">
               ${(productPrice / 100).toFixed(2)}
             </p>
           )}

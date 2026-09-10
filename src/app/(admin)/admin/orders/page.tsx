@@ -59,7 +59,7 @@ export default async function AdminOrdersPage({
       </nav>
 
       {rows.length === 0 ? (
-        <p className="text-sm text-clay/50">No orders match this filter.</p>
+        <p className="text-sm text-clay">No orders match this filter.</p>
       ) : (
         <Panel bodyClassName="p-0">
           <div className="overflow-x-auto">
@@ -81,14 +81,14 @@ export default async function AdminOrdersPage({
                     <td className="p-4 text-sm font-semibold text-clay">#{order.id}</td>
                     <td className="p-4 text-sm">
                       <p className="font-medium text-clay">{user?.name ?? "—"}</p>
-                      <p className="text-xs text-clay/50">{user?.email ?? ""}</p>
+                      <p className="text-xs text-clay">{user?.email ?? ""}</p>
                     </td>
                     <td className="p-4 text-sm text-clay tabular-nums">{money(order.totalAmount)}</td>
                     <td className="p-4 text-sm text-clay/60 tabular-nums">
                       {order.discountAmount > 0 ? `−${money(order.discountAmount)}` : "—"}
                     </td>
                     <td className="p-4"><StatusPill status={order.status} /></td>
-                    <td className="p-4 text-sm text-clay/50">
+                    <td className="p-4 text-sm text-clay">
                       {new Date(order.createdAt).toLocaleDateString()}
                     </td>
                     <td className="p-4">

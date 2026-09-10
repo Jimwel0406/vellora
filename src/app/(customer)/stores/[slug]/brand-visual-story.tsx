@@ -138,7 +138,7 @@ export function BrandVisualStory({
 
         {/* Mobile text — below image on solid background */}
         <div className="lg:hidden mt-5 px-1">
-          <span className="block font-label text-xs font-bold uppercase tracking-[0.25em] text-clay/50 mb-2">
+          <span className="block font-label text-xs font-bold uppercase tracking-[0.25em] text-clay mb-2">
             Brand Story
           </span>
           <p className="font-heading text-xl sm:text-2xl text-clay leading-[1.3] tracking-[-0.01em]">

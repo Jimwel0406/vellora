@@ -140,7 +140,7 @@ export default function AdminNewsletterPage() {
                 <Mail className="w-5 h-5 text-clay/40" aria-hidden />
               </span>
               <p className="font-semibold text-clay">No subscribers yet</p>
-              <p className="text-sm text-clay/50 mt-1">Emails captured from the footer form appear here.</p>
+              <p className="text-sm text-clay mt-1">Emails captured from the footer form appear here.</p>
             </div>
           ) : (
             <ul className="divide-y divide-clay/5 max-h-[420px] overflow-y-auto">

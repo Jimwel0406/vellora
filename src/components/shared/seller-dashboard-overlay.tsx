@@ -130,7 +130,7 @@ export function SellerDashboardOverlay({
           <Link
             href={storeSlug ? `/stores/${storeSlug}` : "/stores"}
             onClick={onClose}
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-clay/50 hover:text-clay hover:bg-clay/[0.04] transition-colors"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-clay hover:text-clay hover:bg-clay/[0.04] transition-colors"
           >
             <Store className="w-[18px] h-[18px]" />
             View storefront

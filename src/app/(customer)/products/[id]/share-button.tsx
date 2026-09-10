@@ -22,7 +22,7 @@ export function ShareButton({ name }: { name: string }) {
     <button
       onClick={handleShare}
       className={cn(
-        "p-2 rounded-full border border-clay/15 text-clay/50 transition-colors",
+        "p-2 rounded-full border border-clay/15 text-clay transition-colors",
         copied
           ? "text-emerald-600 border-emerald-300 bg-emerald-50"
           : "hover:text-terracotta hover:border-terracotta/40"

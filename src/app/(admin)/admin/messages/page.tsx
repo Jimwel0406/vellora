@@ -24,7 +24,7 @@ export default async function AdminMessagesPage() {
       />
 
       {messages.length === 0 ? (
-        <p className="text-sm text-clay/50">No messages yet.</p>
+        <p className="text-sm text-clay">No messages yet.</p>
       ) : (
         <div className="space-y-4">
           {messages.map((m) => (
@@ -32,7 +32,7 @@ export default async function AdminMessagesPage() {
               <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                 <div>
                   <h3 className="text-sm font-bold text-clay">{m.subject}</h3>
-                  <p className="text-xs text-clay/50 mt-0.5">
+                  <p className="text-xs text-clay mt-0.5">
                     {m.name} ·{" "}
                     <a
                       href={`mailto:${m.email}`}

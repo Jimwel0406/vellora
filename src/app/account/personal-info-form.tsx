@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Pencil, Check } from "lucide-react";
+import { Check } from "lucide-react";
 
 const inputCls =
-  "mt-1.5 block w-full rounded-lg border border-clay/10 bg-white px-3.5 py-3 text-sm text-clay shadow-sm focus:outline-none focus:ring-2 focus:ring-terracotta/30 focus:border-terracotta/50 placeholder:text-clay/30 transition-all";
+  "mt-1.5 block w-full rounded-lg border border-clay/15 bg-[#FAF7EF] px-4 py-3 text-[14px] text-clay focus:outline-none focus:ring-2 focus:ring-terracotta/20 focus:border-terracotta/40 placeholder:text-clay/40 transition-all";
 const labelCls =
-  "block text-[11px] font-bold uppercase tracking-widest text-clay/50";
+  "block text-[11px] font-bold uppercase tracking-[0.15em] text-clay/60 font-label";
 
 export function PersonalInfoForm({
   name: initialName,
@@ -17,7 +17,6 @@ export function PersonalInfoForm({
   email: string;
 }) {
   const router = useRouter();
-  const firstNameRef = useRef<HTMLInputElement>(null);
 
   const nameParts = initialName.trim().split(/\s+/);
   const [firstName, setFirstName] = useState(nameParts[0] ?? "");
@@ -66,7 +65,6 @@ export function PersonalInfoForm({
           </label>
           <input
             id="firstName"
-            ref={firstNameRef}
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             className={inputCls}
@@ -104,7 +102,7 @@ export function PersonalInfoForm({
       {msg && (
         <p
           role="status"
-          className={`text-sm font-medium ${msg.type === "success" ? "text-emerald-600" : "text-red-500"}`}
+          className={`text-[13px] font-medium ${msg.type === "success" ? "text-emerald-600" : "text-red-500"}`}
         >
           {msg.text}
         </p>
@@ -114,18 +112,10 @@ export function PersonalInfoForm({
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center gap-2 bg-terracotta hover:bg-clay text-white px-8 py-3.5 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all shadow-lg shadow-terracotta/20 hover:scale-[1.02] disabled:opacity-60 disabled:pointer-events-none cursor-pointer"
+          className="inline-flex items-center gap-2 bg-terracotta hover:bg-clay text-white px-8 py-3 rounded-lg text-[11px] font-bold uppercase tracking-[0.15em] transition-all disabled:opacity-60 disabled:pointer-events-none cursor-pointer"
         >
           <Check className="w-4 h-4" strokeWidth={2} />
-          {loading ? "Saving..." : "Update Changes"}
-        </button>
-        <button
-          type="button"
-          onClick={() => firstNameRef.current?.focus()}
-          className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-terracotta hover:text-clay transition-colors cursor-pointer"
-        >
-          <Pencil className="w-4 h-4" strokeWidth={2} />
-          Edit Profile
+          {loading ? "Saving..." : "Save Changes"}
         </button>
       </div>
     </form>

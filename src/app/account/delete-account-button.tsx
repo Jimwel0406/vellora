@@ -2,7 +2,6 @@
 
 import { useState, useTransition } from "react";
 import { signOut } from "next-auth/react";
-import { Trash2 } from "lucide-react";
 
 export function DeleteAccountButton() {
   const [pending, startTransition] = useTransition();
@@ -23,44 +22,50 @@ export function DeleteAccountButton() {
   }
 
   return (
-    <div className="mt-10 border-t border-clay/10 pt-6">
-      <h3 className="text-sm font-bold text-clay mb-1">Delete account</h3>
-      <p className="text-xs text-clay/50 mb-4 max-w-md">
-        Permanently delete your account, orders, wishlist, and reviews. This
-        cannot be undone.
-      </p>
-      <div className="flex flex-col items-start gap-1.5">
-        {confirming ? (
-          <div className="flex items-center gap-2">
+    <>
+      {/* Divider */}
+      <div className="h-px bg-clay/8" />
+
+      <div className="pt-12">
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-clay/40 font-label mb-3">
+          Delete Account
+        </p>
+        <p className="text-[13px] text-clay/50 mb-6 max-w-md leading-relaxed">
+          Permanently delete your account, orders, wishlist, and reviews. This cannot be undone.
+        </p>
+
+        <div className="flex flex-col items-start gap-2">
+          {confirming ? (
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={deleteAccount}
+                disabled={pending}
+                className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-lg text-[11px] font-bold uppercase tracking-[0.15em] transition-colors disabled:opacity-60 cursor-pointer"
+              >
+                {pending ? "Deleting..." : "Confirm Delete"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfirming(false)}
+                disabled={pending}
+                className="inline-flex items-center gap-2 border border-clay/15 text-clay/60 hover:text-clay px-6 py-2.5 rounded-lg text-[11px] font-bold uppercase tracking-[0.15em] transition-colors disabled:opacity-60 cursor-pointer"
+              >
+                Keep Account
+              </button>
+            </div>
+          ) : (
             <button
               type="button"
-              onClick={deleteAccount}
-              disabled={pending}
-              className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider hover:bg-red-700 transition-colors disabled:opacity-60"
+              onClick={() => setConfirming(true)}
+              className="inline-flex items-center gap-2 border border-red-200 text-red-600/80 hover:text-red-600 hover:border-red-300 px-6 py-2.5 rounded-lg text-[11px] font-bold uppercase tracking-[0.15em] transition-colors cursor-pointer"
             >
-              {pending ? "Deleting…" : "Confirm delete"}
+              Delete Account
             </button>
-            <button
-              type="button"
-              onClick={() => setConfirming(false)}
-              disabled={pending}
-              className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-clay/15 text-clay/70 text-[10px] font-bold uppercase tracking-wider hover:text-clay transition-colors disabled:opacity-60"
-            >
-              Keep account
-            </button>
-          </div>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setConfirming(true)}
-            className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-red-200 text-red-600 text-[10px] font-bold uppercase tracking-wider hover:bg-red-50 transition-colors"
-          >
-            <Trash2 className="w-3.5 h-3.5" />
-            Delete account
-          </button>
-        )}
-        {error && <span className="text-xs text-red-600">{error}</span>}
+          )}
+          {error && <span className="text-[12px] text-red-500">{error}</span>}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -63,7 +63,7 @@ export default async function VendorOrdersPage() {
       />
 
       {vendorSubOrders.length === 0 ? (
-        <Card className="p-8 text-center text-sm text-clay/50">
+        <Card className="p-8 text-center text-sm text-clay">
           No orders yet.
         </Card>
       ) : (
@@ -88,7 +88,7 @@ export default async function VendorOrdersPage() {
                           {item.productName}
                         </p>
                         {item.variant && (
-                          <p className="text-xs text-clay/50 truncate">{item.variant}</p>
+                          <p className="text-xs text-clay truncate">{item.variant}</p>
                         )}
                       </div>
                       <p className="text-xs text-clay/60 whitespace-nowrap">

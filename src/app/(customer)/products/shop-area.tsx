@@ -286,7 +286,7 @@ export function ShopArea({
                       "text-left px-4 py-3 rounded-lg text-sm transition-colors cursor-pointer " +
                       (sort === opt.value
                         ? "bg-clay/5 text-clay font-semibold"
-                        : "text-clay/50 hover:bg-clay/5 hover:text-clay")
+                        : "text-clay hover:bg-clay/5 hover:text-clay")
                     }
                   >
                     {opt.label}
@@ -325,10 +325,10 @@ export function ShopArea({
           {/* Empty state */}
           {filtered.length === 0 ? (
             <div className="py-32 text-center">
-              <p className="font-heading text-2xl text-clay/50">
+              <p className="font-heading text-2xl text-clay">
                 Nothing here yet.
               </p>
-              <p className="text-sm text-clay/50 mt-2">
+              <p className="text-sm text-clay mt-2">
                 No products match your selection.
               </p>
               <button
@@ -350,7 +350,7 @@ export function ShopArea({
                   onClick={() =>
                     setCurrentPage((p) => p - 1)
                   }
-                  className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay/50 hover:text-clay transition-colors cursor-pointer"
+                  className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay hover:text-clay transition-colors cursor-pointer"
                 >
                   Prev
                 </button>
@@ -377,7 +377,7 @@ export function ShopArea({
                   onClick={() =>
                     setCurrentPage((p) => p + 1)
                   }
-                  className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay/50 hover:text-clay transition-colors cursor-pointer"
+                  className="px-3 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-clay hover:text-clay transition-colors cursor-pointer"
                 >
                   Next
                 </button>
@@ -412,7 +412,7 @@ function MobileSheet({
           </p>
           <button
             onClick={onClose}
-            className="w-9 h-9 rounded-full hover:bg-clay/5 flex items-center justify-center text-clay/50 hover:text-clay transition-colors cursor-pointer"
+            className="w-9 h-9 rounded-full hover:bg-clay/5 flex items-center justify-center text-clay hover:text-clay transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X className="w-5 h-5" />

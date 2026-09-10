@@ -55,7 +55,7 @@ export function CommissionRateForm({ initialRate }: { initialRate: number }) {
             onChange={(e) => setRate(e.target.value)}
             className={`${fieldInput} max-w-[160px]`}
           />
-          <span className="text-sm text-clay/50">%</span>
+          <span className="text-sm text-clay">%</span>
         </div>
       </div>
 

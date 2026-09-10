@@ -68,7 +68,7 @@ export function ProductRow({
       <div className="mb-5">
         <Link
           href="/products"
-          className="group inline-flex items-center gap-1.5 h-8 px-3 rounded-full border border-clay/15 text-[10px] font-bold uppercase tracking-[0.18em] text-clay/50 hover:text-sand hover:bg-clay hover:border-clay transition-all duration-200 whitespace-nowrap"
+          className="group inline-flex items-center gap-1.5 h-8 px-3 rounded-full border border-clay/15 text-[10px] font-bold uppercase tracking-[0.18em] text-clay hover:text-sand hover:bg-clay hover:border-clay transition-all duration-200 whitespace-nowrap"
         >
           View all
           <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -109,7 +109,7 @@ function ProductRowItem({ product }: { product: ShopProduct }) {
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-clay/30 text-sm">
+          <div className="w-full h-full flex items-center justify-center text-clay/45 text-sm">
             No image
           </div>
         )}

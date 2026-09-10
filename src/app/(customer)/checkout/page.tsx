@@ -103,7 +103,7 @@ export default async function CheckoutPage() {
                   </div>
                 ))}
                 <div className="border-t mt-3 pt-3 flex justify-between text-sm">
-                  <span className="text-clay/50">Store subtotal</span>
+                  <span className="text-clay">Store subtotal</span>
                   <span className="font-semibold text-clay">
                     ${(subtotal / 100).toFixed(2)}
                   </span>
@@ -116,7 +116,7 @@ export default async function CheckoutPage() {
 
       <div className="bg-white rounded-2xl border border-clay/10 p-5 sm:p-8">
         <div className="flex justify-between items-end mb-6">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-clay/50">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-clay">
             Total due
           </span>
           <span className="text-4xl font-black text-clay leading-none tracking-tight">
@@ -124,14 +124,14 @@ export default async function CheckoutPage() {
           </span>
         </div>
         <StripeCheckoutButton label={`Pay $${(total / 100).toFixed(2)} with Stripe`} />
-        <p className="mt-4 text-xs text-clay/50 flex items-center gap-1.5 justify-center">
+        <p className="mt-4 text-xs text-clay flex items-center gap-1.5 justify-center">
           <Lock className="w-3 h-3" />
           Powered by Stripe. Your payment details are handled securely by Stripe.
         </p>
         <div className="mt-4 text-center">
           <Link
             href="/cart"
-            className="text-[11px] font-semibold uppercase tracking-wider text-clay/50 hover:text-clay transition-colors border-b border-transparent hover:border-clay pb-0.5"
+            className="text-[11px] font-semibold uppercase tracking-wider text-clay hover:text-clay transition-colors border-b border-transparent hover:border-clay pb-0.5"
           >
             Back to cart
           </Link>

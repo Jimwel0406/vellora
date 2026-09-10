@@ -49,7 +49,7 @@ export function ImageGallery({ images, name }: { images: string[]; name: string 
     <>
       <div
         ref={imageRef}
-        className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden rounded-[8px] bg-[#FAF7EC] cursor-zoom-in group"
+        className="relative w-full aspect-square overflow-hidden rounded-[8px] bg-[#FAF7EC] cursor-zoom-in group"
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -76,7 +76,7 @@ export function ImageGallery({ images, name }: { images: string[]; name: string 
             isZooming ? "opacity-0 translate-y-1" : "opacity-100 translate-y-0"
           }`}
         >
-          <div className="w-9 h-9 rounded-full bg-white/80 backdrop-blur-sm shadow-sm flex items-center justify-center text-clay/50 group-hover:text-clay group-hover:bg-white transition-all duration-300">
+          <div className="w-9 h-9 rounded-full bg-white/80 backdrop-blur-sm shadow-sm flex items-center justify-center text-clay group-hover:text-clay group-hover:bg-white transition-all duration-300">
             <Expand className="w-4 h-4" strokeWidth={1.75} />
           </div>
         </div>

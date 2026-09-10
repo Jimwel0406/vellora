@@ -52,7 +52,7 @@ export default function NotFound() {
         </Link>
         <Link
           href="/products"
-          className="inline-flex items-center gap-2 w-fit text-[12px] font-bold uppercase tracking-[0.10em] text-clay border-b border-clay/20 pb-0.5 hover:border-clay/50 transition-colors"
+          className="inline-flex items-center gap-2 w-fit text-[12px] font-bold uppercase tracking-[0.10em] text-clay border-b border-clay/20 pb-0.5 hover:border-clay transition-colors"
         >
           SHOP COLLECTION &rarr;
         </Link>

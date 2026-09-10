@@ -71,7 +71,7 @@ export function ReviewList({ reviews }: { reviews: ReviewItem[] }) {
                     <Star key={i} className="w-3 h-3 fill-rating" />
                   ))}
                 </div>
-                <span className="text-[12px] text-clay/50 font-medium">
+                <span className="text-[12px] text-clay font-medium">
                   {new Date(review.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",

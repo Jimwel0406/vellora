@@ -171,7 +171,7 @@ export default function AdminPromosPage() {
                 <Ticket className="w-5 h-5 text-clay/40" aria-hidden />
               </span>
               <p className="font-semibold text-clay">No promo codes yet</p>
-              <p className="text-sm text-clay/50 mt-1">Create your first code on the left.</p>
+              <p className="text-sm text-clay mt-1">Create your first code on the left.</p>
             </div>
           ) : (
             <ul className="divide-y divide-clay/5">
@@ -184,7 +184,7 @@ export default function AdminPromosPage() {
                         {discountLabel(p)}
                       </span>
                     </div>
-                    <p className="text-xs text-clay/50 mt-1">
+                    <p className="text-xs text-clay mt-1">
                       Min {money(p.minOrderAmount)} &middot; {p.usedCount}/{p.maxUses ?? "∞"} used
                       {p.expiresAt ? ` · expires ${new Date(p.expiresAt).toLocaleDateString()}` : ""}
                     </p>

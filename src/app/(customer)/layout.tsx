@@ -9,7 +9,7 @@ export default function CustomerLayout({
   return (
     <>
       <Header />
-      <main className="flex-1 bg-sand">{children}</main>
+      <main className="flex-1 bg-[#FAF7EF]">{children}</main>
       <FooterEcommerce />
     </>
   );

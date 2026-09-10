@@ -1,117 +1,165 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service — Vellora",
   description: "Vellora terms of service",
 };
 
+const sections = [
+  { id: "intro", num: "00", label: "Introduction" },
+  { id: "account", num: "01", label: "Account Responsibilities" },
+  { id: "orders", num: "02", label: "Orders & Payments" },
+  { id: "contact", num: "03", label: "Contact" },
+];
+
 export default function TermsPage() {
   return (
-    <div className="max-w-[1440px] mx-auto px-8 lg:px-12 py-32 lg:py-48">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <aside className="hidden lg:block lg:col-span-3">
-          <div className="sticky top-32">
-            <h3 className="font-heading text-[10px] font-bold uppercase tracking-[0.3em] text-terracotta mb-8">Contents</h3>
-            <ul className="space-y-6">
-              <li>
-                <a href="#intro" className="text-sm text-clay/50 hover:text-terracotta transition-all border-l-2 border-transparent hover:border-terracotta pl-4 block">
-                  Introduction
-                </a>
-              </li>
-              <li>
-                <a href="#account" className="text-sm text-clay/50 hover:text-terracotta transition-all border-l-2 border-transparent hover:border-terracotta pl-4 block">
+    <div className="bg-[#FAF7EF] min-h-screen">
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-24 lg:py-32">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+
+          {/* ── Left: Contents navigation rail ── */}
+          <aside className="hidden lg:block lg:w-[200px] xl:w-[220px] shrink-0">
+            <div className="sticky top-32">
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] font-label text-terracotta">
+                Contents
+              </span>
+              <nav className="mt-6 flex flex-col gap-1">
+                {sections.map((s) => (
+                  <a
+                    key={s.id}
+                    href={`#${s.id}`}
+                    className="flex items-baseline gap-3 py-2 text-[12px] text-clay/40 hover:text-terracotta transition-colors group"
+                  >
+                    <span className="text-[10px] font-bold tracking-[0.1em] font-label text-clay/25 group-hover:text-terracotta/60 transition-colors">
+                      {s.num}
+                    </span>
+                    <span className="tracking-wide">{s.label}</span>
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </aside>
+
+          {/* ── Main content column ── */}
+          <main className="flex-1 max-w-[680px] lg:max-w-[720px] xl:max-w-[760px]">
+
+            {/* Hero / page introduction */}
+            <div id="intro" className="scroll-mt-32 mb-16 lg:mb-20">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="text-[10px] font-bold uppercase tracking-[0.25em] font-label text-terracotta">
+                  Legal
+                </span>
+                <span className="text-[10px] font-bold tracking-[0.1em] font-label text-clay/40">
+                  / 01
+                </span>
+              </div>
+              <h1 className="text-[48px] sm:text-[56px] lg:text-[68px] font-heading font-semibold uppercase tracking-[-0.02em] text-clay leading-[0.95] mb-8 lg:mb-10">
+                Terms of Service
+              </h1>
+              <p className="text-[15px] sm:text-[16px] text-clay/75 leading-[1.7] max-w-[520px]">
+                By using Vellora, you agree to the following terms and conditions. Please read them carefully before using our marketplace.
+              </p>
+              <div className="mt-8 flex items-center gap-4">
+                <span className="w-10 h-[2px] bg-terracotta rounded-full" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] font-label text-clay/35">
+                  Updated Jul 2025
+                </span>
+              </div>
+            </div>
+
+            {/* Mobile contents nav */}
+            <div className="lg:hidden mb-12 -mx-1 overflow-x-auto">
+              <div className="flex items-center gap-5 px-1 pb-2">
+                <span className="text-[9px] font-bold uppercase tracking-[0.2em] font-label text-terracotta shrink-0">
+                  Contents
+                </span>
+                {sections.slice(1).map((s) => (
+                  <a
+                    key={s.id}
+                    href={`#${s.id}`}
+                    className="text-[11px] text-clay/40 hover:text-terracotta transition-colors whitespace-nowrap"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+              <div className="h-px bg-clay/8 mt-2" />
+            </div>
+
+            {/* 01 — Account Responsibilities */}
+            <section id="account" data-section="terms-account" className="scroll-mt-32 mb-18 lg:mb-24">
+              <div className="flex items-baseline gap-4 mb-6 lg:mb-8">
+                <span className="text-[28px] sm:text-[32px] lg:text-[36px] font-heading font-bold text-clay/35 leading-none">
+                  01
+                </span>
+                <h2 className="text-[22px] sm:text-[24px] lg:text-[28px] font-heading font-semibold text-clay tracking-[-0.01em]">
                   Account Responsibilities
-                </a>
-              </li>
-              <li>
-                <a href="#orders" className="text-sm text-clay/50 hover:text-terracotta transition-all border-l-2 border-transparent hover:border-terracotta pl-4 block">
-                  Orders &amp; Payments
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-sm text-clay/50 hover:text-terracotta transition-all border-l-2 border-transparent hover:border-terracotta pl-4 block">
-                  Contact &amp; Legal
-                </a>
-              </li>
-            </ul>
-          </div>
-        </aside>
-
-        <div className="lg:col-span-9 xl:col-span-8 max-w-3xl">
-          <div className="mb-24">
-            <span className="inline-block px-4 py-1 bg-terracotta/10 text-terracotta text-[10px] font-bold uppercase tracking-widest rounded-full mb-6">
-              Updated July 2026
-            </span>
-            <h1 id="intro" className="text-5xl lg:text-7xl font-black uppercase tracking-tighter text-clay mb-8 leading-tight scroll-mt-40">
-              Terms of Service
-            </h1>
-            <p className="text-lg text-clay/60 leading-relaxed">
-              By using Vellora, you agree to the following terms and conditions. Please read them carefully before using our marketplace.
-            </p>
-            <div className="w-20 h-1 bg-terracotta mt-10" />
-          </div>
-
-          <section id="account" data-section="terms-account" className="section-terms-account mb-24 max-w-2xl group scroll-mt-40">
-            <div className="flex items-start gap-4 mb-8">
-              <span className="font-heading text-4xl text-terracotta/40 leading-none">01</span>
-              <h2 className="font-heading text-3xl text-clay">Account responsibilities</h2>
-            </div>
-            <div className="md:pl-12 space-y-4">
-              <p className="text-base text-clay/60 leading-relaxed">
-                You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You must provide accurate, current, and complete information during registration.
-              </p>
-              <p className="text-base text-clay/60 leading-relaxed">
-                Vellora reserves the right to suspend or terminate accounts that provide false information or engage in suspicious activity. Your profile is the gateway to a personalized marketplace experience; keep it secure.
-              </p>
-            </div>
-          </section>
-
-          <section id="orders" data-section="terms-orders" className="section-terms-orders mb-24 max-w-2xl group scroll-mt-40">
-            <div className="flex items-start gap-4 mb-8">
-              <span className="font-heading text-4xl text-terracotta/40 leading-none">02</span>
-              <h2 className="font-heading text-3xl text-clay">Orders and payments</h2>
-            </div>
-            <div className="md:pl-12 space-y-4">
-              <p className="text-base text-clay/60 leading-relaxed">
-                All prices are listed in USD and are subject to change. Orders are processed once payment is confirmed through our secure unified checkout system. We reserve the right to cancel any order if necessary due to vendor stock levels or technical errors.
-              </p>
-              <div className="bg-sand/50 p-8 rounded-xl border border-clay/10 my-8">
-                <h4 className="text-[10px] font-bold uppercase font-label tracking-[0.2em] text-terracotta mb-3 flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeWidth="1.5" />
-                  </svg>
-                  Smart Cart Routing
-                </h4>
-                <p className="text-sm text-clay/60 leading-relaxed">
-                  When you purchase from multiple vendors, our system automatically routes payments and shipping instructions. This ensures a &ldquo;one-checkout&rdquo; experience while maintaining the uniqueness of each vendor&apos;s fulfillment process.
+                </h2>
+              </div>
+              <div className="space-y-5">
+                <p className="text-[15px] sm:text-[16px] text-clay/75 leading-[1.7]">
+                  You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You must provide accurate, current, and complete information during registration.
+                </p>
+                <p className="text-[15px] sm:text-[16px] text-clay/75 leading-[1.7]">
+                  Vellora reserves the right to suspend or terminate accounts that provide false information or engage in suspicious activity. Your profile is the gateway to a personalized marketplace experience; keep it secure.
                 </p>
               </div>
-              <p className="text-base text-clay/60 leading-relaxed">
-                Refunds and returns are subject to individual vendor policies, though Vellora provides a baseline of protection for every transaction made on the platform.
-              </p>
-            </div>
-          </section>
+            </section>
 
-          <section id="contact" data-section="terms-contact" className="section-terms-contact max-w-2xl group scroll-mt-40">
-            <div className="flex items-start gap-4 mb-8">
-              <span className="font-heading text-4xl text-terracotta/40 leading-none">03</span>
-              <h2 className="font-heading text-3xl text-clay">Contact</h2>
-            </div>
-            <div className="md:pl-12 space-y-8">
-              <p className="text-base text-clay/60 leading-relaxed">
+            {/* 02 — Orders & Payments */}
+            <section id="orders" data-section="terms-orders" className="scroll-mt-32 mb-18 lg:mb-24">
+              <div className="flex items-baseline gap-4 mb-6 lg:mb-8">
+                <span className="text-[28px] sm:text-[32px] lg:text-[36px] font-heading font-bold text-clay/35 leading-none">
+                  02
+                </span>
+                <h2 className="text-[22px] sm:text-[24px] lg:text-[28px] font-heading font-semibold text-clay tracking-[-0.01em]">
+                  Orders & Payments
+                </h2>
+              </div>
+              <div className="space-y-5">
+                <p className="text-[15px] sm:text-[16px] text-clay/75 leading-[1.7]">
+                  All prices are listed in USD and are subject to change. Orders are processed once payment is confirmed through our secure unified checkout system. We reserve the right to cancel any order if necessary due to vendor stock levels or technical errors.
+                </p>
+
+                {/* Smart Cart Routing — editorial callout */}
+                <div className="my-8 lg:my-10 pl-5 border-l-[2px] border-terracotta/40">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] font-label text-terracotta">
+                    Smart Cart Routing
+                  </span>
+                  <p className="mt-2.5 text-[13px] sm:text-[14px] text-clay/65 leading-[1.7]">
+                    When you purchase from multiple vendors, our system automatically routes payments and shipping instructions. This ensures a one-checkout experience while maintaining the uniqueness of each vendor&apos;s fulfillment process.
+                  </p>
+                </div>
+
+                <p className="text-[15px] sm:text-[16px] text-clay/75 leading-[1.7]">
+                  Refunds and returns are subject to individual vendor policies, though Vellora provides a baseline of protection for every transaction made on the platform.
+                </p>
+              </div>
+            </section>
+
+            {/* 03 — Contact */}
+            <section id="contact" data-section="terms-contact" className="scroll-mt-32">
+              <div className="flex items-baseline gap-4 mb-6 lg:mb-8">
+                <span className="text-[28px] sm:text-[32px] lg:text-[36px] font-heading font-bold text-clay/35 leading-none">
+                  03
+                </span>
+                <h2 className="text-[22px] sm:text-[24px] lg:text-[28px] font-heading font-semibold text-clay tracking-[-0.01em]">
+                  Contact
+                </h2>
+              </div>
+              <p className="text-[15px] sm:text-[16px] text-clay/75 leading-[1.7] mb-8 lg:mb-10">
                 For questions about these terms or legal inquiries, please reach out to our team. We are committed to transparency and clarity in all our partnerships.
               </p>
               <a
                 href="mailto:legal@vellora.com"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-clay text-white text-[10px] font-bold uppercase font-label tracking-[0.2em] rounded-full hover:bg-terracotta transition-all shadow-lg"
+                className="inline-flex items-center gap-2 bg-clay hover:bg-terracotta text-sand text-[11px] font-bold uppercase tracking-[0.12em] px-5 py-3 rounded-lg transition-colors duration-200"
               >
                 legal@vellora.com
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeWidth="2" />
-                </svg>
               </a>
-            </div>
-          </section>
+            </section>
+
+          </main>
         </div>
       </div>
     </div>

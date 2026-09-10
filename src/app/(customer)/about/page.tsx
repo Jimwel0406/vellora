@@ -300,7 +300,7 @@ export default function AboutPage() {
           <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-clay leading-[1.05] tracking-tight mb-8">
             Discover something <span className="block sm:inline text-terracotta">you didn&apos;t know you needed</span>
           </h2>
-          <p className="text-lg text-clay/50 max-w-xl mx-auto mb-12">
+          <p className="text-lg text-clay max-w-xl mx-auto mb-12">
             Whether you&apos;re shopping for yourself or building a business, Vellora is where quality meets community.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

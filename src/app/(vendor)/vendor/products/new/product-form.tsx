@@ -208,7 +208,7 @@ export function ProductForm() {
               className="mt-2 block w-full text-sm text-clay/60 file:mr-4 file:rounded-lg file:border-0 file:bg-clay/10 file:px-4 file:py-2 file:text-[10px] file:font-bold file:uppercase file:tracking-wider file:text-clay hover:file:bg-clay/20"
             />
             {uploading && (
-              <p className="text-sm text-clay/50 flex items-center gap-2 mt-2">
+              <p className="text-sm text-clay flex items-center gap-2 mt-2">
                 <Loader2 className="w-4 h-4 animate-spin" />
                 Uploading...
               </p>

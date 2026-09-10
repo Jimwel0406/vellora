@@ -85,7 +85,7 @@ export function MobileNavDrawer({
               <button
                 type="button"
                 aria-label="Close navigation"
-                className="absolute top-5 right-5 z-20 w-10 h-10 flex items-center justify-center text-clay/50 hover:text-clay transition-colors cursor-pointer"
+                className="absolute top-5 right-5 z-20 w-10 h-10 flex items-center justify-center text-clay hover:text-clay transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" strokeWidth={1.75} />
               </button>

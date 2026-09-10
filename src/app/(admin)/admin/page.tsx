@@ -124,7 +124,7 @@ export default async function AdminOverviewPage() {
                   <Icon className="w-4 h-4 text-terracotta" aria-hidden />
                 </div>
                 <p className="font-semibold text-sm text-clay">{item.label}</p>
-                <p className="text-xs text-clay/50 mt-0.5">{item.desc}</p>
+                <p className="text-xs text-clay mt-0.5">{item.desc}</p>
               </Link>
             );
           })}
@@ -139,20 +139,20 @@ export default async function AdminOverviewPage() {
           className="lg:col-span-2"
           bodyClassName="p-0"
           action={
-            <Link href="/admin/payouts" className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-clay/50 hover:text-terracotta transition-colors">
+            <Link href="/admin/payouts" className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-clay hover:text-terracotta transition-colors">
               View all <ArrowRight className="w-3 h-3" aria-hidden />
             </Link>
           }
         >
           {recentOrders.length === 0 ? (
-            <p className="p-5 text-sm text-clay/50">No orders yet.</p>
+            <p className="p-5 text-sm text-clay">No orders yet.</p>
           ) : (
             <ul className="divide-y divide-clay/5">
               {recentOrders.map((order) => (
                 <li key={order.id} className="py-3.5 px-5 flex items-center justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold text-clay">Order #{order.id}</p>
-                    <p className="text-xs text-clay/50 mt-0.5">
+                    <p className="text-xs text-clay mt-0.5">
                       {money(order.totalAmount)} &middot; {new Date(order.createdAt).toLocaleDateString()}
                     </p>
                   </div>
@@ -165,7 +165,7 @@ export default async function AdminOverviewPage() {
 
         <Panel title="Commission earned" description="Lifetime platform fees">
           <p className="text-3xl font-bold text-clay tabular-nums">{money(totalCommission)}</p>
-          <p className="text-xs text-clay/50 mt-1">
+          <p className="text-xs text-clay mt-1">
             {pendingPayouts.length} payout{pendingPayouts.length === 1 ? "" : "s"} pending &middot; {money(pendingAmount)} owed
           </p>
         </Panel>

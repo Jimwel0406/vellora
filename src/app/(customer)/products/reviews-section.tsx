@@ -85,7 +85,7 @@ export function ReviewsSection() {
                 <p className="text-base font-semibold text-clay">
                   {PRIMARY.name}
                 </p>
-                <p className="text-xs font-semibold text-clay/50 font-label uppercase tracking-wider">
+                <p className="text-xs font-semibold text-clay font-label uppercase tracking-wider">
                   {PRIMARY.location}
                 </p>
               </div>
@@ -100,9 +100,6 @@ export function ReviewsSection() {
             {SUPPORTING.map((review, i) => (
               <div key={i} className="border-t border-clay/8 py-6 sm:py-7">
                 <div className="flex items-start gap-4">
-                  <span className="font-label text-xs font-semibold uppercase tracking-[0.15em] text-clay/50 mt-1 shrink-0 w-6">
-                    {String(i + 2).padStart(2, "0")}
-                  </span>
                   <div className="flex-1">
                     <p className="text-base sm:text-lg text-clay/70 leading-relaxed font-medium italic">
                       &ldquo;{review.text}&rdquo;

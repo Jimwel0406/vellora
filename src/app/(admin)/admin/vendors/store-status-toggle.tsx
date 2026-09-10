@@ -58,7 +58,7 @@ export function StoreStatusToggle({
         type="button"
         onClick={toggle}
         disabled={pending}
-        className="text-[11px] font-semibold text-clay/50 underline underline-offset-2 hover:text-clay transition-colors disabled:opacity-50"
+        className="text-[11px] font-semibold text-clay underline underline-offset-2 hover:text-clay transition-colors disabled:opacity-50"
       >
         {pending ? "Updating…" : isActive ? "Disable" : "Enable"}
       </button>

@@ -220,15 +220,15 @@ export function NotificationBell({ user, scrolled }: { user: SessionUser; scroll
 
               <div className="max-h-[420px] overflow-y-auto">
                 {loading && notifications.length === 0 ? (
-                  <div className="flex items-center justify-center gap-2 py-10 text-sm text-clay/50">
+                  <div className="flex items-center justify-center gap-2 py-10 text-sm text-clay">
                     <Loader2 className="w-4 h-4 animate-spin" />
                     Loading...
                   </div>
                 ) : notifications.length === 0 ? (
                   <div className="px-6 py-10 text-center">
-                    <Bell className="w-6 h-6 text-clay/30 mx-auto mb-2" />
+                    <Bell className="w-6 h-6 text-clay/45 mx-auto mb-2" />
                     <p className="text-sm font-semibold text-clay">No notifications yet</p>
-                    <p className="text-xs text-clay/50 mt-1">
+                    <p className="text-xs text-clay mt-1">
                       Order updates, reviews, and more will show up here.
                     </p>
                   </div>
@@ -264,7 +264,7 @@ export function NotificationBell({ user, scrolled }: { user: SessionUser; scroll
                               )}
                             </span>
                             {n.message && (
-                              <span className="block text-xs text-clay/50 mt-0.5 truncate">
+                              <span className="block text-xs text-clay mt-0.5 truncate">
                                 {n.message}
                               </span>
                             )}

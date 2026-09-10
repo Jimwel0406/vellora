@@ -297,9 +297,9 @@ export default async function ProductPage({
         data-section="product-hero"
         className="section-product-hero max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pb-12 sm:pb-16 lg:pb-20"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-[48%_52%] gap-6 lg:gap-10 xl:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[48%_52%] gap-6 lg:gap-10 xl:gap-14">
           {/* LEFT — Single dominant product image */}
-          <div className="w-full">
+          <div className="w-full lg:sticky lg:top-24 lg:self-start">
             <ImageGallery images={galleryImages} name={product.products.name} />
           </div>
 
@@ -617,9 +617,9 @@ export default async function ProductPage({
               </Link>
             </div>
 
-            <div className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory lg:grid lg:grid-cols-3 lg:overflow-visible pb-4 lg:pb-0 px-5 lg:px-0">
+            <div className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4 px-5 lg:px-0">
               {relatedProducts.slice(0, 3).map((p) => (
-                <div key={p.id} className="w-[75%] min-w-[260px] shrink-0 snap-start sm:w-[300px] lg:w-auto">
+                <div key={p.id} className="w-[75%] min-w-[260px] shrink-0 snap-start sm:w-[300px]">
                   <RelatedProductCard product={p} />
                 </div>
               ))}

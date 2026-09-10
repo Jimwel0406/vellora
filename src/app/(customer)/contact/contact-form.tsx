@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const inputClass =
-  "mt-2 block w-full h-12 bg-transparent border-0 border-b border-clay/15 text-[15px] sm:text-[16px] text-clay placeholder:text-clay/35 focus:outline-none focus:border-terracotta transition-colors pb-2 disabled:opacity-40 disabled:cursor-not-allowed";
+  "mt-2 block w-full h-12 bg-transparent border-0 border-b border-clay/15 text-[15px] sm:text-[16px] text-clay placeholder:text-clay/45 focus:outline-none focus:border-terracotta transition-colors pb-2 disabled:opacity-40 disabled:cursor-not-allowed";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
@@ -67,7 +67,7 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <label className="block">
-        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/45 font-label">
+        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/60 font-label">
           Name
         </span>
         <input
@@ -81,7 +81,7 @@ export function ContactForm() {
       </label>
 
       <label className="block">
-        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/45 font-label">
+        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/60 font-label">
           Email
         </span>
         <input
@@ -95,7 +95,7 @@ export function ContactForm() {
       </label>
 
       <label className="block">
-        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/45 font-label">
+        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/60 font-label">
           Subject
         </span>
         <input
@@ -109,7 +109,7 @@ export function ContactForm() {
       </label>
 
       <label className="block">
-        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/45 font-label">
+        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-clay/60 font-label">
           Message
         </span>
         <textarea
@@ -117,7 +117,7 @@ export function ContactForm() {
           required
           rows={5}
           disabled={status === "submitting"}
-          className="mt-2 block w-full bg-transparent border-0 border-b border-clay/15 text-[15px] sm:text-[16px] text-clay placeholder:text-clay/35 focus:outline-none focus:border-terracotta transition-colors pb-2 resize-none h-[120px] sm:h-[140px] disabled:opacity-40 disabled:cursor-not-allowed"
+          className="mt-2 block w-full bg-transparent border-0 border-b border-clay/15 text-[15px] sm:text-[16px] text-clay placeholder:text-clay/45 focus:outline-none focus:border-terracotta transition-colors pb-2 resize-none h-[120px] sm:h-[140px] disabled:opacity-40 disabled:cursor-not-allowed"
           placeholder="Write your message here"
         />
       </label>

@@ -80,7 +80,7 @@ export default async function OrderDetailPage({
                   <CancelOrderButton orderId={order.id} />
                 )}
                 <Badge
-                  className={`${statusColors[order.status] || "bg-clay/5 text-clay/50"} capitalize`}
+                  className={`${statusColors[order.status] || "bg-clay/5 text-clay"} capitalize`}
                 >
                   {order.status}
                 </Badge>
@@ -88,7 +88,7 @@ export default async function OrderDetailPage({
             </div>
 
             <div className="p-4 sm:p-8">
-              <p className="text-[11px] text-clay/50 mb-6">
+              <p className="text-[11px] text-clay mb-6">
                 Placed on{" "}
                 {new Date(order.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -118,7 +118,7 @@ export default async function OrderDetailPage({
                               loading="lazy"
                             />
                           ) : (
-                            <span className="w-14 h-14 rounded-lg bg-clay/5 flex items-center justify-center text-[10px] text-clay/30 shrink-0">
+                            <span className="w-14 h-14 rounded-lg bg-clay/5 flex items-center justify-center text-[10px] text-clay/45 shrink-0">
                               No image
                             </span>
                           )}
@@ -127,9 +127,9 @@ export default async function OrderDetailPage({
                               {item.productName}
                             </p>
                             {item.variant && (
-                              <p className="text-xs text-clay/50 truncate">{item.variant}</p>
+                              <p className="text-xs text-clay truncate">{item.variant}</p>
                             )}
-                            <p className="text-xs text-clay/50">
+                            <p className="text-xs text-clay">
                               ${(item.price / 100).toFixed(2)} × {item.quantity}
                             </p>
                           </div>
@@ -155,10 +155,10 @@ export default async function OrderDetailPage({
                     </div>
                     <div className="text-sm space-y-1.5">
                       <div className="flex justify-between">
-                        <span className="text-clay/50">Subtotal</span>
+                        <span className="text-clay">Subtotal</span>
                         <span className="font-semibold text-clay">${(sub.subtotal / 100).toFixed(2)}</span>
                       </div>
-                      <div className="flex justify-between text-clay/50">
+                      <div className="flex justify-between text-clay">
                         <span>Platform commission</span>
                         <span>-${(sub.commission / 100).toFixed(2)}</span>
                       </div>
@@ -167,7 +167,7 @@ export default async function OrderDetailPage({
                         <span className="text-clay">${(sub.vendorPayout / 100).toFixed(2)}</span>
                       </div>
                       {sub.status === "shipped" && (
-                        <div className="border-t border-clay/5 pt-2 mt-2 text-xs text-clay/50 space-y-1">
+                        <div className="border-t border-clay/5 pt-2 mt-2 text-xs text-clay space-y-1">
                           <div className="flex justify-between">
                             <span className="inline-flex items-center gap-1.5">
                               <Truck className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -221,7 +221,7 @@ export default async function OrderDetailPage({
               )}
 
               <div className="border-t border-clay/5 mt-6 pt-6 flex justify-between items-center">
-                <span className="text-sm font-bold uppercase tracking-widest text-clay/50">Total paid</span>
+                <span className="text-sm font-bold uppercase tracking-widest text-clay">Total paid</span>
                 <span className="text-2xl font-bold text-clay">${(order.totalAmount / 100).toFixed(2)}</span>
               </div>
             </div>

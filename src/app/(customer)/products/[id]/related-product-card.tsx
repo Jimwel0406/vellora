@@ -27,7 +27,7 @@ export function RelatedProductCard({
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-clay/30 text-xs italic">
+          <div className="w-full h-full flex items-center justify-center text-clay/45 text-xs italic">
             No image
           </div>
         )}

@@ -49,7 +49,7 @@ function ProductItem({
 
       {/* Metadata */}
       <div className="pt-3 sm:pt-4 flex flex-col gap-1">
-        <span className="font-label text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.16em] text-clay/50">
+        <span className="font-label text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.16em] text-clay">
           {paddedIndex} / {paddedTotal}
         </span>
         <h3 className="font-heading text-[15px] sm:text-[16px] font-semibold text-clay leading-snug line-clamp-1 group-hover:text-terracotta transition-colors duration-300">

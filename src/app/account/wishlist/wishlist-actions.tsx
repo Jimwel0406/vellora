@@ -31,13 +31,13 @@ export function WishlistRemoveButton({ itemId }: { itemId: number }) {
       type="button"
       onClick={handleRemove}
       disabled={removing}
-      className="w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-all"
+      className="w-8 h-8 bg-white/90 rounded-lg flex items-center justify-center shadow-sm hover:bg-white hover:shadow-md transition-all"
       aria-label="Remove from wishlist"
     >
       {removing ? (
-        <Loader2 className="w-4 h-4 text-red-500 animate-spin" />
+        <Loader2 className="w-3.5 h-3.5 text-red-500 animate-spin" />
       ) : (
-        <Trash2 className="w-4 h-4 text-red-500" />
+        <Trash2 className="w-3.5 h-3.5 text-red-500/70 hover:text-red-500" />
       )}
     </button>
   );
@@ -78,12 +78,12 @@ export function WishlistAddToCartButton({
       type="button"
       onClick={handleAdd}
       disabled={adding || disabled}
-      className="w-full bg-terracotta hover:bg-clay text-white py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+      className="w-full bg-terracotta hover:bg-clay text-white py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-[0.15em] transition-all disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
     >
       {adding ? (
-        <Loader2 className="w-4 h-4 animate-spin" />
+        <Loader2 className="w-3.5 h-3.5 animate-spin" />
       ) : (
-        <ShoppingBag className="w-4 h-4" />
+        <ShoppingBag className="w-3.5 h-3.5" />
       )}
       {adding ? "Adding..." : "Add to Cart"}
     </button>

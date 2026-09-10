@@ -125,7 +125,7 @@ export function AddToCartButton({
       <button
         onClick={handleWishlist}
         disabled={outOfStock}
-        className="w-full h-11 rounded-full border border-clay/10 bg-transparent font-medium text-[13px] flex items-center justify-center gap-2 text-clay/50 transition-all duration-300 hover:border-clay/20 hover:text-clay disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full h-11 rounded-full border border-clay/10 bg-transparent font-medium text-[13px] flex items-center justify-center gap-2 text-clay transition-all duration-300 hover:border-clay/20 hover:text-clay disabled:opacity-40 disabled:cursor-not-allowed"
       >
         <Heart
           className={`w-4 h-4 transition-all duration-300 ${

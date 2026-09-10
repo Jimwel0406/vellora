@@ -68,7 +68,7 @@ export function DashboardSidebar({
             <div className="h-px bg-clay/10 mb-2" aria-hidden />
             <Link
               href={footerLink.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-clay/50 hover:text-clay hover:bg-clay/[0.04] transition-colors"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-clay hover:text-clay hover:bg-clay/[0.04] transition-colors"
             >
               <footerLink.icon className="w-[18px] h-[18px]" aria-hidden />
               {footerLink.label}
@@ -92,7 +92,7 @@ export function DashboardSidebar({
               aria-current={active ? "page" : undefined}
               className={cn(
                 "flex-1 flex flex-col items-center gap-0.5 py-2.5 text-[9px] font-bold uppercase tracking-wider transition-colors",
-                active ? "text-terracotta" : "text-clay/50 hover:text-clay"
+                active ? "text-terracotta" : "text-clay hover:text-clay"
               )}
             >
               <Icon className="w-4 h-4" aria-hidden />

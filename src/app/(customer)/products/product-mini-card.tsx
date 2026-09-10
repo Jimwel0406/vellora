@@ -52,7 +52,7 @@ export function ProductMiniCard({ product }: { product: ShopProduct }) {
               loading="lazy"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-clay/30 text-sm">
+            <div className="w-full h-full flex items-center justify-center text-clay/45 text-sm">
               No image
             </div>
           )}

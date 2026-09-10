@@ -55,7 +55,7 @@ export function StoreCardC({ item }: { item: StoreItem }) {
           </div>
           <Link
             href={`/stores/${store.slug}`}
-            className="shrink-0 mt-0.5 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.12em] text-clay/50 hover:text-terracotta transition-colors"
+            className="shrink-0 mt-0.5 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.12em] text-clay hover:text-terracotta transition-colors"
           >
             Visit
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -73,12 +73,12 @@ export function StoreCardC({ item }: { item: StoreItem }) {
               {formatRating(item.rating)}
             </span>
           </span>
-          <span className="text-[11px] text-clay/50">
+          <span className="text-[11px] text-clay">
             {item.reviewCount > 0
               ? `${item.reviewCount} reviews`
               : "New"}
           </span>
-          <span className="text-[11px] text-clay/50">
+          <span className="text-[11px] text-clay">
             {item.productCount} products
           </span>
         </div>

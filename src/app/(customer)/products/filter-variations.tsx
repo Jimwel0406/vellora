@@ -149,7 +149,7 @@ export function FilterPanelF3({
                     "text-[11px] font-label " +
                     (active
                       ? "text-terracotta font-semibold"
-                      : "text-clay/50")
+                      : "text-clay")
                   }
                 >
                   {categoryCount(name)}
@@ -184,10 +184,10 @@ export function FilterPanelF3({
                       : Math.max(0, Number(e.target.value)) * 100,
                 })
               }
-              className="w-full h-9 pl-7 pr-3 rounded-lg border border-clay/12 bg-white text-sm text-clay placeholder:text-clay/50 focus:outline-none focus:border-terracotta/40 transition-all"
+              className="w-full h-9 pl-7 pr-3 rounded-lg border border-clay/12 bg-white text-sm text-clay placeholder:text-clay focus:outline-none focus:border-terracotta/40 transition-all"
             />
           </div>
-          <span className="text-clay/30 text-xs">—</span>
+          <span className="text-clay/45 text-xs">—</span>
           <div className="relative flex-1">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-clay/45 text-sm">
               $
@@ -210,7 +210,7 @@ export function FilterPanelF3({
                       : Number(e.target.value) * 100,
                 })
               }
-              className="w-full h-9 pl-7 pr-3 rounded-lg border border-clay/12 bg-white text-sm text-clay placeholder:text-clay/50 focus:outline-none focus:border-terracotta/40 transition-all"
+              className="w-full h-9 pl-7 pr-3 rounded-lg border border-clay/12 bg-white text-sm text-clay placeholder:text-clay focus:outline-none focus:border-terracotta/40 transition-all"
             />
           </div>
         </div>
@@ -240,7 +240,7 @@ export function FilterPanelF3({
                     "text-[11px] font-label " +
                     (active
                       ? "text-terracotta font-semibold"
-                      : "text-clay/50")
+                      : "text-clay")
                   }
                 >
                   {vendorCount(name)}

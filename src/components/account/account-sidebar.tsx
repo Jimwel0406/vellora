@@ -1,53 +1,72 @@
 import Link from "next/link";
-import { User, Package, Heart, Store, Settings, LogOut } from "lucide-react";
 import { signOutAction } from "@/app/account/actions";
 
 export const ACCOUNT_NAV = [
-  { label: "Personal Information", href: "/account", icon: User },
-  { label: "My Orders", href: "/orders", icon: Package },
-  { label: "Wishlist", href: "/account/wishlist", icon: Heart },
-  { label: "Following", href: "/account/following", icon: Store },
-  { label: "Password Manager", href: "/account/settings", icon: Settings },
+  { label: "Personal Information", href: "/account" },
+  { label: "My Orders", href: "/orders", countKey: "orders" as const },
+  { label: "Wishlist", href: "/account/wishlist", countKey: "wishlist" as const },
+  { label: "Following", href: "/account/following" },
+  { label: "Password Manager", href: "/account/settings" },
 ];
 
-export function AccountSidebar({ active }: { active: string }) {
+export function AccountSidebar({
+  active,
+  orderCount,
+  wishlistCount,
+}: {
+  active: string;
+  orderCount?: number;
+  wishlistCount?: number;
+}) {
+  const counts: Record<string, number> = {
+    orders: orderCount ?? 0,
+    wishlist: wishlistCount ?? 0,
+  };
+
   return (
-    <aside data-section="account-nav" className="section-account-nav w-full lg:w-72 shrink-0">
-      <nav className="flex lg:flex-col gap-2 p-1 -mx-1 lg:mx-0 overflow-x-auto lg:overflow-visible">
-        {ACCOUNT_NAV.map(({ label, href, icon: Icon }) => {
+    <aside data-section="account-nav" className="section-account-nav w-full lg:w-60 shrink-0">
+      <nav className="flex lg:flex-col gap-0.5 lg:gap-0 overflow-x-auto lg:overflow-visible -mx-1 px-1 lg:mx-0 lg:px-0">
+        {ACCOUNT_NAV.map(({ label, href, countKey }) => {
           const isActive = href === active;
+          const count = countKey !== undefined ? counts[countKey] : undefined;
           return (
             <Link
               key={href}
               href={href}
               aria-current={isActive ? "page" : undefined}
-              className={`group flex items-center gap-3 px-4 lg:px-5 py-3 rounded-xl transition-all whitespace-nowrap shrink-0 lg:shrink ${
+              className={`group relative flex items-center gap-2 px-3 lg:px-4 py-2.5 lg:py-3 transition-all whitespace-nowrap shrink-0 lg:shrink rounded-none lg:rounded ${
                 isActive
-                  ? "bg-terracotta/10 text-clay border border-terracotta/30"
-                  : "text-clay/50 hover:text-clay hover:bg-clay/[0.04] border border-transparent"
+                  ? "text-clay font-bold"
+                  : "text-clay/45 hover:text-clay"
               }`}
             >
-              <Icon
-                className={`w-5 h-5 shrink-0 ${
-                  isActive ? "text-terracotta" : "text-clay/40 group-hover:text-terracotta"
-                }`}
-                strokeWidth={isActive ? 2 : 1.5}
-              />
-              <span className="text-xs lg:text-[13px] font-semibold">{label}</span>
-              {isActive && <span className="ml-auto hidden lg:block w-1.5 h-1.5 rounded-full bg-terracotta" />}
+              {/* Active indicator — terracotta left border on desktop */}
+              {isActive && (
+                <span className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-4 bg-terracotta rounded-full" />
+              )}
+              <span className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.15em] font-label">
+                {label}
+              </span>
+              {count !== undefined && (
+                <span className="text-[10px] text-clay/30 font-label">
+                  · {String(count).padStart(2, "0")}
+                </span>
+              )}
             </Link>
           );
         })}
 
-        <div className="hidden lg:block h-px bg-clay/10 mx-4 my-2" />
+        {/* Divider */}
+        <div className="hidden lg:block h-px bg-clay/10 my-3 mx-4" />
 
         <form action={signOutAction} className="shrink-0 lg:shrink">
           <button
             type="submit"
-            className="flex items-center gap-3 px-4 lg:px-5 py-3 rounded-xl transition-all whitespace-nowrap text-red-500 hover:bg-red-50 w-full text-left cursor-pointer"
+            className="flex items-center gap-2 px-3 lg:px-4 py-2.5 lg:py-3 rounded transition-all whitespace-nowrap text-red-600/60 hover:text-red-600 w-full text-left cursor-pointer"
           >
-            <LogOut className="w-5 h-5 shrink-0" strokeWidth={1.5} />
-            <span className="text-xs lg:text-[13px] font-semibold">Sign Out</span>
+            <span className="text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.15em] font-label">
+              Sign Out
+            </span>
           </button>
         </form>
       </nav>

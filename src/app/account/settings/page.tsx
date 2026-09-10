@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
+import { db } from "@/db";
+import { orders, wishlistItems } from "@/db/schema";
+import { eq, ne, and } from "drizzle-orm";
 import { Header } from "@/components/shared/header";
 import { FooterEcommerce } from "@/components/home/footer-ecommerce";
 import { AccountSidebar } from "@/components/account/account-sidebar";
@@ -12,37 +15,35 @@ export default async function AccountSettingsPage() {
   if (!session?.user) redirect("/login");
 
   const user = session.user;
+  const userId = parseInt(user.id);
+
+  const [orderRows, wishlistRows] = await Promise.all([
+    db.select({ id: orders.id }).from(orders).where(
+      and(eq(orders.userId, userId), ne(orders.status, "pending"), ne(orders.status, "cancelled"))
+    ),
+    db.select({ id: wishlistItems.id }).from(wishlistItems).where(eq(wishlistItems.userId, userId)),
+  ]);
 
   return (
     <>
       <Header />
-      <main className="min-h-screen pb-16 bg-sand">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-36">
+      <main className="min-h-screen bg-[#FAF7EF]">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 lg:pt-36 pb-16 lg:pb-20">
           <AccountHero
             user={user}
             title="Password Manager"
             subtitle="Update your profile details or secure your account with a new password."
           />
 
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-            <AccountSidebar active="/account/settings" />
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+            <AccountSidebar active="/account/settings" orderCount={orderRows.length} wishlistCount={wishlistRows.length} />
 
-            {/* Content Area */}
             <section data-section="settings-content" className="section-settings-content flex-grow min-w-0">
-              <div className="bg-white rounded-xl border border-clay/5 shadow-[0px_4px_20px_rgba(0,0,0,0.04)] min-h-[400px] sm:min-h-[500px] flex flex-col">
-                <div className="px-4 sm:px-8 py-4 sm:py-5 border-b border-clay/5 bg-sand/30">
-                  <div className="flex items-center justify-between gap-4">
-                    <h2 className="text-lg sm:text-xl font-bold text-clay truncate">Account Settings</h2>
-                  </div>
-                </div>
-                <div className="p-4 sm:p-8 flex-grow">
-                  <SettingsForm
-                    name={session.user.name ?? ""}
-                    email={session.user.email ?? ""}
-                  />
-                  <DeleteAccountButton />
-                </div>
-              </div>
+              <SettingsForm
+                name={session.user.name ?? ""}
+                email={session.user.email ?? ""}
+              />
+              <DeleteAccountButton />
             </section>
           </div>
         </div>

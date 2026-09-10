@@ -99,7 +99,7 @@ function ProductCard({ product }: ProductCardProps) {
             (adding
               ? "bg-emerald-600 text-white"
               : product.stock <= 0
-                ? "bg-clay/10 text-clay/50 cursor-not-allowed"
+                ? "bg-clay/10 text-clay cursor-not-allowed"
                 : "bg-white text-clay hover:bg-terracotta hover:text-white")
           }
         >
